@@ -25,6 +25,13 @@
 
 package com.datayes.dyoa.network.service;
 
+import retrofit2.Call;
+import retrofit2.http.Field;
+import retrofit2.http.FormUrlEncoded;
+import retrofit2.http.Headers;
+import retrofit2.http.POST;
+import retrofit2.http.Path;
+
 /**
  * Created by Yang on 2016/5/1.
  */
@@ -37,4 +44,44 @@ public interface AppService {
     String CONTENT_TYPE_RAW = "Content-Type:multipart/raw";
     String CONTENT_TYPE_FORM_DATA = "Content-Type:multipart/form-data";
     String MULTIPART_FORM_DATA = "Content-Type: multipart/form-data; boundary=----WebKitFormBoundaryJKxbzue2e43U4Bc4";
+
+    /**
+     * 登陆接口
+     *
+     * @param subServer
+     * @param username
+     * @param password
+     * @param grant_type
+     * @param tenant
+     * @param captcha
+     * @param setContext
+     * @return
+     */
+    @Headers({ACCEPT_JSON})
+    @FormUrlEncoded
+    @POST("{subServer}/oauth2/token.json")
+    Call<String> sendLogin(
+            @Path(value = "subServer", encoded = true) String subServer,
+            @Field("username") String username,
+            @Field("password") String password,
+            @Field("grant_type") String grant_type,
+            @Field("tenant") String tenant,
+            @Field("captcha") String captcha,
+            @Field("setContext") String setContext
+    );
+
+    /**
+     * 刷新refreshTocken请求
+     *
+     * @param subServer
+     * @return
+     */
+    @Headers({ACCEPT_JSON})
+    @FormUrlEncoded
+    @POST("{subServer}/oauth2/token.json")
+    Call<String> sendRefreshTocken(
+            @Path(value = "subServer", encoded = true) String subServer,
+            @Field("grant_type") String grant_type,
+            @Field("refresh_token") String refresh_token
+    );
 }

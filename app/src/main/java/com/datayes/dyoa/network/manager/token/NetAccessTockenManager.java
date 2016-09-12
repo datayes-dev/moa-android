@@ -26,11 +26,10 @@
 package com.datayes.dyoa.network.manager.token;
 
 import com.datayes.baseapp.tools.DYLog;
+import com.datayes.dyoa.bean.UserLoginBean;
+import com.datayes.dyoa.common.config.Config;
+import com.datayes.dyoa.module.user.CurrentUser;
 import com.datayes.dyoa.network.manager.base.BaseRequestManager;
-import com.datayes.irr.App;
-import com.datayes.irr.activity.user.infomanage.CurrentUser;
-import com.datayes.irr.comm.config.Config;
-import com.datayes.irr.comm.net.mode.bean.user.UserLoginBean;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -187,9 +186,6 @@ public enum NetAccessTockenManager {
 
                             if ((bean.getCode() == -120)) {
 
-                                App.getInstance().logoutClearCache();//登出之后的操作
-                                App.getInstance().clearAppCache();
-//                                clearCaches();
                                 enqueueCaches();
                                 DYLog.d(Tag, "刷新token失败，APP登出");
 
