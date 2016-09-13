@@ -15,7 +15,7 @@ import butterknife.OnClick;
 /**
  * Created by datayes on 16/9/13.
  */
-public class tradeFinishActivity extends BaseActivity {
+public class TradeFinishActivity extends BaseActivity {
 
     @BindView(R.id.tv_shop_name)
     TextView mTvShopName;

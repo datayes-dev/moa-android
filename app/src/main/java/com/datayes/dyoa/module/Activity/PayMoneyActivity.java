@@ -1,6 +1,6 @@
 package com.datayes.dyoa.module.activity;
 
-import android.os.Bundle;
+
 import android.widget.EditText;
 import android.widget.TextView;
 
@@ -9,13 +9,12 @@ import com.datayes.dyoa.common.base.BaseActivity;
 import com.datayes.dyoa.common.networkstatus.NetworkState;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 /**
  * Created by datayes on 16/9/12.
  */
-public class PayMoneyActivity extends BaseActivity {
+public class PayMoneyActivity extends BaseActivity{
 
     @BindView(R.id.tv_user_name)
     TextView mTvUserName;
