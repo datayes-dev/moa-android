@@ -25,6 +25,8 @@
 
 package com.datayes.dyoa.common.network.service;
 
+import com.datayes.dyoa.common.network.bean.RestaurantListBean;
+
 import okhttp3.RequestBody;
 import retrofit2.Call;
 import retrofit2.http.Body;
@@ -146,5 +148,5 @@ public interface AppService {
      * @time create at 2016/9/13 14:08
      */
     @GET("restaurant")
-    Call getRestaurantList();
+    Call<RestaurantListBean> getRestaurantList();
 }
