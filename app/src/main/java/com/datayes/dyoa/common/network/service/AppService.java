@@ -25,9 +25,14 @@
 
 package com.datayes.dyoa.common.network.service;
 
+import com.datayes.dyoa.common.network.bean.RestaurantListBean;
+
+import okhttp3.RequestBody;
 import retrofit2.Call;
+import retrofit2.http.Body;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
+import retrofit2.http.GET;
 import retrofit2.http.Headers;
 import retrofit2.http.POST;
 import retrofit2.http.Path;
@@ -84,4 +89,64 @@ public interface AppService {
             @Field("grant_type") String grant_type,
             @Field("refresh_token") String refresh_token
     );
+
+    /**
+     * 获取饭店详情
+     *
+     * @author hongfei.tao
+     * @time create at 2016/9/13 13:56
+     */
+    @GET("restaurant/{resId}")
+    Call getRestaurantDetail(
+            @Path("resId") String resId
+    );
+
+    /**
+     * 添加饭店
+     *
+     * @author hongfei.tao
+     * @time create at 2016/9/13 13:56
+     */
+    @POST("restaurant")
+    Call addRestaurant(
+            @Body RequestBody body
+    );
+
+    /**
+     * 执行交易
+     *
+     * @author hongfei.tao
+     * @time create at 2016/9/13 14:03
+     */
+    @POST("transaction")
+    Call handleTransaction(
+            @Body RequestBody body
+    );
+
+    /**
+     * 获取个人当天交易
+     *
+     * @author hongfei.tao
+     * @time create at 2016/9/13 14:04
+     */
+    @GET("transaction-user")
+    Call getPersonalDeals();
+
+    /**
+     * 获取商家当天交易
+     *
+     * @author hongfei.tao
+     * @time create at 2016/9/13 14:07
+     */
+    @GET("transaction-restaurant")
+    Call getRestaurantDeals();
+
+    /**
+     * 饭店列表
+     *
+     * @author hongfei.tao
+     * @time create at 2016/9/13 14:08
+     */
+    @GET("restaurant")
+    Call<RestaurantListBean> getRestaurantList();
 }
