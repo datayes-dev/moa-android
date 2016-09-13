@@ -23,34 +23,38 @@
  *
  */
 
-package com.datayes.dyoa.network;
+package com.datayes.dyoa.common.network.interceptor;
 
-import com.datayes.dyoa.network.interceptor.LoggingInterceptor;
-import com.datayes.dyoa.network.interceptor.TokenInterceptor;
+import com.orhanobut.logger.Logger;
 
-import java.util.concurrent.TimeUnit;
+import java.io.IOException;
 
-import okhttp3.OkHttpClient;
+import okhttp3.Interceptor;
+import okhttp3.Request;
+import okhttp3.Response;
 
 /**
- * Created by hongfei.tao on 2016/8/29 17:44.
+ * Created by hongfei.tao on 2016/8/29 17:52.
  */
-public class OkHttpClientSingleton {
-    private static OkHttpClient mInstance;
+public class LoggingInterceptor implements Interceptor {
 
-    public static OkHttpClient getInstance() {
-        if (mInstance == null) {
-            synchronized (OkHttpClientSingleton.class) {
-                if (mInstance == null) {
-                    mInstance = new OkHttpClient.Builder()
-                            .connectTimeout(15000, TimeUnit.MILLISECONDS)
-                            .addInterceptor(new TokenInterceptor())
-                            .addNetworkInterceptor(new LoggingInterceptor())
-                            .build();
-                }
-            }
-        }
+    private static final String TAG = "RetrofitLogger";
 
-        return mInstance;
+    @Override
+    public Response intercept(Chain chain) throws IOException {
+        Request request = chain.request();
+
+        long t1 = System.nanoTime();
+        Logger.init(TAG);
+        Logger.d(String.format("Sending request %s on %s%n%s",
+                request.url(), chain.connection(), request.headers()));
+
+        Response response = chain.proceed(request);
+
+        long t2 = System.nanoTime();
+        Logger.d(String.format("Received response for %s in %.1fms%n%s",
+                response.request().url(), (t2 - t1) / 1e6d, response.headers()));
+
+        return response;
     }
 }

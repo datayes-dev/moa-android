@@ -23,13 +23,13 @@
  *
  */
 
-package com.datayes.dyoa.network.manager.token;
+package com.datayes.dyoa.common.network.manager.token;
 
 import com.datayes.baseapp.tools.DYLog;
 import com.datayes.dyoa.bean.UserLoginBean;
 import com.datayes.dyoa.common.config.Config;
 import com.datayes.dyoa.module.user.CurrentUser;
-import com.datayes.dyoa.network.manager.base.BaseRequestManager;
+import com.datayes.dyoa.common.network.manager.base.BaseRequestManager;
 
 import org.json.JSONException;
 import org.json.JSONObject;

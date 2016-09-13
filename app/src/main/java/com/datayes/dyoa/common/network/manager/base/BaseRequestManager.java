@@ -23,7 +23,7 @@
  *
  */
 
-package com.datayes.dyoa.network.manager.base;
+package com.datayes.dyoa.common.network.manager.base;
 
 import android.text.TextUtils;
 
@@ -31,10 +31,10 @@ import com.datayes.baseapp.utils.StringUtil;
 import com.datayes.dyoa.bean.UserLoginBean;
 import com.datayes.dyoa.common.config.Config;
 import com.datayes.dyoa.module.user.CurrentUser;
-import com.datayes.dyoa.network.OkHttpClientSingleton;
-import com.datayes.dyoa.network.converter.proto.IrrProtoConverterFactory;
-import com.datayes.dyoa.network.manager.token.NetAccessTockenManager;
-import com.datayes.dyoa.network.service.AppService;
+import com.datayes.dyoa.common.network.OkHttpClientSingleton;
+import com.datayes.dyoa.common.network.converter.proto.IrrProtoConverterFactory;
+import com.datayes.dyoa.common.network.manager.token.NetAccessTockenManager;
+import com.datayes.dyoa.common.network.service.AppService;
 import com.datayes.dyoa.utils.DYCookieManager;
 
 import java.util.List;

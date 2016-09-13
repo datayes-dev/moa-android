@@ -5,10 +5,12 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.datayes.baseapp.base.BaseFragmentActivity;
+import com.datayes.dyoa.common.network.BaseService;
+import com.datayes.dyoa.common.network.NetCallBack;
 import com.datayes.dyoa.common.networkstatus.NetworkState;
 import com.datayes.dyoa.common.networkstatus.NetworkStateManager;
-import com.datayes.dyoa.network.BaseService;
-import com.datayes.dyoa.network.NetCallBack;
+
+import butterknife.ButterKnife;
 
 /**
  * Created by nianyi.yang on 2016/9/12.
@@ -49,7 +51,16 @@ public abstract class BaseActivity extends BaseFragmentActivity implements NetCa
         super.onCreate(savedInstanceState);
         NetworkStateManager.getInstance().addNetworkStateChangedListener(
                 mNetworkStateChangedListener);
+        setContentView(getLayoutId());
+        ButterKnife.bind(this);
     }
+
+    /**
+     * 获取当前Activity的布局文件Id
+     *
+     * @return
+     */
+    protected abstract int getLayoutId();
 
     @Override
     protected void onResume() {

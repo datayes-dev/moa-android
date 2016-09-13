@@ -23,7 +23,7 @@
  *
  */
 
-package com.datayes.dyoa.network.converter.proto;
+package com.datayes.dyoa.common.network.converter.proto;
 
 import com.google.protobuf.ExtensionRegistryLite;
 import com.google.protobuf.InvalidProtocolBufferException;

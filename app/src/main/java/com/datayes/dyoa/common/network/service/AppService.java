@@ -23,7 +23,7 @@
  *
  */
 
-package com.datayes.dyoa.network.service;
+package com.datayes.dyoa.common.network.service;
 
 import retrofit2.Call;
 import retrofit2.http.Field;
