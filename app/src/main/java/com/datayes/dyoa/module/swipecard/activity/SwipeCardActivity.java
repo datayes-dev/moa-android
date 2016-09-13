@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.datayes.baseapp.tools.DYToast;
 import com.datayes.dyoa.R;
 import com.datayes.dyoa.common.base.BaseActivity;
 import com.datayes.dyoa.common.network.BaseService;
@@ -47,18 +48,19 @@ public class SwipeCardActivity extends BaseActivity {
 
     @Override
     public void onErrorResponse(String operationType, Throwable throwable, String tag) {
-
+        DYToast.showShort(this,2);
     }
 
     @Override
     public void networkFinished(String operationType, BaseService service, int code, String tag) {
-
+        DYToast.showShort(this,2);
     }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mSwipeManager = new SwipeManager();
+        mSwipeManager.getRestaurantList(this,this);
     }
 
 
