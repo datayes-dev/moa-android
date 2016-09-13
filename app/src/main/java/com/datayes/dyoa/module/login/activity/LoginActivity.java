@@ -1,10 +1,10 @@
 package com.datayes.dyoa.module.login.activity;
 
+import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.view.View;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -12,32 +12,47 @@ import com.datayes.baseapp.tools.DYToast;
 import com.datayes.dyoa.R;
 import com.datayes.dyoa.bean.UserLoginBean;
 import com.datayes.dyoa.common.base.BaseActivity;
+import com.datayes.dyoa.common.config.Config;
 import com.datayes.dyoa.common.config.RequestInfo;
+import com.datayes.dyoa.common.imageloader.DYImageLoader;
 import com.datayes.dyoa.common.network.BaseService;
 import com.datayes.dyoa.common.network.manager.user.UserManager;
 import com.datayes.dyoa.common.networkstatus.NetworkState;
+import com.datayes.dyoa.common.view.CEditText;
 import com.datayes.dyoa.common.view.CTitle;
 import com.datayes.dyoa.module.login.Constant;
 import com.datayes.dyoa.module.login.service.UserService;
+import com.datayes.dyoa.utils.AppUtil;
+import com.nostra13.universalimageloader.core.assist.FailReason;
+import com.nostra13.universalimageloader.core.listener.ImageLoadingListener;
 
 import butterknife.BindView;
+import butterknife.OnClick;
 
-public class LoginActivity extends BaseActivity implements View.OnClickListener {
+public class LoginActivity extends BaseActivity {
 
     @BindView(R.id.ct_title)
     CTitle cTitle;
     @BindView(R.id.userTxt)
-    EditText mUser;
+    CEditText mUser;
     @BindView(R.id.pwdText)
-    EditText mPwd;
+    CEditText mPwd;
     @BindView(R.id.codeTxt)
-    EditText mCode;
+    CEditText mCode;
     @BindView(R.id.loginBtn)
     Button btnLogin;
     @BindView(R.id.forgetPwdTxt)
     TextView btnForget;
     @BindView(R.id.v_bottom_line)
     View mVTextCodeBottomLine;
+
+    // 验证码图片加载器
+    private DYImageLoader imageLoader_;
+
+    private UserManager request_;
+    private UserService service_;
+
+    private boolean mIsOnLogin = false;
 
     @Override
     protected int getLayoutId() {
@@ -49,11 +64,6 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
 
     }
 
-    private UserManager request_;
-    private UserService service_;
-
-    private boolean mIsOnLogin = false;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -64,22 +74,159 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
 
     @Override
     public BaseService initService() {
+
+        if (service_ == null) {
+            service_ = new UserService();
+        }
+
         return service_;
     }
 
     private void init() {
         request_ = new UserManager();
-        mVTextCodeBottomLine = findViewById(R.id.v_bottom_line);
+        imageLoader_ = DYImageLoader.getInstance();
+
+        mCode.rightIamge.setContentDescription(getString(R.string.my_login_code));
+        mCode.rightText.setText(getString(R.string.loading_state));
+
+        AppUtil.setViewEnableView(btnLogin, false);
+
+        mUser.setCurRegEx(AppUtil.REG_EX_INPUT_STRING);
+        mPwd.setCurRegEx(AppUtil.REG_EX_INPUT_STRING);
     }
 
     private void initEvent() {
+        mUser.setOnEditListener(new CEditText.OnEditListener() {
 
-        btnLogin.setOnClickListener(this);
-        btnForget.setOnClickListener(this);
+            @Override
+            public void onEdit(boolean comList) {
+                refreshAllBtns();
+            }
+        });
+
+        mPwd.setOnEditListener(new CEditText.OnEditListener() {
+
+            @Override
+            public void onEdit(boolean comList) {
+                refreshAllBtns();
+            }
+        });
+
+        mPwd.setRightBtnClick(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+
+                if (mPwd != null) {
+
+                    Button rightBtn = mPwd.getRightBtn();
+
+                    if (rightBtn != null) {
+
+                        if (mPwd.getEditText().getInputType() == CEditText.MyInputType.visible_password.getType()) {
+
+                            mPwd.setInputType(CEditText.MyInputType.textPassword.getTypeName());
+                            rightBtn.setBackgroundResource(R.mipmap.eyeclose2x);
+
+                        } else {
+
+                            mPwd.setInputType(CEditText.MyInputType.visible_password.getTypeName());
+                            rightBtn.setBackgroundResource(R.mipmap.eyeopen2x);
+                        }
+                    }
+                }
+            }
+        });
+
+        mCode.setOnEditListener(new CEditText.OnEditListener() {
+
+            @Override
+            public void onEdit(boolean comList) {
+                refreshAllBtns();
+            }
+        });
+
+        mCode.setRightIamgeClick(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                refreshCaptchaImage();
+            }
+        });
 
     }
 
-    @Override
+    // 刷新按钮的状态
+    private void refreshAllBtns() {
+
+        if (mPwd != null && mPwd != null && mCode != null && btnLogin != null) {
+
+            String pwd = mPwd.getText();
+            String phone = mPwd.getText();
+
+            if (mCode.getVisibility() == View.GONE) {
+
+                AppUtil.setViewEnableView(
+                        btnLogin, pwd.length() >= 6 && phone.length() >= 2);
+
+            } else {
+
+                String code = mCode.getText();
+
+                AppUtil.setViewEnableView(
+                        btnLogin, pwd.length() >= 6 && phone.length() >= 2 && code.length() >= 4);
+
+            }
+        }
+    }
+
+    // 刷新图片验证码
+    private void refreshCaptchaImage() {
+
+        if (mCode != null && imageLoader_ != null && mCode.rightIamge != null) {
+
+            mCode.rightIamge.setVisibility(View.VISIBLE);
+            mCode.setVisibility(View.VISIBLE);
+            mVTextCodeBottomLine.setVisibility(View.VISIBLE);
+
+            imageLoader_.displayFullImage(
+                    new StringBuilder()
+                            .append(Config.getConfig().getUrl(Config.ConfigUrlType.USER_MASTER))
+                            .append(RequestInfo.CAPTCHA_IMAGE.getOperationType()).toString(),
+                    mCode.rightIamge, false, false, new CaptchaImageLoadingListener());
+        }
+    }
+
+    private class CaptchaImageLoadingListener implements ImageLoadingListener {
+
+        @Override
+        public void onLoadingStarted(String s, View view) {
+            mCode.rightIamge.setVisibility(View.GONE);
+            mCode.rightText.setVisibility(View.VISIBLE);
+        }
+
+        @Override
+        public void onLoadingFailed(String s, View view, FailReason failReason) {
+            mCode.rightIamge.setVisibility(View.VISIBLE);
+            mCode.rightText.setVisibility(View.GONE);
+            DYToast.makeText(LoginActivity.this, R.string.user_send_login_response_10, Toast.LENGTH_SHORT).show();
+        }
+
+        @Override
+        public void onLoadingComplete(String s, View view, Bitmap bitmap) {
+            mCode.rightIamge.setVisibility(View.VISIBLE);
+            mCode.rightText.setVisibility(View.GONE);
+        }
+
+        @Override
+        public void onLoadingCancelled(String s, View view) {
+            mCode.rightIamge.setVisibility(View.VISIBLE);
+            mCode.rightText.setVisibility(View.GONE);
+            DYToast.makeText(LoginActivity.this, R.string.user_send_login_response_10, Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    @OnClick({R.id.loginBtn, R.id.forgetPwdTxt})
     public void onClick(View v) {
         switch (v.getId()) {
 
@@ -93,7 +240,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
 
                     mIsOnLogin = true;
 
-                    String username = mUser.getText().toString();
+                    String username = mUser.getText();
 
                     int tagIndex = username.indexOf("@");
                     String tenant = null;
@@ -112,8 +259,8 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
                     request_.sendLogin(this,
                             this,
                             username,
-                            mUser.getText().toString(),
-                            mCode.getVisibility() == View.VISIBLE ? mCode.getText().toString() : "",
+                            mPwd.getText(),
+                            mCode.getVisibility() == View.VISIBLE ? mCode.getText() : "",
                             tenant);
                 }
                 break;
@@ -133,10 +280,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
     }
 
     private void onLoginCompleted() {
-
         finish();
-
-
         DYToast.makeText(this, R.string.user_send_login_response_0, Toast.LENGTH_SHORT).show();
     }
 
@@ -155,6 +299,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
 
                 if (!resultInfo.equals(Constant.SUCCESS)) {
                     // 刷新验证码
+                    refreshCaptchaImage();
                     return;
                 }
 

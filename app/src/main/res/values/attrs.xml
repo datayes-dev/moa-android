@@ -18,4 +18,35 @@
         <attr name="right_btn_margin_right" format="dimension" />
     </declare-styleable>
 
+    <declare-styleable name="custom">
+        <attr name="lable" format="string" />
+        <attr name="errNote" format="string" />
+        <attr name="hit" format="string" />
+        <attr name="input_typed" format="string" />
+        <attr name="length" format="integer" />
+        <attr name="nomal_bg" format="reference" />
+        <attr name="select_bg" format="reference" />
+        <attr name="clear" format="boolean" />
+        <attr name="text_color" format="reference" />
+
+        <attr name="right_btn" format="reference" />  <!-- 给button设置 图片 -->
+        <attr name="right_btn_text" format="reference" /><!-- 给button设置 字 -->
+
+        <attr name="right_btn_bg" format="reference" /><!-- 给右边设置 图片 -->
+        <attr name="left_btn_bg" format="reference" /><!-- 给左边设置 图片 -->
+
+        <attr name="right_iamge_margin_right" format="dimension" /><!-- 右边图片的右边距 -->
+        <attr name="right_iamge_width" format="dimension" /><!-- 右边图片的宽 -->
+        <attr name="right_iamge_height" format="dimension" /><!-- 右边图片的高 -->
+
+        <attr name="text_padding_left" format="dimension" /><!-- 设置文本左间距 -->
+
+        <attr name="right_btn_width" format="dimension" /><!-- 右边按钮的宽 -->
+        <attr name="right_btn_height" format="dimension" /><!-- 右边按钮宽高 -->
+        <attr name="right_btn_padding_left" format="dimension" /><!-- 右边按钮左间距 -->
+        <attr name="right_btn_padding_right" format="dimension" /><!-- 右边按钮右间距 -->
+        <attr name="right_btn_text_appearance" format="reference" /><!-- 右边按钮文本样式 -->
+
+    </declare-styleable>
+
 </resources>

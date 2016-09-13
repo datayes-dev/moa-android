@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/layout"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content">
+
+    <TextView
+        android:id="@+id/label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_centerVertical="true"
+        android:textAppearance="@style/font_T5"
+        android:textColor="@color/color_H9" />
+
+    <RelativeLayout
+        android:id="@+id/inputLayout"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@id/label"
+        android:background="@color/color_B9">
+
+        <LinearLayout
+            android:id="@+id/rightBtnLayout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:orientation="vertical"
+            android:visibility="gone">
+
+            <Button
+                android:id="@+id/rightBtn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center" />
+
+        </LinearLayout>
+
+        <ImageView
+            android:id="@+id/rightIamge"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignWithParentIfMissing="true"
+            android:layout_centerVertical="true"
+            android:layout_marginEnd="5dp"
+            android:layout_marginRight="5dp"
+            android:layout_toLeftOf="@id/rightBtnLayout"
+            android:contentDescription="@string/app_name"
+            android:visibility="gone" />
+
+        <TextView
+            android:id="@+id/rightText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="5dip"
+            android:gravity="center"
+            android:textColor="#2d3e50"
+            android:textSize="14sp"
+            android:visibility="gone" />
+
+        <ImageView
+            android:id="@+id/clearbtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignWithParentIfMissing="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="10dip"
+            android:layout_toLeftOf="@id/rightIamge"
+            android:background="@mipmap/searchboxtitledel"
+            android:contentDescription="@string/app_name"
+            android:visibility="gone" />
+
+        <TextView
+            android:id="@+id/leftTxt"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_alignParentLeft="true"
+            android:layout_alignWithParentIfMissing="true"
+            android:layout_centerVertical="true"
+            android:drawablePadding="5dp"
+            android:gravity="center"
+            android:paddingLeft="7dp"
+            android:textAppearance="@style/font_T5"
+            android:textColor="#c1cfea"
+            android:visibility="gone" />
+
+        <EditText
+            android:id="@+id/editText"
+            android:layout_width="fill_parent"
+            android:layout_height="45dip"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="7dp"
+            android:layout_toLeftOf="@+id/clearbtn"
+            android:layout_toRightOf="@+id/leftTxt"
+            android:background="@null"
+            android:singleLine="true"
+            android:textAppearance="@style/font_T5"
+            android:textColor="@color/color_W1"
+            android:textColorHint="@color/color_H3"></EditText>
+    </RelativeLayout>
+
+    <TextView
+        android:id="@+id/errNote"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/inputLayout"
+        android:layout_marginLeft="10dip"
+        android:layout_marginTop="6dip"
+        android:layout_toRightOf="@id/label"
+        android:textColor="@color/color_R1"
+        android:textSize="12sp"
+        android:visibility="gone" />
+
+</RelativeLayout>

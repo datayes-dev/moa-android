@@ -33,6 +33,7 @@ import com.datayes.dyoa.common.network.BaseService;
 import com.datayes.dyoa.common.network.NetCallBack;
 import com.datayes.dyoa.common.network.bean.BaseResponseBean;
 import com.datayes.dyoa.common.network.manager.token.NetAccessTockenManager;
+import com.orhanobut.logger.Logger;
 
 import org.json.JSONObject;
 
@@ -109,7 +110,7 @@ public class JsonRequestManager extends BaseRequestManager {
 
             @Override
             public void onFailure(Call<String> call, Throwable t) {
-                //Logger.d(t.getMessage());
+                Logger.d(t.getMessage());
             }
         };
 
