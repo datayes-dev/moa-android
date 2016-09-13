@@ -1,20 +1,23 @@
 package com.datayes.dyoa.module.activity;
 
 
+import android.os.Bundle;
 import android.widget.EditText;
 import android.widget.TextView;
 
 import com.datayes.dyoa.R;
 import com.datayes.dyoa.common.base.BaseActivity;
 import com.datayes.dyoa.common.networkstatus.NetworkState;
+import com.datayes.dyoa.common.view.CTitle;
 
 import butterknife.BindView;
+import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 /**
  * Created by datayes on 16/9/12.
  */
-public class PayMoneyActivity extends BaseActivity{
+public class PayMoneyActivity extends BaseActivity {
 
     @BindView(R.id.tv_user_name)
     TextView mTvUserName;
@@ -24,6 +27,8 @@ public class PayMoneyActivity extends BaseActivity{
     EditText mEvMoney;
     @BindView(R.id.btn_pay)
     TextView mBtnPay;
+    @BindView(R.id.ct_title)
+    CTitle mCtTitle;
 
     @Override
     protected int getLayoutId() {
@@ -42,5 +47,12 @@ public class PayMoneyActivity extends BaseActivity{
 
     @OnClick(R.id.btn_pay)
     public void onClick() {
+    }
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        // TODO: add setContentView(...) invocation
+        ButterKnife.bind(this);
     }
 }

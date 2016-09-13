@@ -7,6 +7,7 @@ import android.widget.TextView;
 import com.datayes.dyoa.R;
 import com.datayes.dyoa.common.base.BaseActivity;
 import com.datayes.dyoa.common.networkstatus.NetworkState;
+import com.datayes.dyoa.common.view.CTitle;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -27,6 +28,8 @@ public class TradeFinishActivity extends BaseActivity {
     TextView mBtnPay;
     @BindView(R.id.tv_trade_history)
     TextView mTvTradeHistory;
+    @BindView(R.id.ct_title)
+    CTitle mCtTitle;
 
 
     @Override
@@ -52,5 +55,12 @@ public class TradeFinishActivity extends BaseActivity {
             case R.id.tv_trade_history:
                 break;
         }
+    }
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        // TODO: add setContentView(...) invocation
+        ButterKnife.bind(this);
     }
 }
