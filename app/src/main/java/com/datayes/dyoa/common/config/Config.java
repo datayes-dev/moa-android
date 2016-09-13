@@ -125,7 +125,7 @@ public class Config {
     }
 
     private static final String qaBaseUrl = "http://gw.cp.wmcloud-qa.com";
-    private static final String devBaseUrl = "https://gw.wmcloud-stg.com";
+    private static final String devBaseUrl = "http://139.224.80.105:52491/";
     private static final String stageBaseUrl = "https://gw.wmcloud-stg.com";
     private static final String productBaseUrl = "https://gw.wmcloud.com";
 

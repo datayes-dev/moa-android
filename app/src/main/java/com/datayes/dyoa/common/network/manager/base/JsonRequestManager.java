@@ -26,6 +26,7 @@
 package com.datayes.dyoa.common.network.manager.base;
 
 import android.text.TextUtils;
+import android.util.Log;
 
 import com.datayes.dyoa.bean.BaseBean;
 import com.datayes.dyoa.common.config.Config;
@@ -33,7 +34,9 @@ import com.datayes.dyoa.common.network.BaseService;
 import com.datayes.dyoa.common.network.NetCallBack;
 import com.datayes.dyoa.common.network.bean.BaseResponseBean;
 import com.datayes.dyoa.common.network.manager.token.NetAccessTockenManager;
+import com.orhanobut.logger.Logger;
 
+import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.lang.reflect.Field;
@@ -81,8 +84,13 @@ public class JsonRequestManager extends BaseRequestManager {
                                 bean = beanClass.newInstance();
                             }
 
-                            JSONObject json = new JSONObject(resultJson);
-                            bean.parseJsonObject(json);
+                            if (resultJson.startsWith("{")) {//JsonObject
+                                JSONObject json = new JSONObject(resultJson);
+                                bean.parseJsonObject(json);
+                            }else if (resultJson.startsWith("[")) {//JsonArray
+                                JSONArray json = new JSONArray(resultJson);
+                                bean.parseJsonArray(json);
+                            }
                             if (checkTockenNeedLogin(call, this, bean.getCode())) {
 
                                 saveCookie(response.headers());
@@ -109,7 +117,7 @@ public class JsonRequestManager extends BaseRequestManager {
 
             @Override
             public void onFailure(Call<String> call, Throwable t) {
-                //Logger.d(t.getMessage());
+                Logger.d(t.getMessage());
             }
         };
 
@@ -122,7 +130,7 @@ public class JsonRequestManager extends BaseRequestManager {
      * @author hongfei.tao
      * @time create at 2016/9/2 18:11
      */
-    protected <T extends BaseResponseBean> void start(final String operateType, final NetCallBack callBack, final NetCallBack.InitService service, Call<T> call, final Config.ConfigUrlType type) {
+    protected <T extends BaseResponseBean> void start(final String operateType, final NetCallBack callBack, final NetCallBack.InitService service, Call<T> call) {
 
         Callback callback = new Callback<T>() {
             @Override
@@ -143,19 +151,14 @@ public class JsonRequestManager extends BaseRequestManager {
                         //数据注入
                         infuse(initService, t);
 
-                        callBack.networkFinished(operateType, initService, t.getCode(), t.getMessage());
+                        callBack.networkFinished(operateType, initService, response.code(), response.message());
                     }
                 }
             }
 
             @Override
             public void onFailure(Call<T> call, Throwable t) {
-                if (callBack != null) {
-                    String subUrl = call.request().url().url().getPath();
-                    String operateType = subUrl.replace(type.getUrl(), "");
-
-                    callBack.onErrorResponse(operateType, t, "");
-                }
+                Log.d("TAG", t.getMessage());
             }
         };
 

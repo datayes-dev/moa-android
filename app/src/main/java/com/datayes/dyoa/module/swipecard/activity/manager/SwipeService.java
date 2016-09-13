@@ -8,9 +8,9 @@ import com.datayes.dyoa.common.network.bean.RestaurantListBean;
  */
 public class SwipeService extends BaseService {
 
+    private RestaurantListBean mRestaurantListBean;
+
     public RestaurantListBean getRestaurantListBean() {
         return mRestaurantListBean;
     }
-
-    private RestaurantListBean mRestaurantListBean;
 }

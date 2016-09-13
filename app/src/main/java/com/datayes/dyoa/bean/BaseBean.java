@@ -3,6 +3,8 @@ package com.datayes.dyoa.bean;
 import com.datayes.baseapp.utils.StringUtil;
 import com.datayes.dyoa.common.networkstatus.NetworkCode;
 
+import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
 
 /**
@@ -74,5 +76,9 @@ public class BaseBean {
 
     public String getData() {
         return data;
+    }
+
+    public void parseJsonArray(JSONArray jsonArray) throws JSONException {
+
     }
 }
