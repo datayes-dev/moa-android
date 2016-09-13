@@ -23,16 +23,16 @@
  *
  */
 
-package com.datayes.dyoa.network.manager.base;
+package com.datayes.dyoa.common.network.manager.base;
 
 import android.text.TextUtils;
 
 import com.datayes.dyoa.bean.BaseBean;
 import com.datayes.dyoa.common.config.Config;
-import com.datayes.dyoa.network.BaseService;
-import com.datayes.dyoa.network.NetCallBack;
-import com.datayes.dyoa.network.bean.BaseResponseBean;
-import com.datayes.dyoa.network.manager.token.NetAccessTockenManager;
+import com.datayes.dyoa.common.network.BaseService;
+import com.datayes.dyoa.common.network.NetCallBack;
+import com.datayes.dyoa.common.network.bean.BaseResponseBean;
+import com.datayes.dyoa.common.network.manager.token.NetAccessTockenManager;
 
 import org.json.JSONObject;
 

@@ -22,13 +22,13 @@
  *  * strictly forbidden unless prior written permission is obtained from DataYes.
  *
  */
-package com.datayes.dyoa.network.manager.base;
+package com.datayes.dyoa.common.network.manager.base;
 
 
 import com.datayes.dyoa.common.config.Config;
-import com.datayes.dyoa.network.BaseService;
-import com.datayes.dyoa.network.NetCallBack;
-import com.datayes.dyoa.network.manager.token.NetAccessTockenManager;
+import com.datayes.dyoa.common.network.BaseService;
+import com.datayes.dyoa.common.network.NetCallBack;
+import com.datayes.dyoa.common.network.manager.token.NetAccessTockenManager;
 import com.google.protobuf.GeneratedMessage;
 
 import java.lang.reflect.Field;

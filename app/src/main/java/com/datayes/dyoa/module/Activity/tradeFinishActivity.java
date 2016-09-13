@@ -28,11 +28,10 @@ public class tradeFinishActivity extends BaseActivity {
     @BindView(R.id.tv_trade_history)
     TextView mTvTradeHistory;
 
+
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_trade_finish);
-        ButterKnife.bind(this);
+    protected int getLayoutId() {
+        return R.layout.activity_trade_finish;
     }
 
     @Override

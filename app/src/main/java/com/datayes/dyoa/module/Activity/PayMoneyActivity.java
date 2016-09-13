@@ -27,10 +27,8 @@ public class PayMoneyActivity extends BaseActivity {
     TextView mBtnPay;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_pay_money);
-        ButterKnife.bind(this);
+    protected int getLayoutId() {
+        return R.layout.activity_pay_money;
     }
 
     @Override

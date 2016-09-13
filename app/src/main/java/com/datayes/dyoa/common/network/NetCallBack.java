@@ -23,38 +23,25 @@
  *
  */
 
-package com.datayes.dyoa.network.bean;
+package com.datayes.dyoa.common.network;
 
 /**
- * 网络请求返回数据类型为json时的基类Bean
- * Created by hongfei.tao on 2016/9/1 16:59.
+ * 网络层接口
+ * 
+ * @author nianyi.yang
+ * @date create at 2016/9/12 11:25
  */
-public class BaseResponseBean {
+public interface NetCallBack {
+    
+    //正常请求
+    void networkFinished(String operationType, BaseService service, int code, String tag);
 
-    /**
-     * 服务器返回状态码
-     */
-    protected int code;
+    //异常请求
+    void onErrorResponse(String operationType, Throwable throwable, String tag);
 
-    /**
-     * 服务器返回的状态描述
-     */
-    protected String message;
-
-
-    public int getCode() {
-        return code;
+    interface InitService {
+        //业务处理类
+        BaseService initService();
     }
 
-    public String getMessage() {
-        return message;
-    }
-
-    public void setMessage(String message) {
-        this.message = message;
-    }
-
-    public void setCode(int code) {
-        this.code = code;
-    }
 }

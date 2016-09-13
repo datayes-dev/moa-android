@@ -23,7 +23,7 @@
  *
  */
 
-package com.datayes.dyoa.network.interceptor;
+package com.datayes.dyoa.common.network.interceptor;
 
 
 import com.datayes.dyoa.module.user.CurrentUser;

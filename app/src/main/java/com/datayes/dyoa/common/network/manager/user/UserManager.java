@@ -23,10 +23,10 @@
  *
  */
 
-package com.datayes.dyoa.network.manager.user;
+package com.datayes.dyoa.common.network.manager.user;
 
-import com.datayes.dyoa.network.NetCallBack;
-import com.datayes.dyoa.network.manager.base.JsonRequestManager;
+import com.datayes.dyoa.common.network.NetCallBack;
+import com.datayes.dyoa.common.network.manager.base.JsonRequestManager;
 
 /**
  * @author shenen.gao
