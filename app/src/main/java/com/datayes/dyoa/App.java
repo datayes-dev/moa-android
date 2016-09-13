@@ -3,11 +3,12 @@ package com.datayes.dyoa;
 import android.app.Activity;
 
 import com.datayes.baseapp.base.BaseApp;
+import com.uuzuche.lib_zxing.activity.ZXingLibrary;
 
 /**
  * Created by nianyi.yang on 2016/9/12.
  */
-public class App extends BaseApp{
+public class App extends BaseApp {
 
     private static App instance_;
 
@@ -20,6 +21,8 @@ public class App extends BaseApp{
         instance_ = this;
 
         super.onCreate();
+
+        ZXingLibrary.initDisplayOpinion(this);
     }
 
     @Override
