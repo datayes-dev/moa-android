@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:id="@+id/rl_title_bar"
+                android:layout_width="fill_parent"
+                android:layout_height="48dip"
+                android:background="@color/color_B1"
+                android:orientation="horizontal">
+
+    <Button
+        android:id="@+id/leftBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="fill_parent"
+        android:layout_alignParentLeft="true"
+        android:layout_centerVertical="true"
+        android:background="@null"
+        android:drawableLeft="@drawable/icon_back_bg"
+        android:paddingLeft="10dp"
+        android:paddingRight="6dp"
+        android:textColor="#ffffffff"
+        android:textSize="18sp" />
+
+    <Button
+        android:id="@+id/leftBtn1"
+        android:layout_width="wrap_content"
+        android:layout_height="fill_parent"
+        android:layout_centerVertical="true"
+        android:layout_toRightOf="@id/leftBtn"
+        android:background="@null"
+        android:paddingRight="30dp"
+        android:textAppearance="@style/font_T4"
+        android:textColor="@color/color_W1"
+        android:visibility="gone" />
+
+    <com.datayes.dyoa.common.view.CMarqueeText
+        android:id="@+id/titleTxt"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="75dp"
+        android:layout_marginRight="75dp"
+        android:drawablePadding="4dp"
+        android:ellipsize="marquee"
+        android:focusable="true"
+        android:focusableInTouchMode="true"
+        android:gravity="center"
+        android:includeFontPadding="false"
+        android:lineSpacingExtra="0dp"
+        android:marqueeRepeatLimit="marquee_forever"
+        android:scrollHorizontally="true"
+        android:singleLine="true"
+        android:textColor="@color/color_W1"
+        android:textAppearance="@style/font_T7" />
+
+    <TextView
+        android:id="@+id/titleTxt1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_marginLeft="75dp"
+        android:layout_marginRight="75dp"
+        android:ellipsize="marquee"
+        android:focusable="true"
+        android:focusableInTouchMode="true"
+        android:gravity="top|center_horizontal"
+        android:includeFontPadding="false"
+        android:marqueeRepeatLimit="marquee_forever"
+        android:scrollHorizontally="true"
+        android:singleLine="true"
+        android:textAppearance="@style/font_T3"
+        android:textColor="@color/color_W1"
+        android:visibility="gone" />
+
+    <Button
+        android:id="@+id/rightBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="fill_parent"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:layout_marginRight="0dip"
+        android:background="#00000000"
+        android:gravity="center"
+        android:textColor="#ffcccccc"
+        android:textSize="18sp" />
+
+    <TextView
+        android:id="@+id/rightText"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_centerVertical="true"
+        android:layout_marginRight="15dp"
+        android:layout_toLeftOf="@id/rightBtn"
+        android:gravity="center"
+        android:textColor="@color/color_H5"
+        android:textAppearance="@style/font_T5" />
+
+    <Button
+        android:id="@+id/rightLeftBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="fill_parent"
+        android:layout_centerVertical="true"
+        android:layout_toLeftOf="@id/rightText"
+        android:background="#00000000"
+        android:gravity="center"
+        android:paddingLeft="15dp"
+        android:paddingRight="15dp" />
+
+    <RelativeLayout
+        android:id="@+id/rightFenGeLayout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:visibility="gone">
+
+        <ImageView
+            android:id="@+id/alignrightLeftBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="-1dip"
+            android:background="@mipmap/break_line"
+            android:contentDescription="@string/app_name" />
+
+        <Button
+            android:id="@+id/rightFenGe"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_toRightOf="@+id/alignrightLeftBtn"
+            android:background="@null"
+            android:singleLine="true"
+            android:textColor="@color/color_W1"
+            android:textSize="14sp" />
+    </RelativeLayout>
+
+</RelativeLayout>
