@@ -1,6 +1,5 @@
 package com.datayes.dyoa.module.activity;
 
-import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
 
@@ -9,7 +8,6 @@ import com.datayes.dyoa.common.base.BaseActivity;
 import com.datayes.dyoa.common.networkstatus.NetworkState;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 /**

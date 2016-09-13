@@ -7,14 +7,20 @@ import android.os.Bundle;
 import com.datayes.dyoa.R;
 import com.datayes.dyoa.common.base.BaseActivity;
 import com.datayes.dyoa.common.networkstatus.NetworkState;
+import com.datayes.dyoa.common.view.CTitle;
 import com.uuzuche.lib_zxing.activity.CaptureFragment;
 import com.uuzuche.lib_zxing.activity.CodeUtils;
+
+import butterknife.BindView;
 
 /**
  * 二维码扫描界面
  * Created by hongfei.tao on 2016/9/13 10:44.
  */
 public class ScanCodeActivity extends BaseActivity implements CodeUtils.AnalyzeCallback {
+
+    @BindView(R.id.ct_title)
+    CTitle mTitle;
 
     private CaptureFragment mCaptureFragment;
 
@@ -61,4 +67,5 @@ public class ScanCodeActivity extends BaseActivity implements CodeUtils.AnalyzeC
     public void onErrorResponse(String operationType, Throwable throwable, String tag) {
 
     }
+
 }
