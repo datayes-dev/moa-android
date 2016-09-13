@@ -25,6 +25,8 @@
 
 package com.datayes.dyoa.common.network.manager.user;
 
+import com.datayes.dyoa.bean.UserLoginBean;
+import com.datayes.dyoa.common.config.Config;
 import com.datayes.dyoa.common.network.NetCallBack;
 import com.datayes.dyoa.common.network.manager.base.JsonRequestManager;
 
@@ -50,7 +52,7 @@ public class UserManager extends JsonRequestManager {
     public void sendLogin(NetCallBack netCallBack,
                           NetCallBack.InitService baseService, String username, String password, String captcha, String tenant) {
 
-        /*start(netCallBack,
+        start(netCallBack,
                 baseService,
                 getInstance().sendLogin(
                         Config.ConfigUrlType.USER_MASTER.getUrl(),
@@ -61,6 +63,6 @@ public class UserManager extends JsonRequestManager {
                         captcha,
                         ((captcha.length() <= 0) ? "false" : "true")
                 ),
-                Config.ConfigUrlType.USER_MASTER, UserLoginBean.class);*/
+                Config.ConfigUrlType.USER_MASTER, UserLoginBean.class);
     }
 }

@@ -129,11 +129,6 @@ public class Config {
     private static final String stageBaseUrl = "https://gw.wmcloud-stg.com";
     private static final String productBaseUrl = "https://gw.wmcloud.com";
 
-    private static final String webpageQaBaseUrl = "https://app.wmcloud-stg.com/ira/";
-    private static final String webpageDevBaseUrl = "https://app.wmcloud-stg.com/ira/";
-    private static final String webpageStageBaseUrl = "https://app.wmcloud-stg.com/ira/";
-    private static final String webpageProductBaseUrl = "https://app.wmcloud.com/ira/";
-
     /**
      * @author shenen.gao  @brief 获取请求的URL  @param type  @back_return String      
      *  @throws  

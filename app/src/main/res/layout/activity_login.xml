@@ -6,19 +6,17 @@
     android:layout_height="match_parent"
     tools:context="com.datayes.dyoa.module.login.activity.LoginActivity">
 
-    <com.datayes.irr.view.CTitle
-        android:id="@+id/title"
+    <com.datayes.dyoa.common.view.CTitle
+        android:id="@+id/ct_title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        irr:rightNote="登录"
         irr:right_text_margin_right="20dp"
         irr:titleValue="登录" />
 
     <RelativeLayout
-        android:id="@+id/sss"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@id/title"
+        android:layout_below="@id/ct_title"
         android:background="@color/color_W1">
 
         <LinearLayout
