@@ -25,8 +25,6 @@
 
 package com.datayes.dyoa.common.network.service;
 
-import com.datayes.dyoa.common.network.bean.RestaurantListBean;
-
 import okhttp3.RequestBody;
 import retrofit2.Call;
 import retrofit2.http.Body;
@@ -120,7 +118,7 @@ public interface AppService {
      */
     @POST("/meal_ticket/transaction")
     Call handleTransaction(
-            @Body RequestBody body
+//            @Body RequestBody body
     );
 
     /**
@@ -147,6 +145,6 @@ public interface AppService {
      * @author hongfei.tao
      * @time create at 2016/9/13 14:08
      */
-    @GET("/meal_ticket/restaurant")
-    Call<RestaurantListBean> getRestaurantList();
+    @GET("restaurant")
+    Call<String> getRestaurantList();
 }

@@ -95,6 +95,8 @@
                     android:layout_marginTop="1dp"
                     android:layout_marginLeft="4dp"
                     android:layout_marginRight="4dp"
+                    android:inputType="numberDecimal"
+                    android:maxLength="5"
                     android:gravity="right|center_vertical"
                     android:textAppearance="@style/font_T10"
                     android:textColor="@color/color_H9"
