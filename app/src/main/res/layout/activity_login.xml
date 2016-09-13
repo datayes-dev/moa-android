@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:irr="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.datayes.dyoa.module.login.activity.LoginActivity">
+
+    <com.datayes.irr.view.CTitle
+        android:id="@+id/title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        irr:rightNote="登录"
+        irr:right_text_margin_right="20dp"
+        irr:titleValue="登录" />
+
+    <RelativeLayout
+        android:id="@+id/sss"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/title"
+        android:background="@color/color_W1">
+
+        <LinearLayout
+            android:id="@+id/inputContainer"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="15dp"
+            android:layout_marginTop="28dp"
+            android:orientation="vertical">
+
+            <EditText
+                android:id="@+id/userTxt"
+                android:layout_width="match_parent"
+                android:layout_height="46dp" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1px"
+                android:background="@color/color_H2" />
+
+            <EditText
+                android:id="@+id/pwdText"
+                android:layout_width="match_parent"
+                android:layout_height="46dp" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1px"
+                android:background="@color/color_H2" />
+
+            <EditText
+                android:id="@+id/codeTxt"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:visibility="gone" />
+
+            <View
+                android:id="@+id/v_bottom_line"
+                android:layout_width="match_parent"
+                android:layout_height="1px"
+                android:background="@color/color_H2"
+                android:visibility="gone" />
+
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/loginBtn"
+            android:layout_width="match_parent"
+            android:layout_height="45dp"
+            android:layout_below="@+id/inputContainer"
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="15dp"
+            android:layout_marginTop="20dp"
+            android:background="@drawable/orangebg_cycle_border"
+            android:text="登录"
+            android:textColor="#77FFFFFF">
+
+        </Button>
+
+        <TextView
+            android:id="@+id/forgetPwdTxt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_below="@id/loginBtn"
+            android:layout_marginRight="19dp"
+            android:layout_marginTop="15dp"
+            android:ellipsize="end"
+            android:singleLine="true"
+            android:text="忘记密码"
+            android:textAppearance="@style/font_T4"
+            android:textColor="@color/color_B1" />
+
+    </RelativeLayout>
+</RelativeLayout>

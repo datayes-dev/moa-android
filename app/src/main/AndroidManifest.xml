@@ -30,6 +30,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".module.login.activity.LoginActivity"></activity>
         <!-- 扫描二维码Activity -->
         <activity
             android:name=".module.code.activity.ScanCodeActivity"
