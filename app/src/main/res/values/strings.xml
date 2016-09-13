@@ -1,3 +1,13 @@
 <resources>
     <string name="app_name">dyoa</string>
+
+    <string name="worker_name">员工姓名</string>
+     <string name="shop_name">商家</string>
+    <string name="input_money_key">输入就餐金额</string>
+    <string name="pay_key">付款</string>
+    <string name="finish_key">完成</string>
+    <string name="message_key">无需支付真实费用,由公司与餐厅根据账卡记录统一结算</string>
+    <string name="swipe_card_success">刷卡成功</string>
+    <string name="trade_history">查看交易记录</string>
+
 </resources>
