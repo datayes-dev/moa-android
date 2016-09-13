@@ -42,7 +42,15 @@
         <activity
             android:name=".module.code.activity.ScanCodeActivity"
             android:screenOrientation="portrait" />
-
+        <activity
+            android:name=".module.swipecard.activity.SwipeSuccessActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".module.swipecard.activity.TradeHistoryActivity"
+            android:screenOrientation="portrait" />
+        <!--<activity-->
+            <!--android:name=".module.swipecard.activity.SwipeCardActivity"-->
+            <!--android:screenOrientation="portrait" />-->
         <!-- qa; stg, prd -->
         <meta-data
             android:name="ENVIRONMENT"

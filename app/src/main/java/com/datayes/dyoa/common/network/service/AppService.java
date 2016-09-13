@@ -120,7 +120,7 @@ public interface AppService {
      */
     @POST("/meal_ticket/transaction")
     Call handleTransaction(
-            @Body RequestBody body
+//            @Body RequestBody body
     );
 
     /**

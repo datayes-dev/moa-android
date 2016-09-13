@@ -20,4 +20,20 @@ public class SwipeManager extends JsonRequestManager {
                                   NetCallBack.InitService baseService) {
         start("",netCallBack,baseService,getInstance().getRestaurantList(), Config.ConfigUrlType.NOMRAL);
     }
+
+
+    /**
+     * 执行交易
+     *
+     * @author datayes
+     * @time create at 16/9/13
+     */
+    public void sendUserTradeMessage(NetCallBack netCallBack,
+                                  NetCallBack.InitService baseService,
+                                     String price,
+                                     String restaurant,
+                                     String memo) {
+        start("",netCallBack,baseService,getInstance().handleTransaction(), Config.ConfigUrlType.NOMRAL);
+    }
+
 }
