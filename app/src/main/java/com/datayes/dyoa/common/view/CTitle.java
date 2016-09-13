@@ -25,8 +25,6 @@
 
 package com.datayes.dyoa.common.view;
 
-import java.io.IOException;
-
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.drawable.Drawable;
@@ -38,7 +36,10 @@ import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+
 import com.datayes.dyoa.R;
+
+import java.io.IOException;
 
 
 /**
@@ -89,15 +90,15 @@ public class CTitle extends RelativeLayout implements OnClickListener {
 
     private void setAttribute(Context context, AttributeSet attrs) {
         TypedArray typedArray = context.obtainStyledAttributes(attrs,
-                R.styleable.mTitle);
+                R.styleable.CTitle);
 
-        String txt = typedArray.getString(R.styleable.mTitle_titleValue);
+        String txt = typedArray.getString(R.styleable.CTitle_titleValue);
         if (txt != null && !"".equals(txt)) {
             fTitleTxt.setText(txt);
         }
 
         Drawable right_bg = typedArray
-                .getDrawable(R.styleable.mTitle_title_right_btn_bg);
+                .getDrawable(R.styleable.CTitle_title_right_btn_bg);
         if (right_bg != null) {
             right_bg.setBounds(0, 0,
                     right_bg.getMinimumWidth(),
@@ -107,19 +108,19 @@ public class CTitle extends RelativeLayout implements OnClickListener {
             fRightBtn.setVisibility(View.VISIBLE);
         }
 
-        if (typedArray.getBoolean(R.styleable.mTitle_title_back, false)) {// title_back
+        if (typedArray.getBoolean(R.styleable.CTitle_title_back, false)) {// title_back
             // 属性设置为true时
             // title返回键模拟发送硬件返回键
             fLeftBtn.setOnClickListener(this);
         }
-        if (typedArray.getBoolean(R.styleable.mTitle_display_left_back_drawable,
+        if (typedArray.getBoolean(R.styleable.CTitle_display_left_back_drawable,
                 false)) {// title_back
             // 属性设置为true时
             // title返回键有图标
             fLeftBtn.setCompoundDrawables(null, null, null, null);
         }
 
-        Drawable left_btn_drawable = typedArray.getDrawable(R.styleable.mTitle_left_btn_drawable);
+        Drawable left_btn_drawable = typedArray.getDrawable(R.styleable.CTitle_left_btn_drawable);
         if (left_btn_drawable != null) {
             left_btn_drawable.setBounds(0, 0,
                     left_btn_drawable.getMinimumWidth(),
@@ -128,17 +129,17 @@ public class CTitle extends RelativeLayout implements OnClickListener {
             fLeftBtn.setCompoundDrawables(left_btn_drawable, null, null, null);
         }
 
-        if (typedArray.getBoolean(R.styleable.mTitle_leftBtn_visibility, false)) {
+        if (typedArray.getBoolean(R.styleable.CTitle_leftBtn_visibility, false)) {
             fLeftBtn.setVisibility(View.GONE);
         }
 
-        String rightInfo = typedArray.getString(R.styleable.mTitle_rightNote);
+        String rightInfo = typedArray.getString(R.styleable.CTitle_rightNote);
         if (rightInfo != null && !"".equals(rightInfo)) {
             fRightText.setText(rightInfo);
 
         }
         Drawable title_rightNote_drawable = typedArray
-                .getDrawable(R.styleable.mTitle_rightNote_drawable);
+                .getDrawable(R.styleable.CTitle_rightNote_drawable);
         if (title_rightNote_drawable != null) {
             title_rightNote_drawable.setBounds(0, 0,
                     title_rightNote_drawable.getMinimumWidth(),
@@ -149,7 +150,7 @@ public class CTitle extends RelativeLayout implements OnClickListener {
         }
 
         int right_text_margin = (int) typedArray.getDimension(
-                R.styleable.mTitle_right_text_margin_right, 0);
+                R.styleable.CTitle_right_text_margin_right, 0);
 
         if (right_text_margin > 0) {
 
@@ -165,14 +166,14 @@ public class CTitle extends RelativeLayout implements OnClickListener {
         }
 
         int right_text_appearance = typedArray.getResourceId(
-                R.styleable.mTitle_right_text_text_appearance, 0);
+                R.styleable.CTitle_right_text_text_appearance, 0);
 
         if (right_text_appearance > 0) {
             fRightText.setTextAppearance(getContext(), right_text_appearance);
         }
 
         Drawable right_left_bg = typedArray
-                .getDrawable(R.styleable.mTitle_title_right_left_btn_bg);
+                .getDrawable(R.styleable.CTitle_title_right_left_btn_bg);
         if (right_left_bg != null) {
 
             right_left_bg.setBounds(0, 0,
@@ -184,7 +185,7 @@ public class CTitle extends RelativeLayout implements OnClickListener {
         }
 
         int right_btn_margin_right = (int) typedArray.getDimension(
-                R.styleable.mTitle_right_btn_margin_right, 0);
+                R.styleable.CTitle_right_btn_margin_right, 0);
 
         if (right_btn_margin_right > 0) {
 
