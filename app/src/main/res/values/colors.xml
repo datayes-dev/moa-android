@@ -3,4 +3,58 @@
     <color name="colorPrimary">#3F51B5</color>
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
+
+    <color name="color_O1">#F2731C</color>
+    <!-- //////////////////颜色标准化////////////////////////////// -->
+    <!-- //////////////////颜色标准化////////////////////////////// -->
+
+    <!--通联红-->
+    <color name="color_R1">#e6514a</color>
+
+    <!--通联白-->
+    <!--通半透明白-->
+    <color name="color_W1_halfAlpha">#7fffffff</color>
+    <color name="color_W1">#ffffffff</color>
+    <!--通联黑-->
+    <color name="color_Black">#000000</color>
+    <!--通联蓝-->
+    <color name="color_B1">#3d77c7</color>
+    <color name="color_B2">#e1f0fa</color>
+    <color name="color_B3">#233040</color>
+    <color name="color_B4">#2d3e50</color>
+    <color name="color_B5">#546a79</color>
+    <color name="color_B6">#f3f7fc</color>
+    <color name="color_B7">#cddef4</color>
+    <color name="color_B8">#5389d2</color>
+    <color name="color_B9">#99c9ff</color>
+    <color name="color_B10">#5a9bd1</color>
+    <color name="color_B11">#82b0eb</color>
+    <color name="color_B12">#d8e4f4</color>
+    <color name="color_B13">#cdd9e6</color>
+    <!--通联绿-->
+    <color name="color_G1">#0bb908</color>
+    <color name="color_G2">#34ba95</color>
+
+    <!--通联黄-->
+    <color name="color_Y1">#fff5d5</color>
+    <color name="color_Y2">#65541d</color>
+    <color name="color_Y3">#f9d10e</color>
+    <!--通联灰-->
+    <color name="color_H1">#f4f5f9</color>
+    <color name="color_H2">#e5e5e5</color>
+    <color name="color_H3">#c7c7c7</color>
+    <color name="color_H4">#bdbdbd</color>
+    <color name="color_H5">#a5a5a5</color>
+    <color name="color_H6">#99a2a1</color>
+    <color name="color_H7">#7e7e7e</color>
+    <color name="color_H8">#676767</color>
+    <color name="color_H9">#404040</color>
+    <color name="color_H10">#7d848d</color>
+    <color name="color_H11">#9f9f9f</color>
+    <color name="color_H12">#f3f3f3</color>
+    <color name="color_H13">#000000</color>
+
+    <!--通联紫-->
+    <color name="color_P1">#dd60bc</color>
+
 </resources>

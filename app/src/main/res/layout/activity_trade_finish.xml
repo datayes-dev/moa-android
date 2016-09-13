@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:irr="http://schemas.android.com/apk/res-auto"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:orientation="vertical">
+
+    <com.datayes.dyoa.common.view.CTitle
+        android:id="@+id/ct_title"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        irr:titleValue="@string/pay_title"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
+        android:orientation="vertical">
+
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="30dp"
+            android:src="@mipmap/success"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="30dp"
+            android:text="@string/swipe_card_success"
+            android:textAppearance="@style/font_T8"
+            android:textColor="@color/color_H9"/>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_marginTop="40dp"
+            android:gravity="center_vertical">
+
+            <TextView
+                android:id="@+id/tv_shop_name"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_weight="1.4"
+                android:ellipsize="end"
+                android:singleLine="true"
+                android:text="大家乐"
+                android:textAppearance="@style/font_T8"
+                android:textColor="@color/color_H9"/>
+
+            <TextView
+                android:id="@+id/tv_money"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="30dp"
+                android:layout_weight="1"
+                android:gravity="right"
+                android:text="20"
+                android:textAppearance="@style/font_T9"
+                android:textColor="@color/color_H9"/>
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/tv_date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:text="2016年7月21日"
+            android:textAppearance="@style/font_T4"
+            android:textColor="@color/color_H7"/>
+
+
+        <TextView
+            android:id="@+id/btn_pay"
+            android:layout_width="match_parent"
+            android:layout_height="45dp"
+            android:layout_marginTop="50dp"
+            android:background="@drawable/orangebg_cycle_border"
+            android:gravity="center"
+            android:text="@string/finish_key"
+            android:textAppearance="@style/font_T9"
+            android:textColor="@color/color_W1"/>
+
+        <TextView
+            android:id="@+id/tv_trade_history"
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:layout_marginTop="10dp"
+            android:gravity="center"
+            android:text="@string/trade_history"
+            android:textAppearance="@style/font_T4"
+            android:textColor="@color/color_B8"/>
+    </LinearLayout>
+</LinearLayout>
