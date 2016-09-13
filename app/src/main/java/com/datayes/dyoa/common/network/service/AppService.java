@@ -96,7 +96,7 @@ public interface AppService {
      * @author hongfei.tao
      * @time create at 2016/9/13 13:56
      */
-    @GET("restaurant/{resId}")
+    @GET("/meal_ticket/restaurant/{resId}")
     Call getRestaurantDetail(
             @Path("resId") String resId
     );
@@ -107,7 +107,7 @@ public interface AppService {
      * @author hongfei.tao
      * @time create at 2016/9/13 13:56
      */
-    @POST("restaurant")
+    @POST("/meal_ticket/restaurant")
     Call addRestaurant(
             @Body RequestBody body
     );
@@ -118,7 +118,7 @@ public interface AppService {
      * @author hongfei.tao
      * @time create at 2016/9/13 14:03
      */
-    @POST("transaction")
+    @POST("/meal_ticket/transaction")
     Call handleTransaction(
             @Body RequestBody body
     );
@@ -129,7 +129,7 @@ public interface AppService {
      * @author hongfei.tao
      * @time create at 2016/9/13 14:04
      */
-    @GET("transaction-user")
+    @GET("/meal_ticket/transaction-user")
     Call getPersonalDeals();
 
     /**
@@ -138,7 +138,7 @@ public interface AppService {
      * @author hongfei.tao
      * @time create at 2016/9/13 14:07
      */
-    @GET("transaction-restaurant")
+    @GET("/meal_ticket/transaction-restaurant")
     Call getRestaurantDeals();
 
     /**
@@ -147,6 +147,6 @@ public interface AppService {
      * @author hongfei.tao
      * @time create at 2016/9/13 14:08
      */
-    @GET("restaurant")
+    @GET("/meal_ticket/restaurant")
     Call<RestaurantListBean> getRestaurantList();
 }

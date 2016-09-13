@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-          package="com.datayes.dyoa">
+    package="com.datayes.dyoa">
 
     <!-- 屏幕适配 -->
     <supports-screens
@@ -24,17 +24,24 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name=".module.MainActivity">
+
+        </activity>
+        <activity android:name=".module.login.activity.LoginActivity" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".module.login.activity.LoginActivity"></activity>
         <!-- 扫描二维码Activity -->
         <activity
             android:name=".module.code.activity.ScanCodeActivity"
             android:screenOrientation="portrait" />
+
+        <!-- qa; stg, prd -->
+        <meta-data
+            android:name="ENVIRONMENT"
+            android:value="stg" />
     </application>
 
 </manifest>

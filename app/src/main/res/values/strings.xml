@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">dyoa</string>
+    <string name="app_name">通联订餐</string>
 
     <string name="worker_name">员工姓名</string>
      <string name="shop_name">商家</string>
@@ -12,4 +12,20 @@
 
     <string name="pay_title">用餐刷卡</string>
     <string name="trade_history_title">交易记录</string>
+
+    <!-- 登录 -->
+    <string name="user_send_login_response_0">登录成功</string>
+    <string name="user_send_login_response_1">密码错误</string>
+    <string name="user_send_login_response_2">参数错误</string>
+    <string name="user_send_login_response_3">用户被锁定</string>
+    <string name="user_send_login_response_4">用户不存在</string>
+    <string name="user_send_login_response_7">验证码输入有误 </string>
+    <string name="user_send_login_response_8">密码输入有误</string>
+    <string name="user_send_login_response_9">登录失败</string>
+    <string name="user_send_login_response_10">加载验证码失败，请重试！</string>
+    <string name="user_login_pwd_tomatch_error">您的账号由于密码输入错误次数过多，已被锁定，请重置密码。 </string>
+    <string name="password_reset_succeed">您已经完成密码重置</string>
+    <string name="is_logout_current_account">是否登出当前账号</string>
+    <string name="alter_password">修改密码</string>
+    <string name="alter_password_success">修改密码成功</string>
 </resources>
