@@ -1,9 +1,11 @@
 package com.datayes.dyoa.common.network.bean;
 
+import com.datayes.dyoa.bean.BaseBean;
+
 /**
  * Created by hongfei.tao on 2016/9/13 14:19.
  */
-public class RestaurantListBean {
+public class RestaurantListBean extends BaseResponseBean {
 
     /**
      * status : 0

@@ -3,7 +3,7 @@
                 android:id="@+id/rl_title_bar"
                 android:layout_width="fill_parent"
                 android:layout_height="48dip"
-                android:background="@color/color_B1"
+                android:background="@color/color_H9"
                 android:orientation="horizontal">
 
     <Button
