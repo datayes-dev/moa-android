@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <declare-styleable name="mTitle">
+    <declare-styleable name="CTitle">
         <attr name="titleValue" format="string" />
         <attr name="rightNote" format="string" />
         <attr name="leftBtn_visibility" format="boolean" />

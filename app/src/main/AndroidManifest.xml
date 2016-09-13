@@ -26,7 +26,12 @@
         <activity android:name=".module.MainActivity">
 
         </activity>
-        <activity android:name=".module.login.activity.LoginActivity" >
+        <activity android:name=".module.login.activity.LoginActivity">
+            
+        </activity>
+
+        <activity android:name=".module.swipecard.activity.SwipeCardActivity">
+
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
