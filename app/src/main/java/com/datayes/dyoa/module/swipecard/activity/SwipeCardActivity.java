@@ -14,7 +14,6 @@ import com.datayes.dyoa.module.swipecard.activity.manager.SwipeManager;
 import com.datayes.dyoa.module.swipecard.activity.manager.SwipeService;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 /**

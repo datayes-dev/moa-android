@@ -2,6 +2,7 @@ package com.datayes.dyoa.module.swipecard.activity.manager;
 
 import com.datayes.dyoa.common.config.Config;
 import com.datayes.dyoa.common.network.NetCallBack;
+import com.datayes.dyoa.common.network.bean.RestaurantListBean;
 import com.datayes.dyoa.common.network.manager.base.JsonRequestManager;
 
 /**
@@ -18,6 +19,10 @@ public class SwipeManager extends JsonRequestManager {
      */
     public void getRestaurantList(NetCallBack netCallBack,
                                   NetCallBack.InitService baseService) {
-        start("",netCallBack,baseService,getInstance().getRestaurantList(), Config.ConfigUrlType.NOMRAL);
+        start(netCallBack,
+                baseService,
+                getInstance().getRestaurantList(),
+                Config.ConfigUrlType.NOMRAL,
+                RestaurantListBean.class);
     }
 }
