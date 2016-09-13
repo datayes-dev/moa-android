@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.text.InputFilter;
 import android.text.Spanned;
+import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
 
@@ -95,6 +96,13 @@ public class SwipeCardActivity extends BaseActivity {
 
         mTvUserName.setText(userName);
         mTvShopName.setText(shopName);
+
+        mCtTitle.setLeftBtnClick(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
 
         mEvMoney.setFilters(new InputFilter[]{
                 new InputFilter() {

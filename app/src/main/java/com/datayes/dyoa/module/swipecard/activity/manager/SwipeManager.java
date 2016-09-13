@@ -38,7 +38,7 @@ public class SwipeManager extends JsonRequestManager {
                                      String price,
                                      String restaurant,
                                      String memo) {
-        start("",netCallBack,baseService,getInstance().handleTransaction(), Config.ConfigUrlType.NOMRAL);
+//        start(netCallBack,baseService,getInstance().handleTransaction(), Config.ConfigUrlType.NOMRAL);
     }
 
 }
