@@ -4,7 +4,7 @@ apply plugin: 'com.neenbedankt.android-apt'
 buildscript {
     repositories {
         mavenCentral()
-
+        maven { url "https://jitpack.io" }
         def deployPath = file(getProperty('baseAppLocalPath.deployPath'))
         maven { url "file://${deployPath.absolutePath}" }
 
@@ -36,7 +36,7 @@ android {
 
 repositories {
     mavenCentral()
-
+    maven { url "https://jitpack.io" }
     def deployPath = file(getProperty('baseAppLocalPath.deployPath'))
     maven { url "file://${deployPath.absolutePath}" }
 }
@@ -66,4 +66,6 @@ dependencies {
     compile 'com.squareup.okhttp3:logging-interceptor:3.4.1'
     //二维码
     compile 'cn.yipianfengye.android:zxing-library:1.9'
+    //loading
+    compile 'com.github.ybq:Android-SpinKit:1.0.5'
 }

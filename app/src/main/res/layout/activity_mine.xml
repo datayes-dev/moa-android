@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:app="http://schemas.android.com/apk/res-auto"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:orientation="vertical">
+
+    <com.datayes.dyoa.common.view.CTitle
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        app:titleValue="@string/mine" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:scrollbars="none">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="10dp"
+                android:background="@color/color_H1" />
+
+            <RelativeLayout
+                android:id="@+id/rl_user_state_"
+                android:layout_width="match_parent"
+                android:layout_height="70dp"
+                android:background="@drawable/selector_menu_item_bg">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="15dp"
+                    android:singleLine="true"
+                    android:text="用户名" />
+
+                <ImageView
+                    android:id="@+id/iv_arrow_user"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="10dp"
+                    android:src="@mipmap/goin2" />
+
+            </RelativeLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="10dp"
+                android:background="@color/color_H1" />
+
+            <com.datayes.dyoa.common.view.MineItemView
+                android:id="@+id/miv_scan_code"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:itemIcon="@mipmap/qrcode_2"
+                app:itemText="扫描二维码" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="10dp"
+                android:background="@color/color_H1" />
+
+            <com.datayes.dyoa.common.view.MineItemView
+                android:id="@+id/miv_logout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:itemIcon="@mipmap/logout2"
+                app:itemText="退出登录" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:background="@color/color_H1" />
+
+        </LinearLayout>
+
+    </ScrollView>
+
+</LinearLayout>

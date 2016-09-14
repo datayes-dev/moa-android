@@ -1,9 +1,7 @@
 package com.datayes.dyoa.module.login.activity;
 
 import android.content.Intent;
-
 import android.graphics.Bitmap;
-
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.view.View;
@@ -12,8 +10,9 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.datayes.baseapp.tools.DYToast;
+import com.datayes.baseapp.utils.KeyBoardUtils;
 import com.datayes.dyoa.R;
-import com.datayes.dyoa.bean.UserLoginBean;
+import com.datayes.dyoa.bean.user.UserLoginBean;
 import com.datayes.dyoa.common.base.BaseActivity;
 import com.datayes.dyoa.common.config.Config;
 import com.datayes.dyoa.common.config.RequestInfo;
@@ -30,11 +29,12 @@ import com.datayes.dyoa.utils.AppUtil;
 import com.nostra13.universalimageloader.core.assist.FailReason;
 import com.nostra13.universalimageloader.core.listener.ImageLoadingListener;
 
-
 import butterknife.BindView;
 import butterknife.OnClick;
 
 public class LoginActivity extends BaseActivity {
+
+    public static final int REQUEST_CODE_RESET_PWD = 100;
 
     @BindView(R.id.ct_title)
     CTitle cTitle;
@@ -72,6 +72,8 @@ public class LoginActivity extends BaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        //重置密码功能暂时不用
+        btnForget.setVisibility(View.GONE);
 
         this.init();
         this.initEvent();
@@ -235,8 +237,9 @@ public class LoginActivity extends BaseActivity {
     public void onClick(View v) {
         switch (v.getId()) {
 
-            case R.id.forgetPwdTxt:
-                // 打开设置密码界面
+            case R.id.forgetPwdTxt://忘记密码
+                Intent intent = new Intent(this, ResetPasswordActivity.class);
+                startActivityForResult(intent, REQUEST_CODE_RESET_PWD);
                 break;
 
             case R.id.loginBtn:
@@ -267,6 +270,12 @@ public class LoginActivity extends BaseActivity {
                             mPwd.getText(),
                             mCode.getVisibility() == View.VISIBLE ? mCode.getText() : "",
                             tenant);
+
+                    showLoading();
+
+                    //软键盘关闭
+                    mPwd.getEditText().clearFocus();
+                    KeyBoardUtils.closeKeybord(mPwd.getEditText(), this);
                 }
                 break;
 
@@ -285,17 +294,17 @@ public class LoginActivity extends BaseActivity {
     }
 
     private void onLoginCompleted() {
-        finish();
         Intent intent = new Intent(this, ScanCodeActivity.class);
         startActivity(intent);
 
         DYToast.makeText(this, R.string.user_send_login_response_0, Toast.LENGTH_SHORT).show();
+        finish();
     }
 
     @Override
     public void networkFinished(String operationType,
                                 BaseService response, int code, String tag) {
-
+        hideLoading();
         mIsOnLogin = false;
 
         if (service_ != null) {

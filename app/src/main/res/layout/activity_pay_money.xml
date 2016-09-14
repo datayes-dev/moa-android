@@ -1,16 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              xmlns:irr="http://schemas.android.com/apk/res-auto"
-              android:layout_width="match_parent"
-              android:layout_height="match_parent"
-              android:background="@color/color_W1"
-              android:orientation="vertical">
+    xmlns:irr="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/color_W1"
+    android:fitsSystemWindows="true"
+    android:orientation="vertical">
 
     <com.datayes.dyoa.common.view.CTitle
         android:id="@+id/ct_title"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        irr:titleValue="@string/pay_title"/>
+        irr:titleValue="@string/pay_title" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -30,7 +31,7 @@
                 android:layout_height="wrap_content"
                 android:text="@string/worker_name"
                 android:textAppearance="@style/font_T9"
-                android:textColor="@color/color_O1"/>
+                android:textColor="@color/color_O1" />
 
             <TextView
                 android:id="@+id/tv_user_name"
@@ -40,7 +41,7 @@
                 android:gravity="right"
                 android:text=""
                 android:textAppearance="@style/font_T9"
-                android:textColor="@color/color_H9"/>
+                android:textColor="@color/color_H9" />
         </LinearLayout>
 
         <LinearLayout
@@ -54,7 +55,7 @@
                 android:layout_height="wrap_content"
                 android:text="@string/shop_name"
                 android:textAppearance="@style/font_T9"
-                android:textColor="@color/color_O1"/>
+                android:textColor="@color/color_O1" />
 
             <TextView
                 android:id="@+id/tv_shop_name"
@@ -64,7 +65,7 @@
                 android:gravity="right"
                 android:text=""
                 android:textAppearance="@style/font_T9"
-                android:textColor="@color/color_H9"/>
+                android:textColor="@color/color_H9" />
         </LinearLayout>
 
         <LinearLayout
@@ -78,32 +79,31 @@
                 android:layout_weight="1"
                 android:text="@string/input_money_key"
                 android:textAppearance="@style/font_T9"
-                android:textColor="@color/color_O1"/>
+                android:textColor="@color/color_O1" />
 
             <LinearLayout
                 android:layout_width="0dp"
                 android:layout_height="52dp"
                 android:layout_weight="0.6"
                 android:background="@drawable/wbg_cycle_orange_border"
-                android:gravity="center"
-                >
+                android:gravity="center">
 
                 <EditText
                     android:id="@+id/ev_money"
                     android:layout_width="match_parent"
                     android:layout_height="50dp"
-                    android:layout_marginTop="1dp"
                     android:layout_marginLeft="4dp"
                     android:layout_marginRight="4dp"
+                    android:layout_marginTop="1dp"
+                    android:background="@null"
+                    android:cursorVisible="true"
+                    android:gravity="right|center_vertical"
                     android:inputType="numberDecimal"
                     android:maxLength="5"
-                    android:gravity="right|center_vertical"
                     android:textAppearance="@style/font_T10"
                     android:textColor="@color/color_H9"
-                    android:textCursorDrawable="@null"
-                    android:background="@null"
                     android:textColorHint="@color/color_H9"
-                    android:cursorVisible="true"
+                    android:textCursorDrawable="@null"
 
                     />
             </LinearLayout>
@@ -120,7 +120,7 @@
             android:gravity="center"
             android:text="@string/pay_key"
             android:textAppearance="@style/font_T9"
-            android:textColor="@color/color_W1"/>
+            android:textColor="@color/color_W1" />
 
         <TextView
             android:layout_width="match_parent"
@@ -129,6 +129,6 @@
             android:gravity="center"
             android:text="@string/message_key"
             android:textAppearance="@style/font_T3"
-            android:textColor="@color/color_H7"/>
+            android:textColor="@color/color_H7" />
     </LinearLayout>
 </LinearLayout>

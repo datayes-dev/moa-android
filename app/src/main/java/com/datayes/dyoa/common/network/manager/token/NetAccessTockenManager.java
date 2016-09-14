@@ -26,7 +26,7 @@
 package com.datayes.dyoa.common.network.manager.token;
 
 import com.datayes.baseapp.tools.DYLog;
-import com.datayes.dyoa.bean.UserLoginBean;
+import com.datayes.dyoa.bean.user.UserLoginBean;
 import com.datayes.dyoa.common.config.Config;
 import com.datayes.dyoa.module.user.CurrentUser;
 import com.datayes.dyoa.common.network.manager.base.BaseRequestManager;
