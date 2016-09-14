@@ -1,5 +1,6 @@
 package com.datayes.dyoa.module.login.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.view.View;
@@ -17,6 +18,7 @@ import com.datayes.dyoa.common.network.BaseService;
 import com.datayes.dyoa.common.network.manager.user.UserManager;
 import com.datayes.dyoa.common.networkstatus.NetworkState;
 import com.datayes.dyoa.common.view.CTitle;
+import com.datayes.dyoa.module.code.activity.ScanCodeActivity;
 import com.datayes.dyoa.module.login.Constant;
 import com.datayes.dyoa.module.login.service.UserService;
 
@@ -135,7 +137,8 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
     private void onLoginCompleted() {
 
         finish();
-
+        Intent intent = new Intent(this, ScanCodeActivity.class);
+        startActivity(intent);
 
         DYToast.makeText(this, R.string.user_send_login_response_0, Toast.LENGTH_SHORT).show();
     }

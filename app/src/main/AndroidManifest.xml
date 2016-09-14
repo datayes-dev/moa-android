@@ -27,16 +27,15 @@
 
         </activity>
         <activity android:name=".module.login.activity.LoginActivity">
-            
-        </activity>
-
-        <activity android:name=".module.swipecard.activity.SwipeCardActivity">
-
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+        </activity>
+
+        <activity android:name=".module.swipecard.activity.SwipeCardActivity">
+
         </activity>
         <!-- 扫描二维码Activity -->
         <activity
