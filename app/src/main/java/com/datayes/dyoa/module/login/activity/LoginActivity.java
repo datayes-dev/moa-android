@@ -290,11 +290,11 @@ public class LoginActivity extends BaseActivity {
     }
 
     private void onLoginCompleted() {
-        finish();
         Intent intent = new Intent(this, ScanCodeActivity.class);
         startActivity(intent);
 
         DYToast.makeText(this, R.string.user_send_login_response_0, Toast.LENGTH_SHORT).show();
+        finish();
     }
 
     @Override

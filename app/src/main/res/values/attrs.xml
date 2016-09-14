@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
+    <!-- CTitle -->
     <declare-styleable name="CTitle">
         <attr name="titleValue" format="string" />
         <attr name="rightNote" format="string" />
@@ -9,7 +10,6 @@
         <attr name="display_left_back_drawable" format="boolean" />
         <attr name="right_text_margin_right" format="dimension" />
         <attr name="right_text_text_appearance" format="reference" />
-
         <attr name="rightNote_drawable" format="reference" />
         <attr name="title_right_btn_bg" format="reference" />
         <attr name="title_right_left_btn_bg" format="reference" />
@@ -48,5 +48,21 @@
         <attr name="right_btn_text_appearance" format="reference" /><!-- 右边按钮文本样式 -->
 
     </declare-styleable>
+
+    <!-- MineItemView我的页面单个条目控件 -->
+    <declare-styleable name="MineItemView">
+        <attr name="itemIcon" format="reference" />
+        <attr name="itemText" format="string" />
+        <attr name="itemOtherText" format="string" />
+        <attr name="itemRightImg" format="reference" />
+        <attr name="imgVisable" format="boolean" />
+        <attr name="otherTextVisable" format="boolean" />
+    </declare-styleable>
+
+    <!-- RoundImageView圆形图片 -->
+    <!--<declare-styleable name="RoundImageView">
+        <attr name="borderRadius" />
+        <attr name="type" />
+    </declare-styleable>-->
 
 </resources>
