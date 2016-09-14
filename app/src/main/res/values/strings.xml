@@ -28,4 +28,35 @@
     <string name="is_logout_current_account">是否登出当前账号</string>
     <string name="alter_password">修改密码</string>
     <string name="alter_password_success">修改密码成功</string>
+    <string name="login_text">登录</string>
+    <string name="my_forget_pwd">忘记密码</string>
+    <string name="my_login_user_hit_3">手机号</string>
+    <string name="my_login_user_hit">请输入手机号</string>
+    <string name="my_login_user_hit_2">请输入手机号/用户名</string>
+    <string name="my_login_user_hit_4">用户名</string>
+    <string name="my_login_pwd_hit">请输入密码</string>
+    <string name="my_login_pwd_hit_1">密码</string>
+    <string name="my_login_pwd_hit_2">6~20位，支持字母、数字和符号</string>
+    <string name="my_login_pwd_hit_3">请输入旧密码</string>
+    <string name="my_login_pwd_hit_4">请输入新密码</string>
+    <string name="my_login_pwd_hit_5">旧密码</string>
+    <string name="my_login_pwd_hit_6">新密码</string>
+
+    <!-- my 验证码 -->
+    <string name="my_login_code">验证码</string>
+    <string name="my_login_code_hit">6位验证码</string>
+    <string name="my_login_code_hit_1">4位验证码</string>
+    <string name="loading_state">加载状态</string>
+    <string name="user_send_code_response_0">验证码发送成功</string>
+    <string name="user_send_code_response_16">你输入的手机号码或用户名不存在，请重现输入</string>
+    <string name="user_send_code_response_17">该手机号已注册</string>
+    <string name="user_send_code_response_18">验证码错误，请重新获取</string>
+    <string name="user_send_code_response_20">验证码过期，请重新获取</string>
+    <string name="user_send_code_response_21">验证码发送失败</string>
+    <string name="user_send_code_response_27">50秒内不能连续发送</string>
+    <string name="user_send_code_response_28">验证码错误</string>
+    <string name="user_send_code_response_29">验证码过期</string>
+    <string name="user_send_code_response_30">需要输入验证码</string>
+    <string name="user_send_code_response_31">旧密码错误</string>
+    <string name="user_send_code_response_38">之前未输入图片验证码</string>
 </resources>
