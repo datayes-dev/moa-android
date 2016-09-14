@@ -27,9 +27,13 @@ package com.datayes.dyoa.module.user;
 
 
 import com.datayes.baseapp.utils.StringUtil;
+import com.datayes.dyoa.bean.user.AccountBean;
 import com.datayes.dyoa.bean.user.UserLoginBean;
+import com.datayes.dyoa.common.network.BaseService;
+import com.datayes.dyoa.common.network.NetCallBack;
 import com.datayes.dyoa.common.sharedpreferences.MySharedPreferences;
-import com.datayes.dyoa.common.network.manager.user.UserManager;
+import com.datayes.dyoa.module.login.manager.UserManager;
+import com.datayes.dyoa.module.login.service.UserService;
 
 
 /**
@@ -59,7 +63,9 @@ public class CurrentUser {
     }
 
     private UserLoginBean userLoginBean;
+    private AccountBean accountInfoBean;
     private UserManager mManager;
+
 
     public static CurrentUser getInstance() {
         sharedInstance();
@@ -159,6 +165,68 @@ public class CurrentUser {
      **/
     public void clearUserInfo() {
         userLoginBean = null;
+        accountInfoBean = null;
         MySharedPreferences.getSharedPreferences().clearUserInfo();
+    }
+
+    /**
+     *      
+     *
+     * @author fei.guo
+     *  @brief 方法描述
+     *  @param accountInfo void      
+     *  @throws  
+     * @date 2015-12-28 下午2:30:46
+     *     
+     */
+    public synchronized void setAccountInfo(AccountBean accountInfo) {
+        this.accountInfoBean = accountInfo;
+    }
+
+    public AccountBean getAccountInfo() {
+        return accountInfoBean;
+    }
+
+    /**
+     * 用户信息
+     * 
+     * @author nianyi.yang
+     * @date create at 2016/9/14 14:45
+     */
+    public void refreshAccountInfo(final onRefreshAccountInfo onRefresh) {
+
+        mManager.getAccountInfo(new NetCallBack() {
+            @Override
+            public void networkFinished(String operationType, BaseService service, int code, String tag) {
+                AccountBean bean = ((UserService) service).getAccountBean();
+
+                if (bean != null && bean.getUser() != null) {
+                    setAccountInfo(bean);
+                } else {
+                    bean = null;
+                }
+
+                if (onRefresh != null)
+                    onRefresh.onRefreshed(bean);
+            }
+
+            @Override
+            public void onErrorResponse(String operationType, Throwable throwable, String tag) {
+                if (onRefresh != null)
+                    onRefresh.onError();
+            }
+        }, new NetCallBack.InitService() {
+
+            @Override
+            public BaseService initService() {
+                return new UserService();
+            }
+        });
+    }
+
+    public interface onRefreshAccountInfo {
+        void onRefreshed(AccountBean accountInfo);
+
+        void onError();
     }
 }

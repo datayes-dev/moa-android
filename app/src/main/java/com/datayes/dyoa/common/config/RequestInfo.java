@@ -37,7 +37,9 @@ public enum RequestInfo {
 
     VALIDATE_CODE("/regist/validateCode.json", "验证输入验证码是否正确"),
 
-    CAPTCHA_IMAGE("/captcha.json", "获取手机验证码图片");
+    CAPTCHA_IMAGE("/captcha.json", "获取手机验证码图片"),
+
+    IDENTITY("/identity.json","获取身份信息");
 
     private String operationType;
     private String name;

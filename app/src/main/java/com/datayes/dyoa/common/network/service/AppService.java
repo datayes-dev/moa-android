@@ -25,6 +25,8 @@
 
 package com.datayes.dyoa.common.network.service;
 
+import com.datayes.dyoa.bean.user.AccountBean;
+
 import okhttp3.RequestBody;
 import retrofit2.Call;
 import retrofit2.http.Body;
@@ -71,6 +73,18 @@ public interface AppService {
             @Field("tenant") String tenant,
             @Field("captcha") String captcha,
             @Field("setContext") String setContext
+    );
+
+    /**
+     * 获取用户详细信息
+     *
+     * @author nianyi.yang
+     * @date create at 2016/9/14 14:25
+     */
+    @Headers({ACCEPT_JSON})
+    @GET("{subServer}/identity.json")
+    Call<AccountBean> getAccountInfo(
+            @Path(value = "subServer", encoded = true) String subServer
     );
 
     /**
