@@ -231,9 +231,10 @@ public class SwipeCardActivity extends BaseActivity {
             }
         } else if (moneyStr.length() <= 0) {
             DYToast.makeText(this, "请输入金额", Toast.LENGTH_LONG).show();
+        }else {
+            showLoading();
+            mSwipeManager.sendUserTradeMessage(this, this, moneyStr, restaurantId, "");
         }
-        showLoading();
-        mSwipeManager.sendUserTradeMessage(this, this, moneyStr, restaurantId, "");
 
     }
 
