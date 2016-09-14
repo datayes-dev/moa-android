@@ -28,7 +28,7 @@ package com.datayes.dyoa.common.network.manager.base;
 import android.text.TextUtils;
 
 import com.datayes.baseapp.utils.StringUtil;
-import com.datayes.dyoa.bean.UserLoginBean;
+import com.datayes.dyoa.bean.user.UserLoginBean;
 import com.datayes.dyoa.common.config.Config;
 import com.datayes.dyoa.module.user.CurrentUser;
 import com.datayes.dyoa.common.network.OkHttpClientSingleton;

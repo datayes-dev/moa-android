@@ -25,7 +25,7 @@
 
 package com.datayes.dyoa.common.network.manager.user;
 
-import com.datayes.dyoa.bean.UserLoginBean;
+import com.datayes.dyoa.bean.user.UserLoginBean;
 import com.datayes.dyoa.common.config.Config;
 import com.datayes.dyoa.common.network.NetCallBack;
 import com.datayes.dyoa.common.network.manager.base.JsonRequestManager;

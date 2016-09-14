@@ -27,7 +27,7 @@ package com.datayes.dyoa.module.user;
 
 
 import com.datayes.baseapp.utils.StringUtil;
-import com.datayes.dyoa.bean.UserLoginBean;
+import com.datayes.dyoa.bean.user.UserLoginBean;
 import com.datayes.dyoa.common.sharedpreferences.MySharedPreferences;
 import com.datayes.dyoa.common.network.manager.user.UserManager;
 

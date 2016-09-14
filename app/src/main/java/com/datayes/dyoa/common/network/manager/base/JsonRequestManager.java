@@ -28,7 +28,7 @@ package com.datayes.dyoa.common.network.manager.base;
 import android.text.TextUtils;
 import android.util.Log;
 
-import com.datayes.dyoa.bean.BaseBean;
+import com.datayes.dyoa.bean.base.BaseBean;
 import com.datayes.dyoa.common.config.Config;
 import com.datayes.dyoa.common.network.BaseService;
 import com.datayes.dyoa.common.network.NetCallBack;

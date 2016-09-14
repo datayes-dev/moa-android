@@ -1,4 +1,4 @@
-package com.datayes.dyoa.bean;
+package com.datayes.dyoa.bean.base;
 
 import com.datayes.baseapp.utils.StringUtil;
 import com.datayes.dyoa.common.networkstatus.NetworkCode;

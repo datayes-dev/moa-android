@@ -1,9 +1,7 @@
 package com.datayes.dyoa.module.login.activity;
 
 import android.content.Intent;
-
 import android.graphics.Bitmap;
-
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.view.View;
@@ -12,8 +10,9 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.datayes.baseapp.tools.DYToast;
+import com.datayes.baseapp.utils.KeyBoardUtils;
 import com.datayes.dyoa.R;
-import com.datayes.dyoa.bean.UserLoginBean;
+import com.datayes.dyoa.bean.user.UserLoginBean;
 import com.datayes.dyoa.common.base.BaseActivity;
 import com.datayes.dyoa.common.config.Config;
 import com.datayes.dyoa.common.config.RequestInfo;
@@ -29,7 +28,6 @@ import com.datayes.dyoa.module.login.service.UserService;
 import com.datayes.dyoa.utils.AppUtil;
 import com.nostra13.universalimageloader.core.assist.FailReason;
 import com.nostra13.universalimageloader.core.listener.ImageLoadingListener;
-
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -272,6 +270,12 @@ public class LoginActivity extends BaseActivity {
                             mPwd.getText(),
                             mCode.getVisibility() == View.VISIBLE ? mCode.getText() : "",
                             tenant);
+
+                    showLoading();
+
+                    //软键盘关闭
+                    mPwd.getEditText().clearFocus();
+                    KeyBoardUtils.closeKeybord(mPwd.getEditText(), this);
                 }
                 break;
 
@@ -300,7 +304,7 @@ public class LoginActivity extends BaseActivity {
     @Override
     public void networkFinished(String operationType,
                                 BaseService response, int code, String tag) {
-
+        hideLoading();
         mIsOnLogin = false;
 
         if (service_ != null) {

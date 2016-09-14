@@ -1,21 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              xmlns:irr="http://schemas.android.com/apk/res-auto"
-              android:layout_width="match_parent"
-              android:layout_height="match_parent"
-              android:orientation="vertical">
+    xmlns:irr="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
+    android:orientation="vertical">
 
     <com.datayes.dyoa.common.view.CTitle
         android:id="@+id/ct_title"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        irr:titleValue="@string/trade_history_title"/>
+        irr:titleValue="@string/trade_history_title" />
 
     <ListView
         android:id="@+id/lv_history"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:cacheColorHint="#00000000"
-        android:divider="@null"/>
+        android:divider="@null" />
 
 </LinearLayout>
