@@ -1,6 +1,7 @@
-package com.datayes.dyoa.bean;
+package com.datayes.dyoa.bean.user;
 
 import com.datayes.baseapp.tools.DYLog;
+import com.datayes.dyoa.bean.base.BaseBean;
 import com.datayes.dyoa.module.user.CurrentUser;
 
 import org.json.JSONException;

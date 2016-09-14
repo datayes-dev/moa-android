@@ -1,14 +1,19 @@
 package com.datayes.dyoa.common.base;
 
+import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
+import android.view.WindowManager;
 
 import com.datayes.baseapp.base.BaseFragmentActivity;
+import com.datayes.dyoa.R;
 import com.datayes.dyoa.common.network.BaseService;
 import com.datayes.dyoa.common.network.NetCallBack;
 import com.datayes.dyoa.common.networkstatus.NetworkState;
 import com.datayes.dyoa.common.networkstatus.NetworkStateManager;
+import com.datayes.dyoa.common.view.CLoading;
 
 import butterknife.ButterKnife;
 
@@ -16,6 +21,8 @@ import butterknife.ButterKnife;
  * Created by nianyi.yang on 2016/9/12.
  */
 public abstract class BaseActivity extends BaseFragmentActivity implements NetCallBack, NetCallBack.InitService {
+
+    protected CLoading loading;
 
     private boolean isResuming = false;
 
@@ -51,6 +58,7 @@ public abstract class BaseActivity extends BaseFragmentActivity implements NetCa
         super.onCreate(savedInstanceState);
         NetworkStateManager.getInstance().addNetworkStateChangedListener(
                 mNetworkStateChangedListener);
+        //setStateBar();
         setContentView(getLayoutId());
         ButterKnife.bind(this);
     }
@@ -116,7 +124,63 @@ public abstract class BaseActivity extends BaseFragmentActivity implements NetCa
     }
 
     @Override
+    public void onErrorResponse(String operationType, Throwable throwable, String tag) {
+        hideLoading();
+    }
+
+    @Override
     public BaseService initService() {
         return null;
+    }
+
+    /**
+     * 加载进度框
+     * 重载
+     */
+    public void showLoading() {
+        if (!BaseActivity.this.isFinishing()) {
+            if (loading == null) {
+                loading = new CLoading.Builder()
+                        .setContext(this)
+                        .setBackground(R.drawable.loading_bg)
+                        .build();
+            }
+            loading.show();
+        }
+    }
+
+    /**
+     * 加载进度框
+     *
+     * @param msg
+     */
+    public void showLoading(String msg) {
+        if (!BaseActivity.this.isFinishing()) {
+            if (loading == null) {
+                loading = new CLoading.Builder()
+                        .setContext(this)
+                        .setBackground(R.drawable.loading_bg)
+                        .setMessage(msg)
+                        .build();
+            }
+            loading.show();
+        }
+    }
+
+    public void hideLoading() {
+        if (loading != null) {
+            loading.hide();
+        }
+    }
+
+    private void setStateBar() {
+        //透明状态栏
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+            Window window = getWindow();
+            // Translucent status bar
+            window.setFlags(
+                    WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS,
+                    WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
+        }
     }
 }
