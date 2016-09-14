@@ -3,6 +3,7 @@ package com.datayes.dyoa.module.code.activity;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Bundle;
+import android.view.View;
 
 import com.datayes.dyoa.R;
 import com.datayes.dyoa.common.base.BaseActivity;
@@ -10,6 +11,7 @@ import com.datayes.dyoa.common.network.BaseService;
 import com.datayes.dyoa.common.networkstatus.NetworkState;
 import com.datayes.dyoa.common.view.CTitle;
 import com.datayes.dyoa.module.swipecard.activity.SwipeCardActivity;
+import com.datayes.dyoa.module.swipecard.activity.TradeHistoryActivity;
 import com.datayes.dyoa.module.swipecard.manager.SwipeManager;
 import com.datayes.dyoa.module.swipecard.service.SwipeService;
 import com.datayes.dyoa.module.user.RestaurantManager;
@@ -40,6 +42,16 @@ public class ScanCodeActivity extends BaseActivity implements CodeUtils.AnalyzeC
         mCaptureFragment.setAnalyzeCallback(this);
         mSwipeManager = new SwipeManager();
         mSwipeManager.getRestaurantList(this, this);
+
+        mTitle.setRightBtnText("交易记录");
+        mTitle.setrightFenGeClick(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(ScanCodeActivity.this, TradeHistoryActivity.class);
+                startActivity(intent);
+            }
+        });
+
         getSupportFragmentManager().beginTransaction().replace(R.id.fl_code_container, mCaptureFragment).commit();
     }
 
