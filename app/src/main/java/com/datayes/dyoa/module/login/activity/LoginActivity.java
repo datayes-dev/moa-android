@@ -12,19 +12,21 @@ import android.widget.Toast;
 import com.datayes.baseapp.tools.DYToast;
 import com.datayes.baseapp.utils.KeyBoardUtils;
 import com.datayes.dyoa.R;
+import com.datayes.dyoa.bean.user.AccountBean;
 import com.datayes.dyoa.bean.user.UserLoginBean;
 import com.datayes.dyoa.common.base.BaseActivity;
 import com.datayes.dyoa.common.config.Config;
 import com.datayes.dyoa.common.config.RequestInfo;
 import com.datayes.dyoa.common.imageloader.DYImageLoader;
 import com.datayes.dyoa.common.network.BaseService;
-import com.datayes.dyoa.common.network.manager.user.UserManager;
 import com.datayes.dyoa.common.networkstatus.NetworkState;
 import com.datayes.dyoa.common.view.CEditText;
 import com.datayes.dyoa.common.view.CTitle;
 import com.datayes.dyoa.module.code.activity.ScanCodeActivity;
 import com.datayes.dyoa.module.login.Constant;
+import com.datayes.dyoa.module.login.manager.UserManager;
 import com.datayes.dyoa.module.login.service.UserService;
+import com.datayes.dyoa.module.user.CurrentUser;
 import com.datayes.dyoa.utils.AppUtil;
 import com.nostra13.universalimageloader.core.assist.FailReason;
 import com.nostra13.universalimageloader.core.listener.ImageLoadingListener;
@@ -322,7 +324,22 @@ public class LoginActivity extends BaseActivity {
 
                 if (resultInfo.equals(Constant.SUCCESS)) {
                     // 登录成功
-                    onLoginCompleted();
+                    showLoading();
+                    CurrentUser.getInstance().setAccountInfo(null);
+                    CurrentUser.getInstance().refreshAccountInfo(new CurrentUser.onRefreshAccountInfo() {
+
+                        @Override
+                        public void onRefreshed(AccountBean accountInfo) {
+                            hideLoading();
+                            onLoginCompleted();
+                        }
+
+                        @Override
+                        public void onError() {
+                            hideLoading();
+                            DYToast.makeText(LoginActivity.this, R.string.user_send_login_response_9, Toast.LENGTH_SHORT).show();
+                        }
+                    });
 
                 } else if (resultInfo.equals(Constant.FAIL)) {
                     // 登录失败
