@@ -150,6 +150,15 @@ public class SwipeCardActivity extends BaseActivity {
                 finish();
             }
         });
+        mCtTitle.setRightBtnText("交易记录");
+        mCtTitle.setrightFenGeClick(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(SwipeCardActivity.this, TradeHistoryActivity.class);
+                startActivity(intent);
+            }
+        });
+
 
         mEvMoney.setFilters(new InputFilter[]{
                 new InputFilter() {
