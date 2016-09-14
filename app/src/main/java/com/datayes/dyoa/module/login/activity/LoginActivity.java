@@ -317,7 +317,7 @@ public class LoginActivity extends BaseActivity {
                 UserLoginBean bean = service_.getLoginBean();
                 String resultInfo = bean.getInfo();
 
-                if (!resultInfo.equals(Constant.SUCCESS)) {
+                if (resultInfo == null || !resultInfo.equals(Constant.SUCCESS)) {
                     // 刷新验证码
                     refreshCaptchaImage();
                     return;
