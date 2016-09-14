@@ -2,20 +2,26 @@ package com.datayes.dyoa.module.swipecard.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.provider.Settings;
 import android.text.InputFilter;
 import android.text.Spanned;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.datayes.baseapp.tools.DYToast;
 import com.datayes.dyoa.R;
 import com.datayes.dyoa.common.base.BaseActivity;
 import com.datayes.dyoa.common.network.BaseService;
+import com.datayes.dyoa.common.network.bean.RestaurantListBean;
 import com.datayes.dyoa.common.networkstatus.NetworkState;
 import com.datayes.dyoa.common.view.CTitle;
 import com.datayes.dyoa.module.swipecard.activity.manager.SwipeManager;
 import com.datayes.dyoa.module.swipecard.activity.manager.SwipeService;
+import com.datayes.dyoa.module.user.RestaurantManager;
 
+import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -26,6 +32,10 @@ import butterknife.OnClick;
  * Created by datayes on 16/9/13.
  */
 public class SwipeCardActivity extends BaseActivity {
+
+    public static final String RESTAURANT_ID_KEY = "restaurant_id_key";
+
+
     @BindView(R.id.ct_title)
     CTitle mCtTitle;
     @BindView(R.id.tv_user_name)
@@ -51,6 +61,7 @@ public class SwipeCardActivity extends BaseActivity {
     private SwipeManager mSwipeManager;
     private SwipeService mSwipeService;
     String shopName;
+    String restaurantId;
 
     @Override
     protected int getLayoutId() {
@@ -64,22 +75,25 @@ public class SwipeCardActivity extends BaseActivity {
 
     @Override
     public void onErrorResponse(String operationType, Throwable throwable, String tag) {
+        if (operationType != null) {
 
+        }
     }
 
     @Override
     public void networkFinished(String operationType, BaseService service, int code, String tag) {
 
-    }
+        if (operationType.equals("/restaurant") && mSwipeService.getRestaurantListBean() != null) {
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        mSwipeManager = new SwipeManager();
-        mSwipeManager.getRestaurantList(this, this);
-        initUI();
-    }
+            RestaurantManager.getInstance().setRestaurantListBean(mSwipeService.getRestaurantListBean());
+            compareRestaurantName();
 
+        } else if (operationType.equals("/transaction")) {//执行交易
+
+            jumpNextPage();
+
+        }
+    }
 
     @Override
     public BaseService initService() {
@@ -89,13 +103,44 @@ public class SwipeCardActivity extends BaseActivity {
     }
 
 
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        mSwipeManager = new SwipeManager();
+
+        initUI();
+    }
+
+
+    private void compareRestaurantName() {
+
+        List<RestaurantListBean.RestaurantBean> beanList = RestaurantManager.getInstance().getRestaurantListBean().getRestaurantBeanList();
+        for (RestaurantListBean.RestaurantBean bean : beanList) {
+            if (bean.getId().equals(restaurantId)) {
+                shopName = bean.getName();
+                break;
+            }
+        }
+        mTvShopName.setText(shopName);
+    }
+
     private void initUI() {
 
         String userName = "哈哈";
-        shopName = "大家乐餐厅";
+
+        restaurantId = getIntent().getStringExtra(RESTAURANT_ID_KEY);
+
+        if (restaurantId == null) {
+            finish();
+        } else {
+            if (RestaurantManager.getInstance().getRestaurantListBean() == null) {
+                mSwipeManager.getRestaurantList(this, this);
+            } else {
+                compareRestaurantName();
+            }
+        }
 
         mTvUserName.setText(userName);
-        mTvShopName.setText(shopName);
 
         mCtTitle.setLeftBtnClick(new View.OnClickListener() {
             @Override
@@ -121,14 +166,14 @@ public class SwipeCardActivity extends BaseActivity {
 
                         //验证非数字或者小数点的情况
                         Matcher m = p.matcher(source);
-                        if(oldtext.contains(".")){
-                        //已经存在小数点的情况下，只能输入数字
-                            if(!m.matches()){
+                        if (oldtext.contains(".")) {
+                            //已经存在小数点的情况下，只能输入数字
+                            if (!m.matches()) {
                                 return null;
                             }
-                        }else{
-                        //未输入小数点的情况下，可以输入小数点和数字
-                            if(!m.matches() && !source.equals(".") ){
+                        } else {
+                            //未输入小数点的情况下，可以输入小数点和数字
+                            if (!m.matches() && !source.equals(".")) {
                                 return null;
                             }
                         }
@@ -166,15 +211,23 @@ public class SwipeCardActivity extends BaseActivity {
     @OnClick(R.id.btn_pay)
     public void onClick() {
         String moneyStr = mEvMoney.getText().toString();
-//        mSwipeManager.sendUserTradeMessage(this,this,moneyStr,shopName,"");
-        jumpNextPage();
+        if (shopName == null || shopName.length() <= 0) {
+            DYToast.makeText(this, "未获取商家名称", Toast.LENGTH_LONG).show();
+            if (RestaurantManager.getInstance().getRestaurantListBean() == null) {
+                mSwipeManager.getRestaurantList(this, this);
+            }
+        } else if (moneyStr.length() <= 0) {
+            DYToast.makeText(this, "请输入金额", Toast.LENGTH_LONG).show();
+        }
+        mSwipeManager.sendUserTradeMessage(this, this, moneyStr, restaurantId, "");
+
     }
 
 
-    private void jumpNextPage(){
-        Intent intent = new Intent(this,SwipeSuccessActivity.class);
-        intent.putExtra(SwipeSuccessActivity.SHOP_NAME_KEY,shopName);
-        intent.putExtra(SwipeSuccessActivity.MONEY_VALUE_KEY,mEvMoney.getText().toString());
+    private void jumpNextPage() {
+        Intent intent = new Intent(this, SwipeSuccessActivity.class);
+        intent.putExtra(SwipeSuccessActivity.SHOP_NAME_KEY, shopName);
+        intent.putExtra(SwipeSuccessActivity.MONEY_VALUE_KEY, mEvMoney.getText().toString());
         startActivity(intent);
     }
 

@@ -110,25 +110,6 @@ public interface AppService {
             @Body RequestBody body
     );
 
-    /**
-     * 执行交易
-     *
-     * @author hongfei.tao
-     * @time create at 2016/9/13 14:03
-     */
-    @POST("/meal_ticket/transaction")
-    Call handleTransaction(
-//            @Body RequestBody body
-    );
-
-    /**
-     * 获取个人当天交易
-     *
-     * @author hongfei.tao
-     * @time create at 2016/9/13 14:04
-     */
-    @GET("/meal_ticket/transaction-user")
-    Call getPersonalDeals();
 
     /**
      * 获取商家当天交易
@@ -145,6 +126,33 @@ public interface AppService {
      * @author hongfei.tao
      * @time create at 2016/9/13 14:08
      */
-    @GET("restaurant")
-    Call<String> getRestaurantList();
+    @GET("{subServer}/restaurant")
+    Call<String> getRestaurantList(
+            @Path(value = "subServer", encoded = true) String subServer
+    );
+
+    /**
+     * 执行交易
+     *
+     * @author hongfei.tao
+     * @time create at 2016/9/13 14:03
+     */
+    @POST("{subServer}/transaction")
+    Call<String> handleTransaction(
+            @Path(value = "subServer", encoded = true) String subServer,
+            @Body RequestBody body
+    );
+
+
+    /**
+     * 获取个人当天交易
+     *
+     * @author hongfei.tao
+     * @time create at 2016/9/13 14:04
+     */
+    @GET("{subServer}/transaction-user")
+    Call<String> getPersonalDeals(
+            @Path(value = "subServer", encoded = true) String subServer
+    );
+
 }

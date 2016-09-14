@@ -6,9 +6,13 @@ import android.os.Bundle;
 
 import com.datayes.dyoa.R;
 import com.datayes.dyoa.common.base.BaseActivity;
+import com.datayes.dyoa.common.network.BaseService;
 import com.datayes.dyoa.common.networkstatus.NetworkState;
 import com.datayes.dyoa.common.view.CTitle;
 import com.datayes.dyoa.module.swipecard.activity.SwipeCardActivity;
+import com.datayes.dyoa.module.swipecard.activity.manager.SwipeManager;
+import com.datayes.dyoa.module.swipecard.activity.manager.SwipeService;
+import com.datayes.dyoa.module.user.RestaurantManager;
 import com.uuzuche.lib_zxing.activity.CaptureFragment;
 import com.uuzuche.lib_zxing.activity.CodeUtils;
 
@@ -23,6 +27,9 @@ public class ScanCodeActivity extends BaseActivity implements CodeUtils.AnalyzeC
     @BindView(R.id.ct_title)
     CTitle mTitle;
 
+    private SwipeManager mSwipeManager;
+    private SwipeService mSwipeService;
+
     private CaptureFragment mCaptureFragment;
 
     @Override
@@ -31,7 +38,8 @@ public class ScanCodeActivity extends BaseActivity implements CodeUtils.AnalyzeC
         mCaptureFragment = new CaptureFragment();
         CodeUtils.setFragmentArgs(mCaptureFragment, R.layout.layout_camera);
         mCaptureFragment.setAnalyzeCallback(this);
-
+        mSwipeManager = new SwipeManager();
+        mSwipeManager.getRestaurantList(this, this);
         getSupportFragmentManager().beginTransaction().replace(R.id.fl_code_container, mCaptureFragment).commit();
     }
 
@@ -42,9 +50,9 @@ public class ScanCodeActivity extends BaseActivity implements CodeUtils.AnalyzeC
 
     @Override
     public void onAnalyzeSuccess(Bitmap mBitmap, String result) {
+
         Intent intent = new Intent(this, SwipeCardActivity.class);
-        intent.putExtra(CodeUtils.RESULT_TYPE, CodeUtils.RESULT_SUCCESS);
-        intent.putExtra(CodeUtils.RESULT_STRING, result);
+        intent.putExtra(SwipeCardActivity.RESTAURANT_ID_KEY, result);
         startActivity(intent);
 
     }
@@ -68,4 +76,18 @@ public class ScanCodeActivity extends BaseActivity implements CodeUtils.AnalyzeC
 
     }
 
+    @Override
+    public void networkFinished(String operationType, BaseService service, int code, String tag) {
+
+        if (operationType.equals("/restaurant") && mSwipeService.getRestaurantListBean() != null) {
+            RestaurantManager.getInstance().setRestaurantListBean(mSwipeService.getRestaurantListBean());
+        }
+    }
+
+    @Override
+    public BaseService initService() {
+        if (mSwipeService == null)
+            mSwipeService = new SwipeService();
+        return mSwipeService;
+    }
 }
