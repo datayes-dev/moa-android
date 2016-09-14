@@ -45,13 +45,17 @@ public class ScanCodeActivity extends BaseActivity implements CodeUtils.AnalyzeC
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        mCaptureFragment = new CaptureFragment();
-        CodeUtils.setFragmentArgs(mCaptureFragment, R.layout.layout_camera);
-        mCaptureFragment.setAnalyzeCallback(this);
+
         mSwipeManager = new SwipeManager();
         mSwipeManager.getRestaurantList(this, this);
 
         mTitle.setRightBtnText("交易记录");
+        mTitle.setLeftBtnClick(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
         mTitle.setrightFenGeClick(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -60,14 +64,20 @@ public class ScanCodeActivity extends BaseActivity implements CodeUtils.AnalyzeC
             }
         });
 
-        getSupportFragmentManager().beginTransaction().replace(R.id.fl_code_container, mCaptureFragment).commit();
 
         // 检查运行时权限，如果是Android M以下直接调用
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             checkCameraPermission();
         } else {
-            // TODO
+            initCode();
         }
+    }
+
+    private void initCode() {
+        mCaptureFragment = new CaptureFragment();
+        CodeUtils.setFragmentArgs(mCaptureFragment, R.layout.layout_camera);
+        mCaptureFragment.setAnalyzeCallback(this);
+        getSupportFragmentManager().beginTransaction().replace(R.id.fl_code_container, mCaptureFragment).commit();
     }
 
     @Override
@@ -124,7 +134,7 @@ public class ScanCodeActivity extends BaseActivity implements CodeUtils.AnalyzeC
     private void checkCameraPermission() {
         if (PermissionManager.hasPermissions(this, PermissionConstant.CAMERA_PERMISSIONS)) {
             // 已有拍照权限
-            // TODO
+            initCode();
         } else {
             PermissionManager.requestPermissions(this, permissionListener,
                     "请求使用拍照权限", PermissionConstant.CAMERA_PERMISSIONS);
@@ -146,7 +156,7 @@ public class ScanCodeActivity extends BaseActivity implements CodeUtils.AnalyzeC
         public void onPermissionsGranted(List<String> perms) {
             if (perms.size() == PermissionConstant.CAMERA_PERMISSIONS.length) {
                 // 拍照授权成功
-                // TODO
+                initCode();
             } else {
                 // 授权失败
                 DYToast.show(ScanCodeActivity.this, "授权失败！", Toast.LENGTH_SHORT);
