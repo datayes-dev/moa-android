@@ -2,6 +2,8 @@ package com.datayes.dyoa.utils;
 
 import android.view.View;
 
+import com.datayes.baseapp.utils.StringUtil;
+
 /**
  *
  * 所有项目相关的工具类方法放到这里
@@ -30,5 +32,18 @@ public class AppUtil {
             view.setAlpha(enabled ? 1.0F : 0.5F);
             view.setEnabled(enabled);
         }
+    }
+
+    /**
+     * @return String
+     * @brief 字符串校验
+     * @date 2014-7-28 下午2:07:01
+     * @author morong
+     * Update Date :
+     * Update Author : morong
+     */
+    public static String checkS(String string) {
+
+        return StringUtil.checkString(string);
     }
 }

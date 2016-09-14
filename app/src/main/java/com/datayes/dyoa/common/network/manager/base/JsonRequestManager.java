@@ -26,17 +26,15 @@
 package com.datayes.dyoa.common.network.manager.base;
 
 import android.text.TextUtils;
-import android.util.Log;
 
 import com.datayes.dyoa.bean.base.BaseBean;
 import com.datayes.dyoa.common.config.Config;
 import com.datayes.dyoa.common.network.BaseService;
 import com.datayes.dyoa.common.network.NetCallBack;
 import com.datayes.dyoa.common.network.bean.BaseResponseBean;
+import com.datayes.dyoa.common.network.error.SafeGrardException;
 import com.datayes.dyoa.common.network.manager.token.NetAccessTockenManager;
-import com.orhanobut.logger.Logger;
 
-import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.lang.reflect.Field;
@@ -65,9 +63,11 @@ public class JsonRequestManager extends BaseRequestManager {
             @Override
             public void onResponse(Call<String> call, Response<String> response) {
 
-                if (checkNetWorkError(response)) {
+                String resultJson = response.body();
 
-                    String resultJson = response.body();
+                Throwable errorThrowable = checkResponseCode(response);
+
+                if (errorThrowable == null) {//网络正常
 
                     if (!TextUtils.isEmpty(resultJson)) {
 
@@ -84,27 +84,38 @@ public class JsonRequestManager extends BaseRequestManager {
                                 bean = beanClass.newInstance();
                             }
 
-                            if (resultJson.startsWith("{")) {//JsonObject
-                                JSONObject json = new JSONObject(resultJson);
-                                bean.parseJsonObject(json);
-                            } else if (resultJson.startsWith("[")) {//JsonArray
-                                JSONArray json = new JSONArray(resultJson);
-                                bean.parseJsonArray(json);
-                            }
-                            if (checkTockenNeedLogin(call, this, bean.getCode())) {
+                            JSONObject json = new JSONObject(resultJson);
+                            bean.parseJsonObject(json);
 
-                                saveCookie(response.headers());
+                            String subUrl = call.request().url().url().getPath();
+                            String operateType = subUrl.replace(type.getUrl(), "");
+
+                            //检查运维模式
+                            if (bean.getCode() == -9990) {
 
                                 if (callBack != null) {
+                                    callBack.onErrorResponse(
+                                            operateType,
+                                            new SafeGrardException(),
+                                            ""
+                                    );
+                                }
 
-                                    String subUrl = call.request().url().url().getPath();
-                                    String operateType = subUrl.replace(type.getUrl(), "");
-                                    BaseService initService = service.initService();
+                            } else {
 
-                                    //数据注入
-                                    infuse(initService, bean);
+                                if (checkTockenNeedLogin(call, this, bean.getCode())) {
 
-                                    callBack.networkFinished(operateType, initService, response.code(), response.message());
+                                    saveCookie(response.headers());
+
+                                    if (callBack != null) {
+
+                                        BaseService initService = service.initService();
+
+                                        //数据注入
+                                        infuse(initService, bean);
+
+                                        callBack.networkFinished(operateType, initService, bean.getCode(), bean.getInfo());
+                                    }
                                 }
                             }
 
@@ -112,12 +123,26 @@ public class JsonRequestManager extends BaseRequestManager {
                             e.printStackTrace();
                         }
                     }
+
+                } else {
+
+                    this.onFailure(call, errorThrowable);
                 }
             }
 
             @Override
             public void onFailure(Call<String> call, Throwable t) {
-                Logger.d(t.getMessage());
+                if (callBack != null && t != null) {
+
+                    String subUrl = call.request().url().url().getPath();
+                    String operateType = subUrl.replace(type.getUrl(), "");
+
+                    callBack.onErrorResponse(
+                            operateType,
+                            t,
+                            ""
+                    );
+                }
             }
         };
 
@@ -135,30 +160,43 @@ public class JsonRequestManager extends BaseRequestManager {
         Callback callback = new Callback<T>() {
             @Override
             public void onResponse(Call<T> call, Response<T> response) {
-                T t = response.body();
 
-                if (t == null) {
-                    return;
-                }
+                Throwable errorThrowable = checkResponseCode(response);
 
-                if (checkTockenNeedLogin(call, this, t.getCode())) {
+                if (errorThrowable == null) {//网络正常
 
-                    saveCookie(response.headers());
+                    T t = response.body();
 
-                    if (callBack != null) {
-                        BaseService initService = service.initService();
+                    if (t != null && checkTockenNeedLogin(call, this, t.getCode())) {
 
-                        //数据注入
-                        infuse(initService, t);
+                        saveCookie(response.headers());
 
-                        callBack.networkFinished(operateType, initService, response.code(), response.message());
+                        if (callBack != null) {
+                            BaseService initService = service.initService();
+
+                            //数据注入
+                            infuse(initService, t);
+
+                            callBack.networkFinished(operateType, initService, t.getCode(), t.getMessage());
+                        }
                     }
+
+                } else {
+
+                    onFailure(call, errorThrowable);
                 }
             }
 
             @Override
             public void onFailure(Call<T> call, Throwable t) {
-                Log.d("TAG", t.getMessage());
+
+                if (callBack != null && t != null) {
+                    callBack.onErrorResponse(
+                            operateType,
+                            t,
+                            ""
+                    );
+                }
             }
         };
 

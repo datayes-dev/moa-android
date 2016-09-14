@@ -27,14 +27,16 @@ package com.datayes.dyoa.common.network.manager.base;
 
 import android.text.TextUtils;
 
-import com.datayes.baseapp.utils.StringUtil;
 import com.datayes.dyoa.bean.user.UserLoginBean;
 import com.datayes.dyoa.common.config.Config;
-import com.datayes.dyoa.module.user.CurrentUser;
 import com.datayes.dyoa.common.network.OkHttpClientSingleton;
 import com.datayes.dyoa.common.network.converter.proto.IrrProtoConverterFactory;
+import com.datayes.dyoa.common.network.error.NetWorkException;
+import com.datayes.dyoa.common.network.error.ServerException;
 import com.datayes.dyoa.common.network.manager.token.NetAccessTockenManager;
 import com.datayes.dyoa.common.network.service.AppService;
+import com.datayes.dyoa.module.user.CurrentUser;
+import com.datayes.dyoa.utils.AppUtil;
 import com.datayes.dyoa.utils.DYCookieManager;
 
 import java.util.List;
@@ -79,21 +81,26 @@ public class BaseRequestManager {
     }
 
     /**
-     * 这里处理一些网络层错误的操作
-     *
      * @param response
      * @return
      */
-    public boolean checkNetWorkError(Response response) {
+    public Throwable checkResponseCode(Response response) {
 
         if (response != null) {
 
-//            response.code();
+            int code = response.code();
 
-            return true;
+            if (code > 200 && code <= 499) {
+
+                return new NetWorkException(code + "");
+
+            } else if (code >= 500) {
+
+                return new ServerException(code + "");
+            }
         }
 
-        return false;
+        return null;
     }
 
     /**
@@ -139,7 +146,7 @@ public class BaseRequestManager {
         UserLoginBean userLoginBean = CurrentUser.getInstance().getUserInfo();
 
         if (userLoginBean != null
-                && !StringUtil.checkString(userLoginBean.getRefresh_token()).equals("")) {
+                && !AppUtil.checkS(userLoginBean.getRefresh_token()).equals("")) {
 
             return System.currentTimeMillis() > userLoginBean.getCurrentTime();
         }
