@@ -69,6 +69,10 @@ public class JsonRequestManager extends BaseRequestManager {
 
                     String resultJson = response.body();
 
+                    if (callBack != null) {
+                        callBack.networkFinished("", service.initService(), response.code(), response.message());
+                    }
+
                     if (!TextUtils.isEmpty(resultJson)) {
 
                         BaseBean bean;
@@ -87,7 +91,7 @@ public class JsonRequestManager extends BaseRequestManager {
                             if (resultJson.startsWith("{")) {//JsonObject
                                 JSONObject json = new JSONObject(resultJson);
                                 bean.parseJsonObject(json);
-                            }else if (resultJson.startsWith("[")) {//JsonArray
+                            } else if (resultJson.startsWith("[")) {//JsonArray
                                 JSONArray json = new JSONArray(resultJson);
                                 bean.parseJsonArray(json);
                             }
@@ -104,7 +108,7 @@ public class JsonRequestManager extends BaseRequestManager {
                                     //数据注入
                                     infuse(initService, bean);
 
-                                    callBack.networkFinished(operateType, initService, bean.getCode(), bean.getInfo());
+                                    callBack.networkFinished(operateType, initService, response.code(), response.message());
                                 }
                             }
 

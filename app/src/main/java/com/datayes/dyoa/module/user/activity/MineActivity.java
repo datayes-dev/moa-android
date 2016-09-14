@@ -3,6 +3,7 @@ package com.datayes.dyoa.module.user.activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.datayes.baseapp.tools.DYToast;
@@ -30,6 +31,8 @@ public class MineActivity extends BaseActivity {
     MineItemView mLogout;
     @BindView(R.id.ct_title)
     CTitle mCtTitle;
+    @BindView(R.id.tv_username)
+    TextView mUsername;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,8 +43,7 @@ public class MineActivity extends BaseActivity {
             CurrentUser.getInstance().refreshAccountInfo(new CurrentUser.onRefreshAccountInfo() {
                 @Override
                 public void onRefreshed(AccountBean accountInfo) {
-                    //
-                    DYToast.show(MineActivity.this, accountInfo.getUserName(), Toast.LENGTH_SHORT);
+                    mUsername.setText(accountInfo.getUserName());
                 }
 
                 @Override
