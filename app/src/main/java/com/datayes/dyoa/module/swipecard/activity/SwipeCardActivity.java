@@ -95,11 +95,7 @@ public class SwipeCardActivity extends BaseActivity {
             compareRestaurantName();
 
         } else if (operationType.equals("/transaction")) {//执行交易
-            if (code == 200) {
-                jumpNextPage();
-            } else {
-                DYToast.makeText(this, "发送失败" + code, Toast.LENGTH_LONG).show();
-            }
+                 jumpNextPage();
 
         }
     }
