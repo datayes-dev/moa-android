@@ -8,6 +8,7 @@ import com.datayes.dyoa.R;
 import com.datayes.dyoa.common.base.BaseActivity;
 import com.datayes.dyoa.common.networkstatus.NetworkState;
 import com.datayes.dyoa.common.view.CTitle;
+import com.datayes.dyoa.module.swipecard.activity.SwipeCardActivity;
 import com.uuzuche.lib_zxing.activity.CaptureFragment;
 import com.uuzuche.lib_zxing.activity.CodeUtils;
 
@@ -41,12 +42,11 @@ public class ScanCodeActivity extends BaseActivity implements CodeUtils.AnalyzeC
 
     @Override
     public void onAnalyzeSuccess(Bitmap mBitmap, String result) {
-        Intent intent = new Intent();
+        Intent intent = new Intent(this, SwipeCardActivity.class);
         intent.putExtra(CodeUtils.RESULT_TYPE, CodeUtils.RESULT_SUCCESS);
         intent.putExtra(CodeUtils.RESULT_STRING, result);
         startActivity(intent);
 
-        finish();
     }
 
     @Override
