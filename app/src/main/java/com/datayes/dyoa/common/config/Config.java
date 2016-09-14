@@ -97,6 +97,7 @@ public class Config {
         WEB_VIEW_PAGE_RESEARCH("information/research/"),
         WEB_VIEW_PAGE_ANNOUNCEMENT("information/announcement/"),
         WEB_VIEW_PAGE_EVENT(""),
+        ORDER("/meal_ticket"),
         WEB_MIAL("/webmail");
 
         private String url_;
@@ -125,7 +126,7 @@ public class Config {
     }
 
     private static final String qaBaseUrl = "http://gw.cp.wmcloud-qa.com";
-    private static final String devBaseUrl = "http://139.224.80.105:52491/";
+    private static final String devBaseUrl = "https://gw.wmcloud-stg.com";
     private static final String stageBaseUrl = "https://gw.wmcloud-stg.com";
     private static final String productBaseUrl = "https://gw.wmcloud.com";
 

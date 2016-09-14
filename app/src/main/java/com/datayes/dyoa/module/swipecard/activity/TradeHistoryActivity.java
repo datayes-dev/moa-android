@@ -6,15 +6,15 @@ import android.widget.ListView;
 
 import com.datayes.dyoa.R;
 import com.datayes.dyoa.common.base.BaseActivity;
+import com.datayes.dyoa.common.network.BaseService;
 import com.datayes.dyoa.common.networkstatus.NetworkState;
 import com.datayes.dyoa.common.view.CTitle;
-import com.datayes.dyoa.module.swipecard.activity.adapter.TradeHistoryAdapter;
-
-import java.util.ArrayList;
-import java.util.List;
+import com.datayes.dyoa.module.swipecard.adapter.TradeHistoryAdapter;
+import com.datayes.dyoa.module.swipecard.manager.SwipeManager;
+import com.datayes.dyoa.module.swipecard.service.SwipeService;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
+
 
 /**
  * Created by datayes on 16/9/13.
@@ -27,6 +27,8 @@ public class TradeHistoryActivity extends BaseActivity {
 
 
     private TradeHistoryAdapter mHistoryAdapter;
+    private SwipeManager mSwipeManager;
+    private SwipeService mSwipeService;
 
     @Override
     protected int getLayoutId() {
@@ -44,9 +46,25 @@ public class TradeHistoryActivity extends BaseActivity {
     }
 
     @Override
+    public void networkFinished(String operationType, BaseService service, int code, String tag) {
+        if (mSwipeService.getTransactionListBean()!=null){
+            mHistoryAdapter.setList(mSwipeService.getTransactionListBean().getTransactionBeanList());
+        }
+    }
+
+    @Override
+    public BaseService initService() {
+        if (mSwipeService == null)
+            mSwipeService = new SwipeService();
+        return mSwipeService;
+    }
+
+
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-         ButterKnife.bind(this);
+        mSwipeManager = new SwipeManager();
+        mSwipeManager.getTransactionHistoryList(this, this);
         initUI();
     }
 
@@ -61,16 +79,6 @@ public class TradeHistoryActivity extends BaseActivity {
             }
         });
 
-        List<String> stringList = new ArrayList<>();
-        stringList.add("哈哈哈");
-        stringList.add("哟哟哟");
-        stringList.add("周末快乐");
-        stringList.add("东方明珠");
-        stringList.add("天天向上");
-        stringList.add("天天向上");
-        stringList.add("天天向上");
-        stringList.add("好好学习");
-        mHistoryAdapter.setList(stringList);
         mLvHistory.setAdapter(mHistoryAdapter);
     }
 

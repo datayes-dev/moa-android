@@ -23,10 +23,11 @@
  *
  */
 
-package com.datayes.dyoa.common.network.manager.user;
+package com.datayes.dyoa.module.login.manager;
 
 import com.datayes.dyoa.bean.user.UserLoginBean;
 import com.datayes.dyoa.common.config.Config;
+import com.datayes.dyoa.common.config.RequestInfo;
 import com.datayes.dyoa.common.network.NetCallBack;
 import com.datayes.dyoa.common.network.manager.base.JsonRequestManager;
 
@@ -64,5 +65,20 @@ public class UserManager extends JsonRequestManager {
                         ((captcha.length() <= 0) ? "false" : "true")
                 ),
                 Config.ConfigUrlType.USER_MASTER, UserLoginBean.class);
+    }
+
+    /**
+     * 获取用户详细信息
+     *
+     * @param netCallBack
+     * @param baseService
+     */
+    public void getAccountInfo(NetCallBack netCallBack,
+                               NetCallBack.InitService baseService) {
+
+        start(RequestInfo.IDENTITY.getOperationType(),
+                netCallBack,
+                baseService,
+                getInstance().getAccountInfo(Config.ConfigUrlType.CLOUD.getUrl()));
     }
 }

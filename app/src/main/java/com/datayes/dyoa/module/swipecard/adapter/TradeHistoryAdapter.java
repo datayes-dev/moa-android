@@ -1,4 +1,4 @@
-package com.datayes.dyoa.module.swipecard.activity.adapter;
+package com.datayes.dyoa.module.swipecard.adapter;
 
 
 import android.content.Context;
@@ -7,6 +7,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.datayes.dyoa.R;
+import com.datayes.dyoa.common.network.bean.TransactionListBean;
 import com.datayes.dyoa.common.view.ArrayListAdapter;
 
 import butterknife.BindView;
@@ -15,7 +16,7 @@ import butterknife.ButterKnife;
 /**
  * Created by datayes on 16/9/13.
  */
-public class TradeHistoryAdapter extends ArrayListAdapter<String,TradeHistoryAdapter.ViewHolder> {
+public class TradeHistoryAdapter extends ArrayListAdapter<TransactionListBean.TransactionBean,TradeHistoryAdapter.ViewHolder> {
 
     public TradeHistoryAdapter(Context context) {
         super(context);
@@ -23,10 +24,10 @@ public class TradeHistoryAdapter extends ArrayListAdapter<String,TradeHistoryAda
 
     @Override
     protected void getView(int position, View convertView, ViewHolder viewHolder, ViewGroup parent) {
-       String bean =  getList().get(position);
-        String shopName = bean;
-        String moneyValue = bean;
-        String dateValue = bean;
+        TransactionListBean.TransactionBean bean =  getList().get(position);
+        String shopName = bean.getRestaurant_name();
+        String moneyValue = String.valueOf(bean.getPrice());
+        String dateValue = bean.getTime_stamp();
         viewHolder.mTvShopName.setText(shopName);
         viewHolder.mTvMoney.setText(moneyValue);
         viewHolder.mTvDate.setText(dateValue);
