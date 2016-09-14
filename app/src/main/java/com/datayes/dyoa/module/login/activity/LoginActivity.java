@@ -34,6 +34,8 @@ import butterknife.OnClick;
 
 public class LoginActivity extends BaseActivity {
 
+    public static final int REQUEST_CODE_RESET_PWD = 100;
+
     @BindView(R.id.ct_title)
     CTitle cTitle;
     @BindView(R.id.userTxt)
@@ -70,6 +72,8 @@ public class LoginActivity extends BaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        //重置密码功能暂时不用
+        btnForget.setVisibility(View.GONE);
 
         this.init();
         this.initEvent();
@@ -233,8 +237,9 @@ public class LoginActivity extends BaseActivity {
     public void onClick(View v) {
         switch (v.getId()) {
 
-            case R.id.forgetPwdTxt:
-                // 打开设置密码界面
+            case R.id.forgetPwdTxt://忘记密码
+                Intent intent = new Intent(this, ResetPasswordActivity.class);
+                startActivityForResult(intent, REQUEST_CODE_RESET_PWD);
                 break;
 
             case R.id.loginBtn:
