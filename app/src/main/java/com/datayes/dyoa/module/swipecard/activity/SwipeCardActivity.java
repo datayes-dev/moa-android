@@ -26,6 +26,7 @@ import com.datayes.dyoa.module.user.RestaurantManager;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+
 import butterknife.BindView;
 import butterknife.OnClick;
 
@@ -77,6 +78,7 @@ public class SwipeCardActivity extends BaseActivity {
 
     @Override
     public void onErrorResponse(String operationType, Throwable throwable, String tag) {
+        hideLoading();
         if (operationType != null) {
 
         }
@@ -84,7 +86,7 @@ public class SwipeCardActivity extends BaseActivity {
 
     @Override
     public void networkFinished(String operationType, BaseService service, int code, String tag) {
-
+        hideLoading();
         if (operationType.equals("/restaurant") && mSwipeService.getRestaurantListBean() != null) {
 
             RestaurantManager.getInstance().setRestaurantListBean(mSwipeService.getRestaurantListBean());
@@ -143,7 +145,6 @@ public class SwipeCardActivity extends BaseActivity {
         }
 
         mTvUserName.setText(userName);
-
         mCtTitle.setLeftBtnClick(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -221,6 +222,7 @@ public class SwipeCardActivity extends BaseActivity {
 
     @OnClick(R.id.btn_pay)
     public void onClick() {
+
         String moneyStr = mEvMoney.getText().toString();
         if (shopName == null || shopName.length() <= 0) {
             DYToast.makeText(this, "未获取商家名称", Toast.LENGTH_LONG).show();
@@ -230,6 +232,7 @@ public class SwipeCardActivity extends BaseActivity {
         } else if (moneyStr.length() <= 0) {
             DYToast.makeText(this, "请输入金额", Toast.LENGTH_LONG).show();
         }
+        showLoading();
         mSwipeManager.sendUserTradeMessage(this, this, moneyStr, restaurantId, "");
 
     }

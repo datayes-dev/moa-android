@@ -76,6 +76,7 @@ public class LoginActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         //重置密码功能暂时不用
         btnForget.setVisibility(View.GONE);
+        cTitle.getLeftBtn().setVisibility(View.INVISIBLE);
 
         this.init();
         this.initEvent();

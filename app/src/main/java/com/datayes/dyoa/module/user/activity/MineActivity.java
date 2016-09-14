@@ -10,6 +10,7 @@ import com.datayes.dyoa.R;
 import com.datayes.dyoa.bean.user.AccountBean;
 import com.datayes.dyoa.common.base.BaseActivity;
 import com.datayes.dyoa.common.networkstatus.NetworkState;
+import com.datayes.dyoa.common.view.CTitle;
 import com.datayes.dyoa.common.view.MineItemView;
 import com.datayes.dyoa.module.code.activity.ScanCodeActivity;
 import com.datayes.dyoa.module.login.activity.LoginActivity;
@@ -27,10 +28,14 @@ public class MineActivity extends BaseActivity {
     MineItemView mScanCode;
     @BindView(R.id.miv_logout)
     MineItemView mLogout;
+    @BindView(R.id.ct_title)
+    CTitle mCtTitle;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        mCtTitle.getLeftBtn().setVisibility(View.INVISIBLE);
         if (CurrentUser.getInstance().getAccountInfo() == null) {
             CurrentUser.getInstance().refreshAccountInfo(new CurrentUser.onRefreshAccountInfo() {
                 @Override

@@ -6,6 +6,7 @@
               android:orientation="vertical">
 
     <com.datayes.dyoa.common.view.CTitle
+        android:id="@+id/ct_title"
         android:layout_width="match_parent"
         android:layout_height="48dp"
         app:titleValue="@string/mine" />

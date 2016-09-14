@@ -42,11 +42,12 @@ public class TradeHistoryActivity extends BaseActivity {
 
     @Override
     public void onErrorResponse(String operationType, Throwable throwable, String tag) {
-
+        hideLoading();
     }
 
     @Override
     public void networkFinished(String operationType, BaseService service, int code, String tag) {
+        hideLoading();
         if (mSwipeService.getTransactionListBean()!=null){
             mHistoryAdapter.setList(mSwipeService.getTransactionListBean().getTransactionBeanList());
         }
@@ -64,6 +65,7 @@ public class TradeHistoryActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mSwipeManager = new SwipeManager();
+        showLoading();
         mSwipeManager.getTransactionHistoryList(this, this);
         initUI();
     }
