@@ -22,11 +22,11 @@ import com.datayes.dyoa.common.network.BaseService;
 import com.datayes.dyoa.common.networkstatus.NetworkState;
 import com.datayes.dyoa.common.view.CEditText;
 import com.datayes.dyoa.common.view.CTitle;
-import com.datayes.dyoa.module.code.activity.ScanCodeActivity;
 import com.datayes.dyoa.module.login.Constant;
 import com.datayes.dyoa.module.login.manager.UserManager;
 import com.datayes.dyoa.module.login.service.UserService;
 import com.datayes.dyoa.module.user.CurrentUser;
+import com.datayes.dyoa.module.user.activity.MineActivity;
 import com.datayes.dyoa.utils.AppUtil;
 import com.nostra13.universalimageloader.core.assist.FailReason;
 import com.nostra13.universalimageloader.core.listener.ImageLoadingListener;
@@ -296,7 +296,7 @@ public class LoginActivity extends BaseActivity {
     }
 
     private void onLoginCompleted() {
-        Intent intent = new Intent(this, ScanCodeActivity.class);
+        Intent intent = new Intent(this, MineActivity.class);
         startActivity(intent);
 
         DYToast.makeText(this, R.string.user_send_login_response_0, Toast.LENGTH_SHORT).show();
@@ -337,7 +337,7 @@ public class LoginActivity extends BaseActivity {
                         @Override
                         public void onError() {
                             hideLoading();
-                            DYToast.makeText(LoginActivity.this, R.string.user_send_login_response_9, Toast.LENGTH_SHORT).show();
+                            DYToast.show(LoginActivity.this, R.string.user_send_login_response_9, Toast.LENGTH_SHORT);
                         }
                     });
 

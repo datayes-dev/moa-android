@@ -18,8 +18,8 @@ import com.datayes.dyoa.common.network.BaseService;
 import com.datayes.dyoa.common.network.bean.RestaurantListBean;
 import com.datayes.dyoa.common.networkstatus.NetworkState;
 import com.datayes.dyoa.common.view.CTitle;
-import com.datayes.dyoa.module.swipecard.activity.manager.SwipeManager;
-import com.datayes.dyoa.module.swipecard.activity.manager.SwipeService;
+import com.datayes.dyoa.module.swipecard.manager.SwipeManager;
+import com.datayes.dyoa.module.swipecard.service.SwipeService;
 import com.datayes.dyoa.module.user.CurrentUser;
 import com.datayes.dyoa.module.user.RestaurantManager;
 

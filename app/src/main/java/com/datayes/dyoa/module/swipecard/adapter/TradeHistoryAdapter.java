@@ -1,4 +1,4 @@
-package com.datayes.dyoa.module.swipecard.activity.adapter;
+package com.datayes.dyoa.module.swipecard.adapter;
 
 
 import android.content.Context;
