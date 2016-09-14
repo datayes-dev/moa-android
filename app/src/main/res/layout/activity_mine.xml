@@ -32,31 +32,23 @@
                 android:layout_height="70dp"
                 android:background="@drawable/selector_menu_item_bg">
 
-                <ImageView
+                <com.datayes.dyoa.common.view.CircleImageView
                     android:id="@+id/iv_user_icon"
                     android:layout_width="50dp"
                     android:layout_height="50dp"
-                    android:layout_centerVertical="true"
-                    android:layout_marginLeft="20dp"
-                    android:src="@mipmap/header" />
+                    android:layout_margin="10dp"
+                    android:src="@mipmap/header"
+                    app:border_color="@color/color_H2"
+                    app:border_width="1dp" />
 
                 <TextView
                     android:id="@+id/tv_username"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
-                    android:layout_marginLeft="15dp"
+                    android:layout_marginLeft="10dp"
                     android:layout_toRightOf="@id/iv_user_icon"
                     android:singleLine="true" />
-
-                <ImageView
-                    android:id="@+id/iv_arrow_user"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentRight="true"
-                    android:layout_centerVertical="true"
-                    android:layout_marginRight="10dp"
-                    android:src="@mipmap/goin2" />
 
             </RelativeLayout>
 

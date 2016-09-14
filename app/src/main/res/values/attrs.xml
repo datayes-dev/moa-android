@@ -1,12 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <attr name="borderRadius" format="dimension" />
-    <attr name="type">
-        <enum name="circle" value="0" />
-        <enum name="round" value="1" />
-    </attr>
-    <attr name="src" format="reference"></attr>
-
     <!-- CTitle -->
     <declare-styleable name="CTitle">
         <attr name="titleValue" format="string" />
@@ -66,10 +59,9 @@
     </declare-styleable>
 
     <!-- 圆形图片 -->
-    <declare-styleable name="CustomImageView">
-        <attr name="borderRadius" />
-        <attr name="type" />
-        <attr name="src" />
+    <declare-styleable name="CircleImageView">
+        <attr name="border_width" format="dimension" />
+        <attr name="border_color" format="color" />
     </declare-styleable>
 
 </resources>

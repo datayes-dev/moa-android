@@ -12,6 +12,7 @@ import com.datayes.dyoa.bean.user.AccountBean;
 import com.datayes.dyoa.common.base.BaseActivity;
 import com.datayes.dyoa.common.networkstatus.NetworkState;
 import com.datayes.dyoa.common.view.CTitle;
+import com.datayes.dyoa.common.view.CircleImageView;
 import com.datayes.dyoa.common.view.MineItemView;
 import com.datayes.dyoa.module.code.activity.ScanCodeActivity;
 import com.datayes.dyoa.module.login.activity.LoginActivity;
@@ -33,6 +34,8 @@ public class MineActivity extends BaseActivity {
     CTitle mCtTitle;
     @BindView(R.id.tv_username)
     TextView mUsername;
+    @BindView(R.id.iv_user_icon)
+    CircleImageView mUserIcon;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -77,6 +80,7 @@ public class MineActivity extends BaseActivity {
                 startActivity(new Intent(this, ScanCodeActivity.class));
                 break;
             case R.id.miv_logout://退出登录
+                CurrentUser.getInstance().clearUserInfo();
                 startActivity(new Intent(this, LoginActivity.class));
                 finish();
                 break;
