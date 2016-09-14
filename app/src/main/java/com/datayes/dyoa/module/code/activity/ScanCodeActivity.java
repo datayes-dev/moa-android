@@ -51,7 +51,7 @@ public class ScanCodeActivity extends BaseActivity implements CodeUtils.AnalyzeC
 
     @Override
     public void onAnalyzeFailed() {
-        Intent intent = new Intent();
+        Intent intent = new Intent(this, SwipeCardActivity.class);
         intent.putExtra(CodeUtils.RESULT_TYPE, CodeUtils.RESULT_FAILED);
         startActivity(intent);
 

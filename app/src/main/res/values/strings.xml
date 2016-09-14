@@ -42,7 +42,7 @@
     <string name="my_login_pwd_hit_5">旧密码</string>
     <string name="my_login_pwd_hit_6">新密码</string>
 
-    <!-- my 验证码 -->
+    <!-- 验证码 -->
     <string name="my_login_code">验证码</string>
     <string name="my_login_code_hit">6位验证码</string>
     <string name="my_login_code_hit_1">4位验证码</string>
@@ -59,4 +59,7 @@
     <string name="user_send_code_response_30">需要输入验证码</string>
     <string name="user_send_code_response_31">旧密码错误</string>
     <string name="user_send_code_response_38">之前未输入图片验证码</string>
+
+    <!-- 我的 -->
+    <string name="mine">我的</string>
 </resources>
