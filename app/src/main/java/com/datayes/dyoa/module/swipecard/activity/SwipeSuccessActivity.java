@@ -87,6 +87,7 @@ public class SwipeSuccessActivity extends BaseActivity {
             case R.id.tv_trade_history:
                 Intent intent = new Intent(this, TradeHistoryActivity.class);
                 startActivity(intent);
+                finish();
                 break;
         }
     }

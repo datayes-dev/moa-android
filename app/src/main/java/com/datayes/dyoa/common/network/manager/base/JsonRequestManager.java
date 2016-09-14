@@ -70,7 +70,9 @@ public class JsonRequestManager extends BaseRequestManager {
                     String resultJson = response.body();
 
                     if (callBack != null) {
-                        callBack.networkFinished("", service.initService(), response.code(), response.message());
+                        String subUrl = call.request().url().url().getPath();
+                        String operateType = subUrl.replace(type.getUrl(), "");
+                        callBack.networkFinished(operateType, service.initService(), response.code(), response.message());
                     }
 
                     if (!TextUtils.isEmpty(resultJson)) {
