@@ -3,13 +3,17 @@ package com.datayes.dyoa.module.user.activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Toast;
 
+import com.datayes.baseapp.tools.DYToast;
 import com.datayes.dyoa.R;
+import com.datayes.dyoa.bean.user.AccountBean;
 import com.datayes.dyoa.common.base.BaseActivity;
 import com.datayes.dyoa.common.networkstatus.NetworkState;
 import com.datayes.dyoa.common.view.MineItemView;
 import com.datayes.dyoa.module.code.activity.ScanCodeActivity;
 import com.datayes.dyoa.module.login.activity.LoginActivity;
+import com.datayes.dyoa.module.user.CurrentUser;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -27,6 +31,20 @@ public class MineActivity extends BaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        if (CurrentUser.getInstance().getAccountInfo() == null) {
+            CurrentUser.getInstance().refreshAccountInfo(new CurrentUser.onRefreshAccountInfo() {
+                @Override
+                public void onRefreshed(AccountBean accountInfo) {
+                    //
+                    DYToast.show(MineActivity.this, accountInfo.getUserName(), Toast.LENGTH_SHORT);
+                }
+
+                @Override
+                public void onError() {
+                    DYToast.show(MineActivity.this, R.string.user_send_login_response_9, Toast.LENGTH_SHORT);
+                }
+            });
+        }
     }
 
     @Override

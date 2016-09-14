@@ -27,6 +27,7 @@ import com.datayes.dyoa.module.login.Constant;
 import com.datayes.dyoa.module.login.manager.UserManager;
 import com.datayes.dyoa.module.login.service.UserService;
 import com.datayes.dyoa.module.user.CurrentUser;
+import com.datayes.dyoa.module.user.activity.MineActivity;
 import com.datayes.dyoa.utils.AppUtil;
 import com.nostra13.universalimageloader.core.assist.FailReason;
 import com.nostra13.universalimageloader.core.listener.ImageLoadingListener;
@@ -337,7 +338,7 @@ public class LoginActivity extends BaseActivity {
                         @Override
                         public void onError() {
                             hideLoading();
-                            DYToast.makeText(LoginActivity.this, R.string.user_send_login_response_9, Toast.LENGTH_SHORT).show();
+                            DYToast.show(LoginActivity.this, R.string.user_send_login_response_9, Toast.LENGTH_SHORT);
                         }
                     });
 

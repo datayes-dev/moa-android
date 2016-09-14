@@ -9,9 +9,9 @@ import com.datayes.dyoa.common.base.BaseActivity;
 import com.datayes.dyoa.common.network.BaseService;
 import com.datayes.dyoa.common.networkstatus.NetworkState;
 import com.datayes.dyoa.common.view.CTitle;
-import com.datayes.dyoa.module.swipecard.activity.adapter.TradeHistoryAdapter;
-import com.datayes.dyoa.module.swipecard.activity.manager.SwipeManager;
-import com.datayes.dyoa.module.swipecard.activity.manager.SwipeService;
+import com.datayes.dyoa.module.swipecard.adapter.TradeHistoryAdapter;
+import com.datayes.dyoa.module.swipecard.manager.SwipeManager;
+import com.datayes.dyoa.module.swipecard.service.SwipeService;
 
 import butterknife.BindView;
 

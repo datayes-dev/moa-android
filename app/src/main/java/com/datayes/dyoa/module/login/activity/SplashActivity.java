@@ -6,8 +6,8 @@ import android.os.Bundle;
 import com.datayes.dyoa.R;
 import com.datayes.dyoa.common.base.BaseActivity;
 import com.datayes.dyoa.common.networkstatus.NetworkState;
-import com.datayes.dyoa.module.code.activity.ScanCodeActivity;
 import com.datayes.dyoa.module.user.CurrentUser;
+import com.datayes.dyoa.module.user.activity.MineActivity;
 
 public class SplashActivity extends BaseActivity {
 
@@ -41,7 +41,7 @@ public class SplashActivity extends BaseActivity {
                     finish();
                 } else {
                     //存在token，免登录
-                    startActivity(new Intent(SplashActivity.this, ScanCodeActivity.class));
+                    startActivity(new Intent(SplashActivity.this, MineActivity.class));
                     finish();
                 }
             }
