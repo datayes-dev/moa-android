@@ -14,7 +14,7 @@ import com.datayes.dyoa.module.swipecard.activity.manager.SwipeManager;
 import com.datayes.dyoa.module.swipecard.activity.manager.SwipeService;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
+
 
 /**
  * Created by datayes on 16/9/13.
@@ -63,7 +63,6 @@ public class TradeHistoryActivity extends BaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        ButterKnife.bind(this);
         mSwipeManager = new SwipeManager();
         mSwipeManager.getTransactionHistoryList(this, this);
         initUI();

@@ -1,6 +1,7 @@
 package com.datayes.dyoa.common.network.bean;
 
-import com.datayes.dyoa.bean.BaseBean;
+import com.datayes.dyoa.bean.base.BaseBean;
+
 
 import org.json.JSONArray;
 import org.json.JSONException;

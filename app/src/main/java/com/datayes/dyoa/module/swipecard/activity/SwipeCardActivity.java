@@ -2,13 +2,14 @@ package com.datayes.dyoa.module.swipecard.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.provider.Settings;
+
 import android.text.InputFilter;
 import android.text.Spanned;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
+
 
 import com.datayes.baseapp.tools.DYToast;
 import com.datayes.dyoa.R;
@@ -19,14 +20,15 @@ import com.datayes.dyoa.common.networkstatus.NetworkState;
 import com.datayes.dyoa.common.view.CTitle;
 import com.datayes.dyoa.module.swipecard.activity.manager.SwipeManager;
 import com.datayes.dyoa.module.swipecard.activity.manager.SwipeService;
+import com.datayes.dyoa.module.user.CurrentUser;
 import com.datayes.dyoa.module.user.RestaurantManager;
 
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-
 import butterknife.BindView;
 import butterknife.OnClick;
+
 
 /**
  * Created by datayes on 16/9/13.
@@ -126,7 +128,7 @@ public class SwipeCardActivity extends BaseActivity {
 
     private void initUI() {
 
-        String userName = "哈哈";
+        String userName = CurrentUser.getInstance().getAccountInfo().getUserName();
 
         restaurantId = getIntent().getStringExtra(RESTAURANT_ID_KEY);
 
