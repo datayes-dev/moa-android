@@ -2,9 +2,13 @@ package com.datayes.dyoa.module.code.activity;
 
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.os.Build;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.view.View;
+import android.widget.Toast;
 
+import com.datayes.baseapp.tools.DYToast;
 import com.datayes.dyoa.R;
 import com.datayes.dyoa.common.base.BaseActivity;
 import com.datayes.dyoa.common.network.BaseService;
@@ -15,8 +19,12 @@ import com.datayes.dyoa.module.swipecard.activity.TradeHistoryActivity;
 import com.datayes.dyoa.module.swipecard.manager.SwipeManager;
 import com.datayes.dyoa.module.swipecard.service.SwipeService;
 import com.datayes.dyoa.module.user.RestaurantManager;
+import com.datayes.dyoa.utils.PermissionConstant;
+import com.datayes.dyoa.utils.PermissionManager;
 import com.uuzuche.lib_zxing.activity.CaptureFragment;
 import com.uuzuche.lib_zxing.activity.CodeUtils;
+
+import java.util.List;
 
 import butterknife.BindView;
 
@@ -53,6 +61,13 @@ public class ScanCodeActivity extends BaseActivity implements CodeUtils.AnalyzeC
         });
 
         getSupportFragmentManager().beginTransaction().replace(R.id.fl_code_container, mCaptureFragment).commit();
+
+        // 检查运行时权限，如果是Android M以下直接调用
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            checkCameraPermission();
+        } else {
+            // TODO
+        }
     }
 
     @Override
@@ -102,4 +117,53 @@ public class ScanCodeActivity extends BaseActivity implements CodeUtils.AnalyzeC
             mSwipeService = new SwipeService();
         return mSwipeService;
     }
+
+    /**
+     * 检查拍照运行时权限 暂未使用
+     */
+    private void checkCameraPermission() {
+        if (PermissionManager.hasPermissions(this, PermissionConstant.CAMERA_PERMISSIONS)) {
+            // 已有拍照权限
+            // TODO
+        } else {
+            PermissionManager.requestPermissions(this, permissionListener,
+                    "请求使用拍照权限", PermissionConstant.CAMERA_PERMISSIONS);
+        }
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        PermissionManager.onRequestPermissionsResult(this, permissionListener, requestCode, permissions, grantResults);
+    }
+
+    /**
+     * Runtime Permission
+     */
+    private final PermissionManager.PermissionListener permissionListener = new PermissionManager.PermissionListener() {
+
+        @Override
+        public void onPermissionsGranted(List<String> perms) {
+            if (perms.size() == PermissionConstant.CAMERA_PERMISSIONS.length) {
+                // 拍照授权成功
+                // TODO
+            } else {
+                // 授权失败
+                DYToast.show(ScanCodeActivity.this, "授权失败！", Toast.LENGTH_SHORT);
+            }
+        }
+
+        @Override
+        public void onPermissionsDenied(List<String> perms) {
+            // 授权失败
+            DYToast.show(ScanCodeActivity.this, "没有权限！请前往系统设置手动赋予权限", Toast.LENGTH_SHORT);
+        }
+
+        @Override
+        public void onPermissionRequestRejected() {
+            // 授权失败
+            DYToast.show(ScanCodeActivity.this, "用户拒绝授予权限！", Toast.LENGTH_SHORT);
+        }
+
+    };
 }
