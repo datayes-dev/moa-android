@@ -35,6 +35,7 @@ import com.datayes.dyoa.common.network.bean.BaseResponseBean;
 import com.datayes.dyoa.common.network.error.SafeGrardException;
 import com.datayes.dyoa.common.network.manager.token.NetAccessTockenManager;
 
+import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.lang.reflect.Field;
@@ -84,8 +85,13 @@ public class JsonRequestManager extends BaseRequestManager {
                                 bean = beanClass.newInstance();
                             }
 
-                            JSONObject json = new JSONObject(resultJson);
-                            bean.parseJsonObject(json);
+                            if (resultJson.startsWith("{")) {
+                                JSONObject json = new JSONObject(resultJson);
+                                bean.parseJsonObject(json);
+                            }else if (resultJson.startsWith("["))  {
+                                JSONArray jsonArray = new JSONArray(resultJson);
+                                bean.parseJsonArray(jsonArray);
+                            }
 
                             String subUrl = call.request().url().url().getPath();
                             String operateType = subUrl.replace(type.getUrl(), "");
