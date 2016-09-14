@@ -79,7 +79,9 @@ public class SwipeCardActivity extends BaseActivity {
     @Override
     public void onErrorResponse(String operationType, Throwable throwable, String tag) {
         hideLoading();
-        if (operationType != null) {
+        if (operationType.equals("/transaction")) {//执行交易
+
+            DYToast.makeText(this, "error错误", Toast.LENGTH_LONG).show();
 
         }
     }
@@ -93,8 +95,11 @@ public class SwipeCardActivity extends BaseActivity {
             compareRestaurantName();
 
         } else if (operationType.equals("/transaction")) {//执行交易
-
-            jumpNextPage();
+            if (code == 200) {
+                jumpNextPage();
+            } else {
+                DYToast.makeText(this, "发送失败" + code, Toast.LENGTH_LONG).show();
+            }
 
         }
     }
@@ -231,7 +236,7 @@ public class SwipeCardActivity extends BaseActivity {
             }
         } else if (moneyStr.length() <= 0) {
             DYToast.makeText(this, "请输入金额", Toast.LENGTH_LONG).show();
-        }else {
+        } else {
             showLoading();
             mSwipeManager.sendUserTradeMessage(this, this, moneyStr, restaurantId, "");
         }
@@ -244,6 +249,7 @@ public class SwipeCardActivity extends BaseActivity {
         intent.putExtra(SwipeSuccessActivity.SHOP_NAME_KEY, shopName);
         intent.putExtra(SwipeSuccessActivity.MONEY_VALUE_KEY, mEvMoney.getText().toString());
         startActivity(intent);
+        finish();
     }
 
 

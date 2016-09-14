@@ -71,13 +71,23 @@ public class ScanCodeActivity extends BaseActivity implements CodeUtils.AnalyzeC
         } else {
             initCode();
         }
+
+
     }
 
     private void initCode() {
-        mCaptureFragment = new CaptureFragment();
-        CodeUtils.setFragmentArgs(mCaptureFragment, R.layout.layout_camera);
-        mCaptureFragment.setAnalyzeCallback(this);
-        getSupportFragmentManager().beginTransaction().replace(R.id.fl_code_container, mCaptureFragment).commit();
+
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        if (mCaptureFragment == null) {
+            mCaptureFragment = new CaptureFragment();
+            CodeUtils.setFragmentArgs(mCaptureFragment, R.layout.layout_camera);
+            mCaptureFragment.setAnalyzeCallback(this);
+            getSupportFragmentManager().beginTransaction().replace(R.id.fl_code_container, mCaptureFragment).commit();
+        }
     }
 
     @Override
