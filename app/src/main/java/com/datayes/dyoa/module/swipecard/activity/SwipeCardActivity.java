@@ -57,12 +57,13 @@ public class SwipeCardActivity extends BaseActivity {
 
     public static final int PONTINT_LENGTH = 2;
 
+    private static final String UNKNOW_SHOP = "未知商家";
     Pattern p = Pattern.compile("[0-9]*");   //除数字外的其他的
 
 
     private SwipeManager mSwipeManager;
     private SwipeService mSwipeService;
-    String shopName;
+    String shopName = UNKNOW_SHOP;
     String restaurantId;
 
     @Override
@@ -141,7 +142,8 @@ public class SwipeCardActivity extends BaseActivity {
 
         restaurantId = getIntent().getStringExtra(RESTAURANT_ID_KEY);
 
-        if (restaurantId == null) {
+        if (restaurantId == null || restaurantId.length() <= 0) {
+            DYToast.makeText(this, getString(R.string.error_no_Id), Toast.LENGTH_LONG).show();
             finish();
         } else {
             if (RestaurantManager.getInstance().getRestaurantListBean() == null) {
@@ -192,20 +194,24 @@ public class SwipeCardActivity extends BaseActivity {
 
     @OnClick(R.id.btn_pay)
     public void onClick() {
-        String moneyStr = mEvMoney.getText().toString();
-        if (shopName == null || shopName.length() <= 0) {
+
+        if (shopName == null || shopName.length() <= 0 || shopName.equals(UNKNOW_SHOP)) {
             DYToast.makeText(this, getString(R.string.error_no_name), Toast.LENGTH_LONG).show();
             if (RestaurantManager.getInstance().getRestaurantListBean() == null) {
                 showLoading();
                 mSwipeManager.getRestaurantList(this, this);
             }
-        } else if (moneyStr.length() <= 0) {
-            DYToast.makeText(this, getString(R.string.error_input), Toast.LENGTH_LONG).show();
-        } else {
-            showLoading();
-            mSwipeManager.sendUserTradeMessage(this, this, moneyStr, restaurantId, "");
+            return;
         }
 
+        String moneyStr = mEvMoney.getText().toString();
+        if (moneyStr.length() <= 0) {
+            DYToast.makeText(this, getString(R.string.error_input), Toast.LENGTH_LONG).show();
+            return;
+        }
+
+        showLoading();
+        mSwipeManager.sendUserTradeMessage(this, this, moneyStr, restaurantId, "");
     }
 
 

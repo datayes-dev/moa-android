@@ -86,5 +86,6 @@
     <string name="error_600">支付失败，您今天金额或次数已超过限制</string>
     <string name="error">支付失败，请稍后再试</string>
     <string name="error_no_name">未获取商家名称</string>
+    <string name="error_no_Id">未获取商家ID</string>
     <string name="error_input">请输入金额</string>
 </resources>
