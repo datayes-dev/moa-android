@@ -55,7 +55,10 @@
                 irr:left_btn_bg="@mipmap/loginpassword"
                 irr:length="20"
                 irr:nomal_bg="@null"
-                irr:right_btn_bg="@mipmap/eyeclose2x"
+                irr:right_btn="@drawable/eyeclose2x"
+                irr:right_btn_padding_right="10dp"
+                irr:right_btn_width="30dp"
+                irr:right_btn_height="30dp"
                 irr:select_bg="@null"
                 irr:text_color="@color/color_B4"
                 irr:text_padding_left="10dp" />
