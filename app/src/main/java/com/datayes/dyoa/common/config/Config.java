@@ -151,4 +151,16 @@ public class Config {
             return productBaseUrl;
         return qaBaseUrl;
     }
+
+    // 获取用户头像的URL
+    private static final String USER_LOGIN_STG = "https://file.wmcloud-stg.com/v1/AUTH_datayes/";
+    private static final String USER_LOGIN_ICON = "https://static.wmcloud.com/v1/AUTH_datayes/";
+
+    public String getUserloginUrl() {
+        if (type.equals("1"))
+            return USER_LOGIN_ICON;
+        else if (type.equals("2"))
+            return USER_LOGIN_STG;
+        return USER_LOGIN_ICON;
+    }
 }
