@@ -11,13 +11,10 @@ import android.widget.Toast;
 import com.datayes.baseapp.tools.DYToast;
 import com.datayes.dyoa.R;
 import com.datayes.dyoa.common.base.BaseActivity;
-import com.datayes.dyoa.common.network.BaseService;
 import com.datayes.dyoa.common.networkstatus.NetworkState;
 import com.datayes.dyoa.common.view.CTitle;
 import com.datayes.dyoa.module.swipecard.activity.SwipeCardActivity;
 import com.datayes.dyoa.module.swipecard.activity.TradeHistoryActivity;
-import com.datayes.dyoa.module.swipecard.manager.SwipeManager;
-import com.datayes.dyoa.module.swipecard.service.SwipeService;
 import com.datayes.dyoa.module.user.RestaurantManager;
 import com.datayes.dyoa.utils.PermissionConstant;
 import com.datayes.dyoa.utils.PermissionManager;
@@ -37,8 +34,6 @@ public class ScanCodeActivity extends BaseActivity implements CodeUtils.AnalyzeC
     @BindView(R.id.ct_title)
     CTitle mTitle;
 
-    private SwipeManager mSwipeManager;
-    private SwipeService mSwipeService;
 
     private CaptureFragment mCaptureFragment;
 
@@ -46,8 +41,7 @@ public class ScanCodeActivity extends BaseActivity implements CodeUtils.AnalyzeC
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        mSwipeManager = new SwipeManager();
-        mSwipeManager.getRestaurantList(this, this);
+        RestaurantManager.getInstance().sendFetchRestaurantRequest();
 
         mTitle.setRightBtnText(getString(R.string.trade_history_title));
         mTitle.setLeftBtnClick(new View.OnClickListener() {
@@ -119,25 +113,6 @@ public class ScanCodeActivity extends BaseActivity implements CodeUtils.AnalyzeC
 
     }
 
-    @Override
-    public void onErrorResponse(String operationType, Throwable throwable, String tag) {
-
-    }
-
-    @Override
-    public void networkFinished(String operationType, BaseService service, int code, String tag) {
-
-        if (operationType.equals("/restaurant") && mSwipeService.getRestaurantListBean() != null) {
-            RestaurantManager.getInstance().setRestaurantListBean(mSwipeService.getRestaurantListBean());
-        }
-    }
-
-    @Override
-    public BaseService initService() {
-        if (mSwipeService == null)
-            mSwipeService = new SwipeService();
-        return mSwipeService;
-    }
 
     /**
      * 检查拍照运行时权限 暂未使用

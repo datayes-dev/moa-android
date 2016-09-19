@@ -20,6 +20,7 @@ import com.datayes.dyoa.module.code.activity.ScanCodeActivity;
 import com.datayes.dyoa.module.login.activity.LoginActivity;
 import com.datayes.dyoa.module.swipecard.activity.TradeHistoryActivity;
 import com.datayes.dyoa.module.user.CurrentUser;
+import com.datayes.dyoa.module.user.RestaurantManager;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -46,7 +47,7 @@ public class MineActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mCtTitle.getLeftBtn().setVisibility(View.INVISIBLE);
-
+        RestaurantManager.getInstance().sendFetchRestaurantRequest();
     }
 
     @Override

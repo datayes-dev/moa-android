@@ -66,7 +66,7 @@ public class SwipeSuccessActivity extends BaseActivity {
         String shopName = getIntent().getStringExtra(SHOP_NAME_KEY);
         String money = getIntent().getStringExtra(MONEY_VALUE_KEY);
 
-        SimpleDateFormat sDateFormat = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+        SimpleDateFormat sDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         String nowDate = sDateFormat.format(new java.util.Date());
 
         String date = nowDate;
