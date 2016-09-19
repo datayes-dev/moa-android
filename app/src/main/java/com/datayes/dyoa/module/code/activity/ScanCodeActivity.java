@@ -49,7 +49,7 @@ public class ScanCodeActivity extends BaseActivity implements CodeUtils.AnalyzeC
         mSwipeManager = new SwipeManager();
         mSwipeManager.getRestaurantList(this, this);
 
-        mTitle.setRightBtnText("交易记录");
+        mTitle.setRightBtnText(getString(R.string.trade_history_title));
         mTitle.setLeftBtnClick(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -148,7 +148,7 @@ public class ScanCodeActivity extends BaseActivity implements CodeUtils.AnalyzeC
             initCode();
         } else {
             PermissionManager.requestPermissions(this, permissionListener,
-                    "通联订餐 请求使用拍照权限", PermissionConstant.CAMERA_PERMISSIONS);
+                    getString(R.string.request_camera_permission_tip), PermissionConstant.CAMERA_PERMISSIONS);
         }
     }
 
@@ -170,20 +170,20 @@ public class ScanCodeActivity extends BaseActivity implements CodeUtils.AnalyzeC
                 initCode();
             } else {
                 // 授权失败
-                DYToast.show(ScanCodeActivity.this, "授权失败！", Toast.LENGTH_SHORT);
+                DYToast.show(ScanCodeActivity.this, getString(R.string.grant_failed), Toast.LENGTH_SHORT);
             }
         }
 
         @Override
         public void onPermissionsDenied(List<String> perms) {
             // 授权失败
-            DYToast.show(ScanCodeActivity.this, "用户拒绝授予权限！", Toast.LENGTH_SHORT);
+            DYToast.show(ScanCodeActivity.this, getString(R.string.permission_denied), Toast.LENGTH_SHORT);
         }
 
         @Override
         public void onPermissionRequestRejected() {
             // 授权失败
-            DYToast.show(ScanCodeActivity.this, "用户拒绝授予权限！", Toast.LENGTH_SHORT);
+            DYToast.show(ScanCodeActivity.this, getString(R.string.permission_denied), Toast.LENGTH_SHORT);
         }
 
     };

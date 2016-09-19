@@ -241,8 +241,7 @@ public class LoginActivity extends BaseActivity {
         switch (v.getId()) {
 
             case R.id.forgetPwdTxt://忘记密码
-                Intent intent = new Intent(this, ResetPasswordActivity.class);
-                startActivityForResult(intent, REQUEST_CODE_RESET_PWD);
+
                 break;
 
             case R.id.loginBtn:
@@ -320,7 +319,6 @@ public class LoginActivity extends BaseActivity {
                 if (resultInfo == null || !resultInfo.equals(Constant.SUCCESS)) {
                     // 刷新验证码
                     refreshCaptchaImage();
-                    return;
                 }
 
                 if (resultInfo.equals(Constant.SUCCESS)) {

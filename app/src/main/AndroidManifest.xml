@@ -23,6 +23,7 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <!-- 闪屏页 -->
         <activity
             android:name=".module.login.activity.SplashActivity"
             android:configChanges="screenSize|orientation|keyboardHidden"
@@ -34,22 +35,23 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".module.MainActivity"></activity>
-        <activity android:name=".module.login.activity.LoginActivity">
-
-        </activity>
-        <activity android:name=".module.swipecard.activity.SwipeCardActivity"></activity>
+        <!-- 登录界面 -->
+        <activity
+            android:name=".module.login.activity.LoginActivity"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".module.swipecard.activity.SwipeCardActivity"
+            android:screenOrientation="portrait" />
         <!-- 扫描二维码Activity -->
         <activity
             android:name=".module.code.activity.ScanCodeActivity"
+            android:launchMode="singleTop"
             android:screenOrientation="portrait" />
-        <!-- 重置密码 -->
-        <activity
-            android:name=".module.login.activity.ResetPasswordActivity"
-            android:screenOrientation="portrait" />
-        <!-- 我的 -->
+        <!-- 我的界面 -->
         <activity
             android:name=".module.user.activity.MineActivity"
+            android:launchMode="singleTop"
             android:screenOrientation="portrait" />
         <activity
             android:name=".module.swipecard.activity.SwipeSuccessActivity"
