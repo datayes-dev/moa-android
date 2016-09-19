@@ -28,16 +28,18 @@ import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.drawable.Drawable;
 import android.util.AttributeSet;
+import android.util.TypedValue;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.datayes.dyoa.App;
 import com.datayes.dyoa.R;
 
 /**
  * "我的"页面--单个cell封装
- * <p/>
+ * <p>
  * Created by hongfei.tao on 2016/7/19 17:37.
  */
 public class MineItemView extends RelativeLayout {
@@ -71,6 +73,7 @@ public class MineItemView extends RelativeLayout {
         Drawable itemRightImage = typedArray.getDrawable(R.styleable.MineItemView_itemRightImg);
         boolean imgShow = typedArray.getBoolean(R.styleable.MineItemView_imgVisable, true);
         boolean otherTextShow = typedArray.getBoolean(R.styleable.MineItemView_otherTextVisable, false);
+        float textSize = typedArray.getDimensionPixelSize(R.styleable.MineItemView_itemTextSize, 16);
 
         typedArray.recycle();
 
@@ -96,6 +99,7 @@ public class MineItemView extends RelativeLayout {
 
         mItemRightImg.setVisibility(imgShow ? VISIBLE : GONE);
         mItemOtherText.setVisibility(otherTextShow ? VISIBLE : GONE);
+        mItemText.setTextSize(textSize);
     }
 
     private void initView() {
@@ -118,5 +122,9 @@ public class MineItemView extends RelativeLayout {
 
     public void hideRedDot() {
         mDotView.setVisibility(GONE);
+    }
+
+    private int sp2px(int sp) {
+        return (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_SP, sp, App.getInstance().getSreenMetrics());
     }
 }

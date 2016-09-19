@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
                 android:layout_width="match_parent"
-                android:layout_height="44dp"
+                android:layout_height="50dp"
                 android:background="@drawable/selector_menu_item_bg">
 
     <ImageView
         android:id="@+id/iv_item_icon"
-        android:layout_width="18dp"
-        android:layout_height="18dp"
+        android:layout_width="22dp"
+        android:layout_height="22dp"
         android:layout_centerVertical="true"
-        android:layout_marginLeft="13dp" />
+        android:layout_marginLeft="15dp" />
 
     <TextView
         android:id="@+id/tv_item_text"
