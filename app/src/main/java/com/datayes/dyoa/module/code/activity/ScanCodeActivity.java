@@ -101,6 +101,7 @@ public class ScanCodeActivity extends BaseActivity implements CodeUtils.AnalyzeC
         Intent intent = new Intent(this, SwipeCardActivity.class);
         intent.putExtra(SwipeCardActivity.RESTAURANT_ID_KEY, result);
         startActivity(intent);
+        finish();
 
     }
 

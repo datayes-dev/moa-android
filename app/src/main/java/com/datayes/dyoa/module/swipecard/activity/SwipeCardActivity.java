@@ -81,7 +81,10 @@ public class SwipeCardActivity extends BaseActivity {
         hideLoading();
         if (operationType.equals("/transaction")) {//执行交易
 
-            DYToast.makeText(this, "error错误", Toast.LENGTH_LONG).show();
+            if (throwable.getMessage().equals("600"))
+                DYToast.makeText(this, getString(R.string.error_600), Toast.LENGTH_LONG).show();
+            else
+                DYToast.makeText(this, getString(R.string.error), Toast.LENGTH_LONG).show();
 
         }
     }
@@ -95,7 +98,7 @@ public class SwipeCardActivity extends BaseActivity {
             compareRestaurantName();
 
         } else if (operationType.equals("/transaction")) {//执行交易
-                 jumpNextPage();
+            jumpNextPage();
 
         }
     }
@@ -139,6 +142,7 @@ public class SwipeCardActivity extends BaseActivity {
             finish();
         } else {
             if (RestaurantManager.getInstance().getRestaurantListBean() == null) {
+                showLoading();
                 mSwipeManager.getRestaurantList(this, this);
             } else {
                 compareRestaurantName();
@@ -152,7 +156,7 @@ public class SwipeCardActivity extends BaseActivity {
                 finish();
             }
         });
-        mCtTitle.setRightBtnText("交易记录");
+        mCtTitle.setRightBtnText(getString(R.string.trade_history_title));
         mCtTitle.setrightFenGeClick(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -226,12 +230,13 @@ public class SwipeCardActivity extends BaseActivity {
 
         String moneyStr = mEvMoney.getText().toString();
         if (shopName == null || shopName.length() <= 0) {
-            DYToast.makeText(this, "未获取商家名称", Toast.LENGTH_LONG).show();
+            DYToast.makeText(this, getString(R.string.error_no_name), Toast.LENGTH_LONG).show();
             if (RestaurantManager.getInstance().getRestaurantListBean() == null) {
+                showLoading();
                 mSwipeManager.getRestaurantList(this, this);
             }
         } else if (moneyStr.length() <= 0) {
-            DYToast.makeText(this, "请输入金额", Toast.LENGTH_LONG).show();
+            DYToast.makeText(this,getString(R.string.error_input), Toast.LENGTH_LONG).show();
         } else {
             showLoading();
             mSwipeManager.sendUserTradeMessage(this, this, moneyStr, restaurantId, "");

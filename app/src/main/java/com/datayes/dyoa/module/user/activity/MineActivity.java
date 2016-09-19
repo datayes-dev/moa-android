@@ -39,8 +39,13 @@ public class MineActivity extends BaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         mCtTitle.getLeftBtn().setVisibility(View.INVISIBLE);
+
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
         if (CurrentUser.getInstance().isLogin()) {
             AccountBean accountInfo = CurrentUser.getInstance().getAccountInfo();
             if (accountInfo != null) {
