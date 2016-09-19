@@ -45,4 +45,8 @@ public class Constant {
      * 验证码错误  invalid credential
      */
     public static final String INVALID_CREDENTIAL = "invalid credential";
+    /**
+     * 服务端错误
+     */
+    public static final String BAD_REQUEST = "bad request";
 }

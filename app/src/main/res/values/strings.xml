@@ -60,6 +60,20 @@
     <string name="user_send_code_response_31">旧密码错误</string>
     <string name="user_send_code_response_38">之前未输入图片验证码</string>
 
+    <!-- 网络状态 -->
+    <string name="default_state">默认状态</string>
+    <string name="NoConnectionError">网络暂时无法访问</string>
+    <string name="ServerError">服务器正忙，请稍后再试</string>
+    <string name="ParseError">解析错误，请稍后再试</string>
+    <string name="TimeoutError">请求超时，请稍后再试</string>
+    <string name="network_problem">网络不给力，请重试</string>
+    <string name="loading_failed_and_try_again">加载失败，请重试</string>
+    <string name="loading_again">重新加载</string>
+    <string name="sorry_and_no_related_content">抱歉，暂无相关内容</string>
+    <string name="request_fail">请求失败</string>
+    <string name="loading">加载中…</string>
+    <string name="operate_failed">操作失败</string>
+
     <!-- 我的 -->
     <string name="mine">我的</string>
 
