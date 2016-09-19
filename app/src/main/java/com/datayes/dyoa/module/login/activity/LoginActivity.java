@@ -320,7 +320,6 @@ public class LoginActivity extends BaseActivity {
                 if (resultInfo == null || !resultInfo.equals(Constant.SUCCESS)) {
                     // 刷新验证码
                     refreshCaptchaImage();
-                    return;
                 }
 
                 if (resultInfo.equals(Constant.SUCCESS)) {
