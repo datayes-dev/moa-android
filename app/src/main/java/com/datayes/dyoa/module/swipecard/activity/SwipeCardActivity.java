@@ -139,6 +139,7 @@ public class SwipeCardActivity extends BaseActivity {
     private void initUI() {
 
         String userName = CurrentUser.getInstance().getAccountInfo().getUserName();
+        mTvShopName.setText(shopName);
 
         restaurantId = getIntent().getStringExtra(RESTAURANT_ID_KEY);
 

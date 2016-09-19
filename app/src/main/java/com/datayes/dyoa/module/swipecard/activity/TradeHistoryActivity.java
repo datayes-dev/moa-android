@@ -3,7 +3,9 @@ package com.datayes.dyoa.module.swipecard.activity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ListView;
+import android.widget.Toast;
 
+import com.datayes.baseapp.tools.DYToast;
 import com.datayes.dyoa.R;
 import com.datayes.dyoa.common.base.BaseActivity;
 import com.datayes.dyoa.common.network.BaseService;
@@ -43,6 +45,8 @@ public class TradeHistoryActivity extends BaseActivity {
     @Override
     public void onErrorResponse(String operationType, Throwable throwable, String tag) {
         hideLoading();
+        DYToast.makeText(this, getString(R.string.NoConnectionError), Toast.LENGTH_LONG).show();
+
     }
 
     @Override
