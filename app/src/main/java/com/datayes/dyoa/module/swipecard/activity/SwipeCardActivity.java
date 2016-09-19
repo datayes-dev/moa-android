@@ -81,7 +81,10 @@ public class SwipeCardActivity extends BaseActivity {
         hideLoading();
         if (operationType.equals("/transaction")) {//执行交易
 
-            DYToast.makeText(this, "error错误", Toast.LENGTH_LONG).show();
+            if (tag.equals("600"))
+                DYToast.makeText(this, "支付失败，您今天金额或次数已超过限制", Toast.LENGTH_LONG).show();
+            else
+                DYToast.makeText(this, "支付失败，请稍后再试", Toast.LENGTH_LONG).show();
 
         }
     }
@@ -95,7 +98,7 @@ public class SwipeCardActivity extends BaseActivity {
             compareRestaurantName();
 
         } else if (operationType.equals("/transaction")) {//执行交易
-                 jumpNextPage();
+            jumpNextPage();
 
         }
     }
