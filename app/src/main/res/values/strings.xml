@@ -32,7 +32,7 @@
     <string name="my_forget_pwd">忘记密码</string>
     <string name="my_login_user_hit_3">手机号</string>
     <string name="my_login_user_hit">请输入手机号</string>
-    <string name="my_login_user_hit_2">请输入手机号/用户名</string>
+    <string name="my_login_user_hit_2">请输入用户名</string>
     <string name="my_login_user_hit_4">用户名</string>
     <string name="my_login_pwd_hit">请输入密码</string>
     <string name="my_login_pwd_hit_1">密码</string>
@@ -67,4 +67,10 @@
     <string name="request_camera_permission_tip">通联订餐 请求使用拍照权限</string>
     <string name="grant_failed">授权失败！</string>
     <string name="permission_denied">用户拒绝授予权限！</string>
+
+    <!-- 交易 -->
+    <string name="error_600">支付失败，您今天金额或次数已超过限制</string>
+    <string name="error">支付失败，请稍后再试</string>
+    <string name="error_no_name">未获取商家名称</string>
+    <string name="error_input">请输入金额</string>
 </resources>

@@ -136,12 +136,12 @@ public class LoginActivity extends BaseActivity {
                         if (mPwd.getEditText().getInputType() == CEditText.MyInputType.visible_password.getType()) {
 
                             mPwd.setInputType(CEditText.MyInputType.textPassword.getTypeName());
-                            rightBtn.setBackgroundResource(R.mipmap.eyeclose2x);
+                            rightBtn.setBackgroundResource(R.drawable.eyeclose2x);
 
                         } else {
 
                             mPwd.setInputType(CEditText.MyInputType.visible_password.getTypeName());
-                            rightBtn.setBackgroundResource(R.mipmap.eyeopen2x);
+                            rightBtn.setBackgroundResource(R.drawable.eyeopen2x);
                         }
                     }
                 }

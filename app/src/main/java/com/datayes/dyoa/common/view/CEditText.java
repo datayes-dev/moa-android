@@ -198,13 +198,15 @@ public class CEditText extends RelativeLayout {
         float right_btn_width = typedArray.getDimension(R.styleable.custom_right_btn_width, 0);
 
         if (right_btn_width > 0) {
-            rightBtn.setWidth((int) right_btn_width);
+            rightBtn.getLayoutParams().width = (int) right_btn_width;
+            rightBtn.setLayoutParams(rightBtn.getLayoutParams());
         }
 
         float right_btn_height = typedArray.getDimension(R.styleable.custom_right_btn_height, 0);
 
         if (right_btn_height > 0) {
-            rightBtn.setHeight((int) right_btn_height);
+            rightBtn.getLayoutParams().height = (int) right_btn_height;
+            rightBtn.setLayoutParams(rightBtn.getLayoutParams());
         }
 
         float right_btn_padding_left = typedArray.getDimension(R.styleable.custom_right_btn_padding_left, 0);
@@ -654,9 +656,9 @@ public class CEditText extends RelativeLayout {
     public void setInputType(String type) {
         getEditText().setInputType(MyInputType.valueOf(type).getType());
         if (type.equals("visible_password"))
-            rightIamge.setBackgroundResource(R.mipmap.eyeopen2x);
+            rightIamge.setBackgroundResource(R.drawable.eyeopen2x);
         if (type.equals("textPassword"))
-            rightIamge.setBackgroundResource(R.mipmap.eyeclose2x);
+            rightIamge.setBackgroundResource(R.drawable.eyeclose2x);
         setEndtion(getEditText().getText().toString());
     }
 
