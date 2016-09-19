@@ -147,7 +147,7 @@ public class ScanCodeActivity extends BaseActivity implements CodeUtils.AnalyzeC
             initCode();
         } else {
             PermissionManager.requestPermissions(this, permissionListener,
-                    "请求使用拍照权限", PermissionConstant.CAMERA_PERMISSIONS);
+                    "通联订餐 请求使用拍照权限", PermissionConstant.CAMERA_PERMISSIONS);
         }
     }
 
@@ -176,7 +176,7 @@ public class ScanCodeActivity extends BaseActivity implements CodeUtils.AnalyzeC
         @Override
         public void onPermissionsDenied(List<String> perms) {
             // 授权失败
-            DYToast.show(ScanCodeActivity.this, "没有权限！请前往系统设置手动赋予权限", Toast.LENGTH_SHORT);
+            DYToast.show(ScanCodeActivity.this, "用户拒绝授予权限！", Toast.LENGTH_SHORT);
         }
 
         @Override
