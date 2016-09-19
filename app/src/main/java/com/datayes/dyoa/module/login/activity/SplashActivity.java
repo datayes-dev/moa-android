@@ -2,6 +2,7 @@ package com.datayes.dyoa.module.login.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 
 import com.datayes.dyoa.R;
 import com.datayes.dyoa.common.base.BaseActivity;
@@ -11,7 +12,9 @@ import com.datayes.dyoa.module.user.activity.MineActivity;
 
 public class SplashActivity extends BaseActivity {
 
-    private static final int sleepTime = 2000;
+    private static final int TIME_DELAY = 2000;
+
+    private Handler mHandler = new Handler();
 
     @Override
     protected int getLayoutId() {
@@ -28,24 +31,18 @@ public class SplashActivity extends BaseActivity {
     protected void onStart() {
         super.onStart();
 
-        new Thread(new Runnable() {
+        mHandler.postDelayed(new Runnable() {
+            @Override
             public void run() {
-                if (!CurrentUser.getInstance().isLogin()) {
-                    //不存在token，登录
-                    try {
-                        Thread.sleep(sleepTime);
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
-                    }
-                    startActivity(new Intent(SplashActivity.this, LoginActivity.class));
-                    finish();
-                } else {
-                    //存在token，免登录
+                if (CurrentUser.getInstance().isLogin()) {
                     startActivity(new Intent(SplashActivity.this, MineActivity.class));
-                    finish();
+                } else {
+                    startActivity(new Intent(SplashActivity.this, LoginActivity.class));
                 }
+                finish();
             }
-        }).start();
+        }, TIME_DELAY);
+
     }
 
     @Override

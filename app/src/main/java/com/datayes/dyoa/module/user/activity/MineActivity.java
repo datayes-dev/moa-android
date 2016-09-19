@@ -126,7 +126,7 @@ public class MineActivity extends BaseActivity {
                 break;
 
             case R.id.miv_logout://退出登录
-                CurrentUser.getInstance().clearUserInfo();
+                CurrentUser.sharedInstance().clearUserInfo();
                 startActivity(new Intent(this, LoginActivity.class));
                 finish();
                 break;
