@@ -4,7 +4,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.datayes.baseapp.tools.DYToast;
 import com.datayes.dyoa.R;
@@ -42,18 +41,27 @@ public class MineActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
 
         mCtTitle.getLeftBtn().setVisibility(View.INVISIBLE);
-        if (CurrentUser.getInstance().getAccountInfo() == null) {
-            CurrentUser.getInstance().refreshAccountInfo(new CurrentUser.onRefreshAccountInfo() {
-                @Override
-                public void onRefreshed(AccountBean accountInfo) {
-                    mUsername.setText(accountInfo.getUserName());
-                }
+        if (CurrentUser.getInstance().isLogin()) {
+            AccountBean accountInfo = CurrentUser.getInstance().getAccountInfo();
+            if (accountInfo != null) {
+                mUsername.setText(accountInfo.getUserName());
+            } else {
+                CurrentUser.getInstance().refreshAccountInfo(new CurrentUser.onRefreshAccountInfo() {
+                    @Override
+                    public void onRefreshed(AccountBean accountInfo) {
+                        mUsername.setText(accountInfo.getUserName());
+                    }
 
-                @Override
-                public void onError() {
-                    DYToast.show(MineActivity.this, R.string.user_send_login_response_9, Toast.LENGTH_SHORT);
-                }
-            });
+                    @Override
+                    public void onError() {
+                        DYToast.showShort(MineActivity.this, R.string.user_send_login_response_9);
+                        startActivity(new Intent(MineActivity.this, LoginActivity.class));
+                        finish();
+                    }
+                });
+            }
+        } else {
+
         }
     }
 
