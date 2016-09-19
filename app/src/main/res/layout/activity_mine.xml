@@ -9,7 +9,7 @@
         android:id="@+id/ct_title"
         android:layout_width="match_parent"
         android:layout_height="48dp"
-        app:titleValue="@string/mine" />
+        app:titleValue="@string/pay_title" />
 
     <ScrollView
         android:layout_width="match_parent"

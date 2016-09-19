@@ -174,52 +174,52 @@ public class SwipeCardActivity extends BaseActivity {
                         if (dest.length() <= 0 && source.equals("0"))
                             return "";
 
-                        String oldtext = dest.toString();
-
+//                        String oldtext = dest.toString();
+//
                         //验证删除等按键
                         if ("".equals(source.toString())) {
                             return null;
                         }
+                        return dest.subSequence(dstart, dend) + source.toString();
 
                         //验证非数字或者小数点的情况
-                        Matcher m = p.matcher(source);
-                        if (oldtext.contains(".")) {
-                            //已经存在小数点的情况下，只能输入数字
-                            if (!m.matches()) {
-                                return null;
-                            }
-                        } else {
-                            //未输入小数点的情况下，可以输入小数点和数字
-                            if (!m.matches() && !source.equals(".")) {
-                                return null;
-                            }
-                        }
+//                        Matcher m = p.matcher(source);
+//                        if (oldtext.contains(".")) {
+//                            //已经存在小数点的情况下，只能输入数字
+//                            if (!m.matches()) {
+//                                return null;
+//                            }
+//                        } else {
+//                            //未输入小数点的情况下，可以输入小数点和数字
+//                            if (!m.matches() && !source.equals(".")) {
+//                                return null;
+//                            }
+//                        }
 
-                        if (!source.toString().equals("")) {
-                            double dold = Double.parseDouble(oldtext + source.toString());
-                            if (dold > MAX_VALUE) {
-                                return dest.subSequence(dstart, dend);
-                            } else if (dold == MAX_VALUE) {
-                                if (source.toString().equals(".")) {
-                                    return dest.subSequence(dstart, dend);
-                                }
+//                        if (!source.toString().equals("")) {
+//                            double dold = Double.parseDouble(oldtext + source.toString());
+//                            if (dold > MAX_VALUE) {
+//                                return dest.subSequence(dstart, dend);
+//                            } else if (dold == MAX_VALUE) {
+//                                if (source.toString().equals(".")) {
+//                                    return dest.subSequence(dstart, dend);
+//                                }
+//
+//                            }
+//
+//                        }
 
-                            }
-
-                        }
-
-                        if (oldtext.contains(".")) {
-                            int index = oldtext.indexOf(".");
-                            int len = dend - index;
-
-                            if (len > PONTINT_LENGTH) {
-                                CharSequence newText = dest.subSequence(dstart, dend);
-                                return newText;
-                            }
-                        }
-                        return dest.subSequence(dstart, dend) + source.toString();
+//                        if (oldtext.contains(".")) {
+//                            int index = oldtext.indexOf(".");
+//                            int len = dend - index;
+//
+//                            if (len > PONTINT_LENGTH) {
+//                                CharSequence newText = dest.subSequence(dstart, dend);
+//                                return newText;
+//                            }
+//                        }
                     }
-                }
+                },new InputFilter.LengthFilter(3)
         });
 
     }

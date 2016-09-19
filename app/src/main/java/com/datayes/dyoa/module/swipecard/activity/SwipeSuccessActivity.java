@@ -10,6 +10,8 @@ import com.datayes.dyoa.common.base.BaseActivity;
 import com.datayes.dyoa.common.networkstatus.NetworkState;
 import com.datayes.dyoa.common.view.CTitle;
 
+import java.text.SimpleDateFormat;
+
 import butterknife.BindView;
 import butterknife.OnClick;
 
@@ -63,7 +65,11 @@ public class SwipeSuccessActivity extends BaseActivity {
 
         String shopName = getIntent().getStringExtra(SHOP_NAME_KEY);
         String money = getIntent().getStringExtra(MONEY_VALUE_KEY);
-        String date = getIntent().getStringExtra(TRADE_DATE_KEY);
+
+        SimpleDateFormat sDateFormat = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+        String nowDate = sDateFormat.format(new java.util.Date());
+
+        String date = nowDate;
 
         mTvMoney.setText(money);
         mTvShopName.setText(shopName);
