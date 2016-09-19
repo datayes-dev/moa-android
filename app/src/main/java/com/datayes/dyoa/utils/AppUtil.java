@@ -15,7 +15,7 @@ public class AppUtil {
     /**
      * 输入文本的正则过滤，字母、数字、符号
      */
-    public static final String REG_EX_INPUT_STRING = "[^a-zA-Z0-9`~!@#$^&*()=|{}':;',\\[\\].<>/?~！@#￥……&*（）——|{}【】‘；：”“'。，、？]";
+    public static final String REG_EX_INPUT_STRING = "[^a-zA-Z0-9`~!@#$^&*()=|{}':;',\\[\\].<>/?~！@#￥……&*（）——|{}【】‘；：”“'。，、？+-]";
 
 
     /**
