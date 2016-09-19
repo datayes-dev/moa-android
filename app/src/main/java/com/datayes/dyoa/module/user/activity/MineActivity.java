@@ -18,6 +18,7 @@ import com.datayes.dyoa.common.view.CircleImageView;
 import com.datayes.dyoa.common.view.MineItemView;
 import com.datayes.dyoa.module.code.activity.ScanCodeActivity;
 import com.datayes.dyoa.module.login.activity.LoginActivity;
+import com.datayes.dyoa.module.swipecard.activity.TradeHistoryActivity;
 import com.datayes.dyoa.module.user.CurrentUser;
 
 import butterknife.BindView;
@@ -38,6 +39,8 @@ public class MineActivity extends BaseActivity {
     TextView mUsername;
     @BindView(R.id.iv_user_icon)
     CircleImageView mUserIcon;
+    @BindView(R.id.miv_history)
+    MineItemView mMivHistory;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -74,6 +77,7 @@ public class MineActivity extends BaseActivity {
 
                                 DYImageLoader.getInstance().displayAvatar(Config.getConfig().getUserloginUrl() + imageId, mUserIcon);
                             }
+
                         } else {
                             DYToast.showShort(MineActivity.this, R.string.user_send_login_response_9);
                             startActivity(new Intent(MineActivity.this, LoginActivity.class));
@@ -110,14 +114,19 @@ public class MineActivity extends BaseActivity {
 
     }
 
-    @OnClick({R.id.miv_scan_code, R.id.miv_logout})
+    @OnClick({R.id.miv_scan_code, R.id.miv_logout,R.id.miv_history})
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.miv_scan_code://扫描二维码
                 startActivity(new Intent(this, ScanCodeActivity.class));
                 break;
+            case R.id.miv_history://交易记录
+                Intent intent = new Intent(MineActivity.this, TradeHistoryActivity.class);
+                startActivity(intent);
+                break;
+
             case R.id.miv_logout://退出登录
-                CurrentUser.getInstance().clearUserInfo();
+                CurrentUser.sharedInstance().clearUserInfo();
                 startActivity(new Intent(this, LoginActivity.class));
                 finish();
                 break;

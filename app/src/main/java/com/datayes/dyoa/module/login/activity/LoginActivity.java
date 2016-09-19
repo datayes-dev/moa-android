@@ -37,8 +37,6 @@ import butterknife.OnClick;
 
 public class LoginActivity extends BaseActivity {
 
-    public static final int REQUEST_CODE_RESET_PWD = 100;
-
     @BindView(R.id.ct_title)
     CTitle cTitle;
     @BindView(R.id.userTxt)

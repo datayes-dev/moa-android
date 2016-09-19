@@ -66,6 +66,18 @@
 
             <View
                 android:layout_width="match_parent"
+                android:layout_height="1px"
+                android:background="@color/border_color" />
+
+            <com.datayes.dyoa.common.view.MineItemView
+                android:id="@+id/miv_history"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:itemIcon="@mipmap/trade"
+                app:itemText="交易记录" />
+
+            <View
+                android:layout_width="match_parent"
                 android:layout_height="10dp"
                 android:background="@color/color_H1" />
 
