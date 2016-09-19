@@ -62,4 +62,9 @@
 
     <!-- 我的 -->
     <string name="mine">我的</string>
+
+    <!-- 扫码 -->
+    <string name="request_camera_permission_tip">通联订餐 请求使用拍照权限</string>
+    <string name="grant_failed">授权失败！</string>
+    <string name="permission_denied">用户拒绝授予权限！</string>
 </resources>

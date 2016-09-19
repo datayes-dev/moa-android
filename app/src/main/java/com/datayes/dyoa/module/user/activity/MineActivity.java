@@ -54,7 +54,13 @@ public class MineActivity extends BaseActivity {
                 CurrentUser.getInstance().refreshAccountInfo(new CurrentUser.onRefreshAccountInfo() {
                     @Override
                     public void onRefreshed(AccountBean accountInfo) {
-                        mUsername.setText(accountInfo.getUserName());
+                        if (accountInfo != null) {
+                            mUsername.setText(accountInfo.getUserName());
+                        }else {
+                            DYToast.showShort(MineActivity.this, R.string.user_send_login_response_9);
+                            startActivity(new Intent(MineActivity.this, LoginActivity.class));
+                            finish();
+                        }
                     }
 
                     @Override
