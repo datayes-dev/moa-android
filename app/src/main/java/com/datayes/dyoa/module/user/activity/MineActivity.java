@@ -2,6 +2,7 @@ package com.datayes.dyoa.module.user.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.TextView;
 
@@ -9,6 +10,8 @@ import com.datayes.baseapp.tools.DYToast;
 import com.datayes.dyoa.R;
 import com.datayes.dyoa.bean.user.AccountBean;
 import com.datayes.dyoa.common.base.BaseActivity;
+import com.datayes.dyoa.common.config.Config;
+import com.datayes.dyoa.common.imageloader.DYImageLoader;
 import com.datayes.dyoa.common.networkstatus.NetworkState;
 import com.datayes.dyoa.common.view.CTitle;
 import com.datayes.dyoa.common.view.CircleImageView;
@@ -50,13 +53,28 @@ public class MineActivity extends BaseActivity {
             AccountBean accountInfo = CurrentUser.getInstance().getAccountInfo();
             if (accountInfo != null) {
                 mUsername.setText(accountInfo.getUserName());
+
+                String imageId = String.valueOf(accountInfo.getUser().getImageId());
+
+                if (!TextUtils.isEmpty(imageId)) {
+
+                    DYImageLoader.getInstance().displayAvatar(Config.getConfig().getUserloginUrl() + imageId, mUserIcon);
+                }
             } else {
                 CurrentUser.getInstance().refreshAccountInfo(new CurrentUser.onRefreshAccountInfo() {
                     @Override
                     public void onRefreshed(AccountBean accountInfo) {
-                        if (accountInfo != null) {
+                        if (accountInfo != null && accountInfo.getUser() != null) {
+
                             mUsername.setText(accountInfo.getUserName());
-                        }else {
+
+                            String imageId = String.valueOf(accountInfo.getUser().getImageId());
+
+                            if (!TextUtils.isEmpty(imageId)) {
+
+                                DYImageLoader.getInstance().displayAvatar(Config.getConfig().getUserloginUrl() + imageId, mUserIcon);
+                            }
+                        } else {
                             DYToast.showShort(MineActivity.this, R.string.user_send_login_response_9);
                             startActivity(new Intent(MineActivity.this, LoginActivity.class));
                             finish();
