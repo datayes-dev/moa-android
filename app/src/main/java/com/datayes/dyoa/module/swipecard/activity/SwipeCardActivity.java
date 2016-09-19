@@ -24,7 +24,6 @@ import com.datayes.dyoa.module.user.CurrentUser;
 import com.datayes.dyoa.module.user.RestaurantManager;
 
 import java.util.List;
-import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import butterknife.BindView;
@@ -122,14 +121,18 @@ public class SwipeCardActivity extends BaseActivity {
 
     private void compareRestaurantName() {
 
-        List<RestaurantListBean.RestaurantBean> beanList = RestaurantManager.getInstance().getRestaurantListBean().getRestaurantBeanList();
-        for (RestaurantListBean.RestaurantBean bean : beanList) {
-            if (bean.getId().equals(restaurantId)) {
-                shopName = bean.getName();
-                break;
+        RestaurantListBean listBean = RestaurantManager.getInstance().getRestaurantListBean();
+        if (listBean != null) {
+            List<RestaurantListBean.RestaurantBean> beanList = listBean.getRestaurantBeanList();
+            if (beanList == null) return;
+            for (RestaurantListBean.RestaurantBean bean : beanList) {
+                if (bean.getId().equals(restaurantId)) {
+                    shopName = bean.getName();
+                    break;
+                }
             }
+            mTvShopName.setText(shopName);
         }
-        mTvShopName.setText(shopName);
     }
 
     private void initUI() {
@@ -219,7 +222,7 @@ public class SwipeCardActivity extends BaseActivity {
 //                            }
 //                        }
                     }
-                },new InputFilter.LengthFilter(3)
+                }, new InputFilter.LengthFilter(3)
         });
 
     }
@@ -236,7 +239,7 @@ public class SwipeCardActivity extends BaseActivity {
                 mSwipeManager.getRestaurantList(this, this);
             }
         } else if (moneyStr.length() <= 0) {
-            DYToast.makeText(this,getString(R.string.error_input), Toast.LENGTH_LONG).show();
+            DYToast.makeText(this, getString(R.string.error_input), Toast.LENGTH_LONG).show();
         } else {
             showLoading();
             mSwipeManager.sendUserTradeMessage(this, this, moneyStr, restaurantId, "");
