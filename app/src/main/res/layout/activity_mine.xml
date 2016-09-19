@@ -9,7 +9,7 @@
         android:id="@+id/ct_title"
         android:layout_width="match_parent"
         android:layout_height="48dp"
-        app:titleValue="@string/pay_title" />
+        app:titleValue="@string/app_name" />
 
     <ScrollView
         android:layout_width="match_parent"
@@ -63,7 +63,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 app:itemIcon="@mipmap/qrcode_2"
-                app:itemText="扫描二维码" />
+                app:itemText="@string/pay_title" />
 
             <View
                 android:layout_width="match_parent"

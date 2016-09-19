@@ -19,6 +19,7 @@ import com.datayes.dyoa.common.config.Config;
 import com.datayes.dyoa.common.config.RequestInfo;
 import com.datayes.dyoa.common.imageloader.DYImageLoader;
 import com.datayes.dyoa.common.network.BaseService;
+import com.datayes.dyoa.common.network.error.ServerException;
 import com.datayes.dyoa.common.networkstatus.NetworkState;
 import com.datayes.dyoa.common.view.CEditText;
 import com.datayes.dyoa.common.view.CTitle;
@@ -314,7 +315,7 @@ public class LoginActivity extends BaseActivity {
                 UserLoginBean bean = service_.getLoginBean();
                 String resultInfo = bean.getInfo();
 
-                if (resultInfo == null || !resultInfo.equals(Constant.SUCCESS)) {
+                if (!resultInfo.equals(Constant.SUCCESS)) {
                     // 刷新验证码
                     refreshCaptchaImage();
                 }
@@ -372,6 +373,9 @@ public class LoginActivity extends BaseActivity {
                 } else if (resultInfo.equals(Constant.INVALID_CREDENTIAL)) {
                     // 验证码错误
                     DYToast.makeText(this, R.string.user_send_login_response_8, Toast.LENGTH_SHORT).show();
+                } else if (resultInfo.equals(Constant.BAD_REQUEST)) {
+                    // 服务端错误
+                    this.onErrorResponse("", new ServerException("-500"), tag);
                 }
             }
         }
@@ -379,6 +383,7 @@ public class LoginActivity extends BaseActivity {
 
     @Override
     public void onErrorResponse(String operationType, Throwable throwable, String tag) {
+        super.onErrorResponse(operationType, throwable, tag);
         mIsOnLogin = false;
     }
 }

@@ -1,19 +1,26 @@
 package com.datayes.dyoa.common.base;
 
+import android.content.Context;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.Toast;
 
 import com.datayes.baseapp.base.BaseFragmentActivity;
+import com.datayes.baseapp.tools.DYToast;
 import com.datayes.dyoa.R;
 import com.datayes.dyoa.common.network.BaseService;
 import com.datayes.dyoa.common.network.NetCallBack;
+import com.datayes.dyoa.common.network.error.SafeGrardException;
 import com.datayes.dyoa.common.networkstatus.NetworkState;
 import com.datayes.dyoa.common.networkstatus.NetworkStateManager;
 import com.datayes.dyoa.common.view.CLoading;
+
+import java.net.SocketTimeoutException;
+import java.net.UnknownHostException;
 
 import butterknife.ButterKnife;
 
@@ -126,6 +133,37 @@ public abstract class BaseActivity extends BaseFragmentActivity implements NetCa
     @Override
     public void onErrorResponse(String operationType, Throwable throwable, String tag) {
         hideLoading();
+        networkResponseError(this, throwable);
+    }
+
+    /**
+     * @author shenen.gao
+     *  @brief 网络接口错误统一返回接口
+     *  @param context
+     *  @param volleyError void      
+     *  @throws  
+     * @date 2016-3-29 下午9:15:15
+     *     
+     */
+    public static void networkResponseError(Context context, Throwable throwable) {
+
+        if (context != null && throwable != null) {
+
+            if (throwable instanceof UnknownHostException) {
+
+                DYToast.makeText(context, R.string.NoConnectionError, Toast.LENGTH_SHORT).show();
+
+            } else if (throwable instanceof SocketTimeoutException) {
+
+                DYToast.makeText(context, R.string.TimeoutError, Toast.LENGTH_SHORT).show();
+
+            } else if (throwable instanceof SafeGrardException) {
+
+            } else {
+
+                DYToast.makeText(context, R.string.ServerError, Toast.LENGTH_SHORT).show();
+            }
+        }
     }
 
     @Override
