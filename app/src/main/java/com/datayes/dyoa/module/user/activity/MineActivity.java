@@ -46,7 +46,6 @@ public class MineActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mCtTitle.getLeftBtn().setVisibility(View.INVISIBLE);
-
     }
 
     @Override
@@ -94,7 +93,8 @@ public class MineActivity extends BaseActivity {
                 });
             }
         } else {
-
+            startActivity(new Intent(MineActivity.this, LoginActivity.class));
+            finish();
         }
     }
 
@@ -102,7 +102,6 @@ public class MineActivity extends BaseActivity {
     protected int getLayoutId() {
         return R.layout.activity_mine;
     }
-
 
     @Override
     public void onNetworkStateChanged(NetworkState networkState) {
@@ -114,7 +113,7 @@ public class MineActivity extends BaseActivity {
 
     }
 
-    @OnClick({R.id.miv_scan_code, R.id.miv_logout,R.id.miv_history})
+    @OnClick({R.id.miv_scan_code, R.id.miv_logout, R.id.miv_history})
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.miv_scan_code://扫描二维码
