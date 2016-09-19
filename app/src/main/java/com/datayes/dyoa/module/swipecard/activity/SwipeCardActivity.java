@@ -174,7 +174,7 @@ public class SwipeCardActivity extends BaseActivity {
                     @Override
                     public CharSequence filter(CharSequence source, int start, int end, Spanned dest, int dstart, int dend) {
 
-                        if ((dest.length() <= 0||dstart ==0) && source.equals("0"))
+                        if ((dest.length() <= 0 || dstart == 0) && source.equals("0"))
                             return "";
 
                         //验证删除等按键
