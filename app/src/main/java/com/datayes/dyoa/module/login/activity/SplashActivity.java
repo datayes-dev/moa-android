@@ -31,7 +31,7 @@ public class SplashActivity extends BaseActivity {
     protected void onStart() {
         super.onStart();
 
-        mHandler.postDelayed(new Runnable() {
+        /*mHandler.postDelayed(new Runnable() {
             @Override
             public void run() {
                 if (CurrentUser.getInstance().isLogin()) {
@@ -41,7 +41,13 @@ public class SplashActivity extends BaseActivity {
                 }
                 finish();
             }
-        }, TIME_DELAY);
+        }, TIME_DELAY);*/
+        if (CurrentUser.getInstance().isLogin()) {
+            startActivity(new Intent(SplashActivity.this, MineActivity.class));
+        } else {
+            startActivity(new Intent(SplashActivity.this, LoginActivity.class));
+        }
+        finish();
 
     }
 
