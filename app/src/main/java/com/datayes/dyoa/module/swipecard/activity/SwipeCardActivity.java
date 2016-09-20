@@ -12,6 +12,7 @@ import android.widget.Toast;
 
 
 import com.datayes.baseapp.tools.DYToast;
+import com.datayes.dyoa.App;
 import com.datayes.dyoa.R;
 import com.datayes.dyoa.common.base.BaseActivity;
 import com.datayes.dyoa.common.network.BaseService;
@@ -82,9 +83,9 @@ public class SwipeCardActivity extends BaseActivity {
         if (operationType.equals("/transaction")) {//执行交易
 
             if (throwable.getMessage().equals("600"))
-                DYToast.makeText(this, getString(R.string.error_600), Toast.LENGTH_LONG).show();
+                DYToast.makeText(this, App.getInstance().getString(R.string.error_600), Toast.LENGTH_LONG).show();
             else
-                DYToast.makeText(this, getString(R.string.error), Toast.LENGTH_LONG).show();
+                DYToast.makeText(this, App.getInstance().getString(R.string.error), Toast.LENGTH_LONG).show();
 
         }
     }
