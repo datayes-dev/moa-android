@@ -12,7 +12,7 @@ import com.datayes.dyoa.module.user.activity.MineActivity;
 
 public class SplashActivity extends BaseActivity {
 
-    private static final int TIME_DELAY = 2000;
+    private static final int TIME_DELAY = 200;
 
     private Handler mHandler = new Handler();
 

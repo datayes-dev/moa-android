@@ -28,7 +28,7 @@
             android:name=".module.login.activity.SplashActivity"
             android:configChanges="screenSize|orientation|keyboardHidden"
             android:screenOrientation="portrait"
-            android:theme="@style/AppTheme.FullScreen">
+            android:theme="@android:style/Theme.Translucent.NoTitleBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
