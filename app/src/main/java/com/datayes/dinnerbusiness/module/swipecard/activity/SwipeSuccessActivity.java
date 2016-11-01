@@ -1,8 +1,10 @@
 package com.datayes.dinnerbusiness.module.swipecard.activity;
 
 import android.content.Intent;
+import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.datayes.dinnerbusiness.R;
@@ -11,6 +13,7 @@ import com.datayes.dinnerbusiness.common.networkstatus.NetworkState;
 import com.datayes.dinnerbusiness.common.view.CTitle;
 
 import java.text.SimpleDateFormat;
+import java.util.Date;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -22,7 +25,11 @@ public class SwipeSuccessActivity extends BaseActivity {
 
     public static final String SHOP_NAME_KEY = "shop_name_key";
     public static final String MONEY_VALUE_KEY = "money_value_key";
-    public static final String TRADE_DATE_KEY = "trade_data_key";
+    public static final String INFO_KEY = "info_key";
+    public static final String ERROR_MESSAG = "error_message";
+
+
+    boolean isSuccess;
 
     @BindView(R.id.ct_title)
     CTitle mCtTitle;
@@ -36,6 +43,10 @@ public class SwipeSuccessActivity extends BaseActivity {
     TextView mBtnPay;
     @BindView(R.id.tv_trade_history)
     TextView mTvTradeHistory;
+    @BindView(R.id.tv_message)
+    TextView mTvMessage;
+    @BindView(R.id.img_info)
+    ImageView mImgInfo;
 
     @Override
     protected int getLayoutId() {
@@ -63,17 +74,34 @@ public class SwipeSuccessActivity extends BaseActivity {
 
     private void initUI() {
 
-        String shopName = getIntent().getStringExtra(SHOP_NAME_KEY);
-        String money = getIntent().getStringExtra(MONEY_VALUE_KEY);
+
+        isSuccess = getIntent().getBooleanExtra(INFO_KEY, false);
 
         SimpleDateFormat sDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-        String nowDate = sDateFormat.format(new java.util.Date());
+        String nowDate = sDateFormat.format(new Date());
 
         String date = nowDate;
-
-        mTvMoney.setText(money);
-        mTvShopName.setText(shopName);
         mTvDate.setText(date);
+
+        if (isSuccess == true) {
+
+            mTvMessage.setText("刷卡成功");
+            mImgInfo.setImageResource(R.mipmap.ok_2);
+            mTvTradeHistory.setVisibility(View.VISIBLE);
+            mTvDate.setVisibility(View.VISIBLE);
+
+        } else {
+
+            String errorString = getIntent().getStringExtra(ERROR_MESSAG);
+            if (errorString == null) {
+                errorString = "刷卡失败";
+            }
+            mTvMessage.setText(errorString);
+
+            mImgInfo.setImageResource(R.mipmap.error);
+            mTvTradeHistory.setVisibility(View.GONE);
+            mTvDate.setVisibility(View.INVISIBLE);
+        }
 
         mCtTitle.setLeftBtnClick(new View.OnClickListener() {
             @Override

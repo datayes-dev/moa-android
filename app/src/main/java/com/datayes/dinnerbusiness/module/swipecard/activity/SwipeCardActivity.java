@@ -213,7 +213,7 @@ public class SwipeCardActivity extends BaseActivity {
         }
 
         showLoading();
-        mSwipeManager.sendUserTradeMessage(this, this, moneyStr, restaurantId, "");
+        mSwipeManager.sendUserTradeMessage(this, this, restaurantId);
     }
 
 

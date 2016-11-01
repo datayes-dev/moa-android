@@ -26,6 +26,10 @@ public class CLoading extends RelativeLayout {
 
     private Context context;
 
+    public Boolean getShowing() {
+        return isShowing;
+    }
+
     private Boolean isShowing = false;
 
     private String msg = "";

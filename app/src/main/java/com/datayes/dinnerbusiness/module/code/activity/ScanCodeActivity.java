@@ -9,12 +9,18 @@ import android.view.View;
 import android.widget.Toast;
 
 import com.datayes.baseapp.tools.DYToast;
+import com.datayes.dinnerbusiness.App;
 import com.datayes.dinnerbusiness.R;
 import com.datayes.dinnerbusiness.common.base.BaseActivity;
+import com.datayes.dinnerbusiness.common.network.BaseService;
 import com.datayes.dinnerbusiness.common.networkstatus.NetworkState;
 import com.datayes.dinnerbusiness.common.view.CTitle;
 import com.datayes.dinnerbusiness.module.swipecard.activity.SwipeCardActivity;
+import com.datayes.dinnerbusiness.module.swipecard.activity.SwipeSuccessActivity;
 import com.datayes.dinnerbusiness.module.swipecard.activity.TradeHistoryActivity;
+import com.datayes.dinnerbusiness.module.swipecard.manager.SwipeManager;
+import com.datayes.dinnerbusiness.module.swipecard.service.SwipeService;
+import com.datayes.dinnerbusiness.module.user.RestaurantManager;
 import com.datayes.dinnerbusiness.utils.PermissionConstant;
 import com.datayes.dinnerbusiness.utils.PermissionManager;
 import com.uuzuche.lib_zxing.activity.CaptureFragment;
@@ -36,10 +42,14 @@ public class ScanCodeActivity extends BaseActivity implements CodeUtils.AnalyzeC
 
     private CaptureFragment mCaptureFragment;
 
+    private SwipeManager mSwipeManager;
+    private SwipeService mSwipeService;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        mSwipeManager = new SwipeManager();
 
         mTitle.setRightBtnText(getString(R.string.trade_history_title));
         mTitle.setLeftBtnClick(new View.OnClickListener() {
@@ -74,12 +84,12 @@ public class ScanCodeActivity extends BaseActivity implements CodeUtils.AnalyzeC
     @Override
     protected void onResume() {
         super.onResume();
-        if (mCaptureFragment == null) {
-            mCaptureFragment = new CaptureFragment();
-            CodeUtils.setFragmentArgs(mCaptureFragment, R.layout.layout_camera);
-            mCaptureFragment.setAnalyzeCallback(this);
-            getSupportFragmentManager().beginTransaction().replace(R.id.fl_code_container, mCaptureFragment).commit();
-        }
+
+        mCaptureFragment = new CaptureFragment();
+        CodeUtils.setFragmentArgs(mCaptureFragment, R.layout.layout_camera);
+        mCaptureFragment.setAnalyzeCallback(this);
+        getSupportFragmentManager().beginTransaction().replace(R.id.fl_code_container, mCaptureFragment).commit();
+
     }
 
     @Override
@@ -90,10 +100,16 @@ public class ScanCodeActivity extends BaseActivity implements CodeUtils.AnalyzeC
     @Override
     public void onAnalyzeSuccess(Bitmap mBitmap, String result) {
 
-        Intent intent = new Intent(this, SwipeCardActivity.class);
-        intent.putExtra(SwipeCardActivity.RESTAURANT_ID_KEY, result);
-        startActivity(intent);
-        finish();
+        if (result != null) {
+            mSwipeManager.sendUserTradeMessage(this, this, result);
+        } else {
+
+            Intent intent = new Intent(this, SwipeCardActivity.class);
+            intent.putExtra(CodeUtils.RESULT_TYPE, CodeUtils.RESULT_FAILED);
+            startActivity(intent);
+
+            finish();
+        }
 
     }
 
@@ -160,4 +176,73 @@ public class ScanCodeActivity extends BaseActivity implements CodeUtils.AnalyzeC
         }
 
     };
+
+
+    @Override
+    public void onErrorResponse(String operationType, Throwable throwable, String tag) {
+        hideLoading();
+        if (operationType.equals("/transaction")) {//执行交易
+
+            jumpNextPage(false, throwable.toString());
+
+        }
+    }
+
+    @Override
+    public void networkFinished(String operationType, BaseService service, int code, String tag) {
+        hideLoading();
+        if (operationType.equals("/transaction")) {//执行交易
+
+            if (code >= 0) {
+
+                jumpNextPage(true,null);
+
+            } else if (tag.equals("Quota error")) {
+
+                jumpNextPage(false,tag);
+
+            } else if (tag.equals("Qrcode error")) {
+
+                jumpNextPage(false,tag);
+            }
+
+
+        }
+    }
+
+    @Override
+    public BaseService initService() {
+        if (mSwipeService == null)
+            mSwipeService = new SwipeService();
+        return mSwipeService;
+    }
+
+    private void jumpNextPage(boolean success, String tag) {
+
+
+        Intent intent = new Intent(this, SwipeSuccessActivity.class);
+
+        intent.putExtra(SwipeSuccessActivity.INFO_KEY, success);
+
+        if (success == false) {
+
+            String error ="";
+
+            if (tag.equals("Quota error")) {
+
+                error = "配额用完了";
+
+            } else if (tag.equals("Qrcode error")) {
+
+                error = "二维码不正确";
+            } else {
+                error = tag;
+            }
+            intent.putExtra(SwipeSuccessActivity.ERROR_MESSAG, error);
+        }
+        startActivity(intent);
+
+    }
+
+
 }

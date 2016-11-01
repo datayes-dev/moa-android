@@ -164,9 +164,10 @@ public interface AppService {
      * @author hongfei.tao
      * @time create at 2016/9/13 14:04
      */
-    @GET("{subServer}/transaction-user")
+    @POST("{subServer}/transaction-restaurant")
     Call<String> getPersonalDeals(
-            @Path(value = "subServer", encoded = true) String subServer
+            @Path(value = "subServer", encoded = true) String subServer,
+            @Body RequestBody body
     );
 
 }

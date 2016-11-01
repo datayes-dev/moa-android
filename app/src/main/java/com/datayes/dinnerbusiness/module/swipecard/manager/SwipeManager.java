@@ -1,10 +1,13 @@
 package com.datayes.dinnerbusiness.module.swipecard.manager;
 
+import com.datayes.dinnerbusiness.bean.user.AccountBean;
 import com.datayes.dinnerbusiness.common.config.Config;
 import com.datayes.dinnerbusiness.common.network.NetCallBack;
 import com.datayes.dinnerbusiness.common.network.bean.RestaurantListBean;
 import com.datayes.dinnerbusiness.common.network.bean.TransactionListBean;
 import com.datayes.dinnerbusiness.common.network.manager.base.JsonRequestManager;
+import com.datayes.dinnerbusiness.module.login.manager.UserManager;
+import com.datayes.dinnerbusiness.module.user.CurrentUser;
 import com.google.gson.JsonObject;
 
 import okhttp3.MediaType;
@@ -40,14 +43,12 @@ public class SwipeManager extends JsonRequestManager {
      */
     public void sendUserTradeMessage(NetCallBack netCallBack,
                                      NetCallBack.InitService baseService,
-                                     String price,
-                                     String restaurant,
-                                     String memo) {
+                                     String qrstring) {
 
         JsonObject jsonObject = new JsonObject();
-        jsonObject.addProperty("price", price);
-        jsonObject.addProperty("restaurant", restaurant);
-        jsonObject.addProperty("memo", memo);
+        jsonObject.addProperty("qrstring", qrstring);
+        jsonObject.addProperty("restaurant", "e91feed4-9f38-11e6-9bc5-0242ac110003RES_");
+        jsonObject.addProperty("memo", "");
 
         RequestBody body = RequestBody.create(MediaType.parse("application/json; charset=UTF-8"), jsonObject.toString());
 
@@ -66,12 +67,33 @@ public class SwipeManager extends JsonRequestManager {
      * @time create at 16/9/13
      */
     public void getTransactionHistoryList(NetCallBack netCallBack,
-                                          NetCallBack.InitService baseService) {
-        start(netCallBack,
-                baseService,
-                getInstance().getPersonalDeals(Config.ConfigUrlType.ORDER.getUrl()),
-                Config.ConfigUrlType.ORDER,
-                TransactionListBean.class);
+                                          NetCallBack.InitService baseService,
+                                          String begin,
+                                          String end) {
+
+        if (CurrentUser.getInstance().getAccountInfo() != null) {
+
+            AccountBean bean = CurrentUser.getInstance().getAccountInfo();
+
+            if (bean.getActivieAccount() != null) {
+
+                JsonObject jsonObject = new JsonObject();
+                jsonObject.addProperty("begin", begin);
+                jsonObject.addProperty("end", end);
+
+                jsonObject.addProperty("admin", bean.getActivieAccount().getPrincipalName());
+
+                RequestBody body = RequestBody.create(MediaType.parse("application/json; charset=UTF-8"), jsonObject.toString());
+
+                start(netCallBack,
+                        baseService,
+                        getInstance().getPersonalDeals(Config.ConfigUrlType.ORDER.getUrl(), body),
+                        Config.ConfigUrlType.ORDER,
+                        TransactionListBean.class);
+            }
+        }
+
+
     }
 
 }

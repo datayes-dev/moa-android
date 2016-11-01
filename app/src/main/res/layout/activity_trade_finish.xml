@@ -21,6 +21,7 @@
 
 
         <ImageView
+            android:id="@+id/img_info"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
@@ -28,6 +29,7 @@
             android:src="@mipmap/ok_2" />
 
         <TextView
+            android:id="@+id/tv_message"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
@@ -41,7 +43,8 @@
             android:layout_width="match_parent"
             android:layout_height="40dp"
             android:layout_marginTop="40dp"
-            android:gravity="center_vertical">
+            android:gravity="center_vertical"
+            android:visibility="visible">
 
             <TextView
                 android:id="@+id/tv_shop_name"
@@ -51,7 +54,6 @@
                 android:layout_weight="1.4"
                 android:ellipsize="end"
                 android:singleLine="true"
-                android:text="大家乐"
                 android:textAppearance="@style/font_T8"
                 android:textColor="@color/color_H9" />
 
@@ -62,7 +64,6 @@
                 android:layout_marginRight="30dp"
                 android:layout_weight="1"
                 android:gravity="right"
-                android:text="20"
                 android:textAppearance="@style/font_T9"
                 android:textColor="@color/color_H9" />
         </LinearLayout>
@@ -72,16 +73,16 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"
-            android:text="2016年7月21日"
             android:textAppearance="@style/font_T4"
-            android:textColor="@color/color_H7" />
+            android:textColor="@color/color_H7"
+             />
 
 
         <TextView
             android:id="@+id/btn_pay"
             android:layout_width="match_parent"
             android:layout_height="45dp"
-            android:layout_marginTop="50dp"
+            android:layout_marginTop="30dp"
             android:background="@drawable/orangebg_cycle_border"
             android:gravity="center"
             android:text="@string/finish_key"
@@ -91,7 +92,7 @@
         <TextView
             android:id="@+id/tv_trade_history"
             android:layout_width="match_parent"
-            android:layout_height="30dp"
+            android:layout_height="40dp"
             android:layout_marginTop="10dp"
             android:gravity="center"
             android:text="@string/trade_history"
