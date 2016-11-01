@@ -1,4 +1,4 @@
-package com.datayes.dyoa.module.swipecard.service;
+package com.datayes.dinnercustom.swipecard.service;
 
 import com.datayes.dyoa.common.network.BaseService;
 import com.datayes.dyoa.common.network.bean.RestaurantListBean;

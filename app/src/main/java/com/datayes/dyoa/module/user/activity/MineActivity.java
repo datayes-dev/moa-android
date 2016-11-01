@@ -7,7 +7,8 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.datayes.baseapp.tools.DYToast;
-import com.datayes.dyoa.R;
+import com.datayes.dinnercustom.R;
+import com.datayes.dinnercustom.swipecard.activity.UserQRCodeActivity;
 import com.datayes.dyoa.bean.user.AccountBean;
 import com.datayes.dyoa.common.base.BaseActivity;
 import com.datayes.dyoa.common.config.Config;
@@ -18,9 +19,9 @@ import com.datayes.dyoa.common.view.CircleImageView;
 import com.datayes.dyoa.common.view.MineItemView;
 import com.datayes.dyoa.module.code.activity.ScanCodeActivity;
 import com.datayes.dyoa.module.login.activity.LoginActivity;
-import com.datayes.dyoa.module.swipecard.activity.TradeHistoryActivity;
+import com.datayes.dinnercustom.swipecard.activity.TradeHistoryActivity;
 import com.datayes.dyoa.module.user.CurrentUser;
-import com.datayes.dyoa.module.user.RestaurantManager;
+import com.datayes.dinnercustom.swipecard.manager.RestaurantManager;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -40,8 +41,8 @@ public class MineActivity extends BaseActivity {
     TextView mUsername;
     @BindView(R.id.iv_user_icon)
     CircleImageView mUserIcon;
-    @BindView(R.id.miv_history)
-    MineItemView mMivHistory;
+//    @BindView(R.id.miv_history)
+//    MineItemView mMivHistory;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -116,16 +117,16 @@ public class MineActivity extends BaseActivity {
 
     }
 
-    @OnClick({R.id.miv_scan_code, R.id.miv_logout, R.id.miv_history})
+    @OnClick({R.id.miv_scan_code, R.id.miv_logout})
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.miv_scan_code://扫描二维码
-                startActivity(new Intent(this, ScanCodeActivity.class));
+                startActivity(new Intent(this, UserQRCodeActivity.class));
                 break;
-            case R.id.miv_history://交易记录
-                Intent intent = new Intent(MineActivity.this, TradeHistoryActivity.class);
-                startActivity(intent);
-                break;
+//            case R.id.miv_history://交易记录
+//                Intent intent = new Intent(MineActivity.this, TradeHistoryActivity.class);
+//                startActivity(intent);
+//                break;
 
             case R.id.miv_logout://退出登录
                 CurrentUser.sharedInstance().clearUserInfo();

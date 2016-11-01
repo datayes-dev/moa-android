@@ -37,7 +37,7 @@ import android.widget.Button;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.datayes.dyoa.R;
+import com.datayes.dinnercustom.R;
 
 import java.io.IOException;
 

@@ -27,7 +27,7 @@ package com.datayes.dyoa.common.sharedpreferences;
 
 import android.content.SharedPreferences;
 
-import com.datayes.dyoa.App;
+import com.datayes.dinnercustom.App;
 import com.datayes.dyoa.bean.user.UserLoginBean;
 import com.google.gson.Gson;
 

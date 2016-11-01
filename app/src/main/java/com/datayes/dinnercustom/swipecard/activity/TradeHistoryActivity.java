@@ -1,4 +1,4 @@
-package com.datayes.dyoa.module.swipecard.activity;
+package com.datayes.dinnercustom.swipecard.activity;
 
 import android.os.Bundle;
 import android.view.View;
@@ -6,15 +6,15 @@ import android.widget.ListView;
 import android.widget.Toast;
 
 import com.datayes.baseapp.tools.DYToast;
-import com.datayes.dyoa.App;
-import com.datayes.dyoa.R;
+import com.datayes.dinnercustom.App;
+import com.datayes.dinnercustom.swipecard.adapter.TradeHistoryAdapter;
+import com.datayes.dinnercustom.R;
 import com.datayes.dyoa.common.base.BaseActivity;
 import com.datayes.dyoa.common.network.BaseService;
 import com.datayes.dyoa.common.networkstatus.NetworkState;
 import com.datayes.dyoa.common.view.CTitle;
-import com.datayes.dyoa.module.swipecard.adapter.TradeHistoryAdapter;
-import com.datayes.dyoa.module.swipecard.manager.SwipeManager;
-import com.datayes.dyoa.module.swipecard.service.SwipeService;
+import com.datayes.dinnercustom.swipecard.manager.SwipeManager;
+import com.datayes.dinnercustom.swipecard.service.SwipeService;
 
 import butterknife.BindView;
 

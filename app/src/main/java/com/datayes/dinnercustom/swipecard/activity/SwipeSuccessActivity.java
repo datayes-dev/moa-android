@@ -1,11 +1,11 @@
-package com.datayes.dyoa.module.swipecard.activity;
+package com.datayes.dinnercustom.swipecard.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
 
-import com.datayes.dyoa.R;
+import com.datayes.dinnercustom.R;
 import com.datayes.dyoa.common.base.BaseActivity;
 import com.datayes.dyoa.common.networkstatus.NetworkState;
 import com.datayes.dyoa.common.view.CTitle;

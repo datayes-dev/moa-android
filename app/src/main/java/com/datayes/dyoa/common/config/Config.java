@@ -29,7 +29,7 @@ import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.PackageManager.NameNotFoundException;
 
-import com.datayes.dyoa.App;
+import com.datayes.dinnercustom.App;
 
 
 public class Config {

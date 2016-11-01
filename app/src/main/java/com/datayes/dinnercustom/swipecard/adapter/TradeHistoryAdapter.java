@@ -1,4 +1,4 @@
-package com.datayes.dyoa.module.swipecard.adapter;
+package com.datayes.dinnercustom.swipecard.adapter;
 
 
 import android.content.Context;
@@ -6,7 +6,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.datayes.dyoa.R;
+import com.datayes.dinnercustom.R;
 import com.datayes.dyoa.common.network.bean.TransactionListBean;
 import com.datayes.dyoa.common.view.ArrayListAdapter;
 

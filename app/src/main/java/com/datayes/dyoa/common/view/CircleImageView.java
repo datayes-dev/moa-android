@@ -16,7 +16,7 @@ import android.graphics.drawable.Drawable;
 import android.util.AttributeSet;
 import android.widget.ImageView;
 
-import com.datayes.dyoa.R;
+import com.datayes.dinnercustom.R;
 
 /**
  * Created by hongfei.tao on 2016/9/14 17:16.

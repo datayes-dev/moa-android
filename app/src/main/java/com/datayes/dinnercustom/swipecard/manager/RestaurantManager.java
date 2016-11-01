@@ -1,10 +1,9 @@
-package com.datayes.dyoa.module.user;
+package com.datayes.dinnercustom.swipecard.manager;
 
 import com.datayes.dyoa.common.network.BaseService;
 import com.datayes.dyoa.common.network.NetCallBack;
 import com.datayes.dyoa.common.network.bean.RestaurantListBean;
-import com.datayes.dyoa.module.swipecard.manager.SwipeManager;
-import com.datayes.dyoa.module.swipecard.service.SwipeService;
+import com.datayes.dinnercustom.swipecard.service.SwipeService;
 
 /**
  * Created by datayes on 16/9/14.

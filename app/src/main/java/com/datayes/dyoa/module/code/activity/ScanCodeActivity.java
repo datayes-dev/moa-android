@@ -9,13 +9,13 @@ import android.view.View;
 import android.widget.Toast;
 
 import com.datayes.baseapp.tools.DYToast;
-import com.datayes.dyoa.R;
+import com.datayes.dinnercustom.R;
 import com.datayes.dyoa.common.base.BaseActivity;
 import com.datayes.dyoa.common.networkstatus.NetworkState;
 import com.datayes.dyoa.common.view.CTitle;
-import com.datayes.dyoa.module.swipecard.activity.SwipeCardActivity;
-import com.datayes.dyoa.module.swipecard.activity.TradeHistoryActivity;
-import com.datayes.dyoa.module.user.RestaurantManager;
+import com.datayes.dinnercustom.swipecard.activity.SwipeCardActivity;
+import com.datayes.dinnercustom.swipecard.activity.TradeHistoryActivity;
+import com.datayes.dinnercustom.swipecard.manager.RestaurantManager;
 import com.datayes.dyoa.utils.PermissionConstant;
 import com.datayes.dyoa.utils.PermissionManager;
 import com.uuzuche.lib_zxing.activity.CaptureFragment;

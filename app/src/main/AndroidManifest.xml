@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-          package="com.datayes.dyoa">
+          package="com.datayes.dinnercustom">
 
     <!-- 屏幕适配 -->
     <supports-screens
@@ -25,7 +25,7 @@
         android:theme="@style/AppTheme">
         <!-- 闪屏页 -->
         <activity
-            android:name=".module.login.activity.SplashActivity"
+            android:name="com.datayes.dyoa.module.login.activity.SplashActivity"
             android:configChanges="screenSize|orientation|keyboardHidden"
             android:screenOrientation="portrait"
             android:theme="@android:style/Theme.Translucent.NoTitleBar">
@@ -37,27 +37,33 @@
         </activity>
         <!-- 登录界面 -->
         <activity
-            android:name=".module.login.activity.LoginActivity"
+            android:name="com.datayes.dyoa.module.login.activity.LoginActivity"
             android:launchMode="singleTop"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".module.swipecard.activity.SwipeCardActivity"
+            android:name=".swipecard.activity.SwipeCardActivity"
             android:screenOrientation="portrait" />
         <!-- 扫描二维码Activity -->
         <activity
-            android:name=".module.code.activity.ScanCodeActivity"
+            android:name="com.datayes.dyoa.module.code.activity.ScanCodeActivity"
             android:launchMode="singleTop"
             android:screenOrientation="portrait" />
+        <!-- 用户二维码Activity -->
+        <activity
+            android:name=".swipecard.activity.UserQRCodeActivity"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait" />
+
         <!-- 我的界面 -->
         <activity
-            android:name=".module.user.activity.MineActivity"
+            android:name="com.datayes.dyoa.module.user.activity.MineActivity"
             android:launchMode="singleTop"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".module.swipecard.activity.SwipeSuccessActivity"
+            android:name=".swipecard.activity.SwipeSuccessActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".module.swipecard.activity.TradeHistoryActivity"
+            android:name=".swipecard.activity.TradeHistoryActivity"
             android:screenOrientation="portrait" />
         <!-- <activity -->
         <!-- android:name=".module.swipecard.activity.SwipeCardActivity" -->

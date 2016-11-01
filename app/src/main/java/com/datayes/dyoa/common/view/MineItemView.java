@@ -34,8 +34,8 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.datayes.dyoa.App;
-import com.datayes.dyoa.R;
+import com.datayes.dinnercustom.App;
+import com.datayes.dinnercustom.R;
 
 /**
  * "我的"页面--单个cell封装

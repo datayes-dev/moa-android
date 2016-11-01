@@ -11,7 +11,7 @@ import android.view.ViewGroup;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.datayes.dyoa.R;
+import com.datayes.dinnercustom.R;
 
 /**
  * Created by nianyi.yang on 2016/9/14.

@@ -39,6 +39,8 @@ public enum RequestInfo {
 
     CAPTCHA_IMAGE("/captcha.json", "获取手机验证码图片"),
 
+    DINNER_USER_QR_CODE("/qrcode/user", "用户用餐扫码二维码"),
+
     IDENTITY("/identity.json","获取身份信息");
 
     private String operationType;

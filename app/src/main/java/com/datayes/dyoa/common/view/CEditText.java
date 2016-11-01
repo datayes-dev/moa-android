@@ -49,7 +49,7 @@ import android.widget.TextView;
 import android.widget.TextView.OnEditorActionListener;
 
 import com.datayes.baseapp.utils.StringUtil;
-import com.datayes.dyoa.R;
+import com.datayes.dinnercustom.R;
 
 import java.io.UnsupportedEncodingException;
 import java.util.regex.Matcher;

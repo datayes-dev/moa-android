@@ -26,7 +26,7 @@ import android.graphics.Bitmap;
 import android.widget.ImageView;
 
 import com.datayes.baseapp.tools.DYLog;
-import com.datayes.dyoa.App;
+import com.datayes.dinnercustom.App;
 import com.datayes.dyoa.module.user.CurrentUser;
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;

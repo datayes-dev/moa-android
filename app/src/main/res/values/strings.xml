@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">吃饭去</string>
+    <string name="app_name">通联用餐</string>
 
     <string name="worker_name">员工姓名</string>
     <string name="shop_name">商家</string>
@@ -10,8 +10,9 @@
     <string name="swipe_card_success">刷卡成功</string>
     <string name="trade_history">查看交易记录</string>
 
-    <string name="pay_title">用餐刷卡</string>
+    <string name="pay_title">用餐二维码</string>
     <string name="trade_history_title">交易记录</string>
+    <string name="refresh">刷新</string>
 
     <!-- 登录 -->
     <string name="user_send_login_response_0">登录成功</string>

@@ -27,7 +27,7 @@ import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.telephony.TelephonyManager;
 
-import com.datayes.dyoa.App;
+import com.datayes.dinnercustom.App;
 
 
 /**

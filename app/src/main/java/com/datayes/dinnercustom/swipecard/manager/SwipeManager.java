@@ -1,4 +1,4 @@
-package com.datayes.dyoa.module.swipecard.manager;
+package com.datayes.dinnercustom.swipecard.manager;
 
 import com.datayes.dyoa.common.config.Config;
 import com.datayes.dyoa.common.network.NetCallBack;
