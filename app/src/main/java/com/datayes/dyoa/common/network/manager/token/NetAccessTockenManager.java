@@ -26,6 +26,7 @@
 package com.datayes.dyoa.common.network.manager.token;
 
 import com.datayes.baseapp.tools.DYLog;
+import com.datayes.baseapp.utils.TimeUtil;
 import com.datayes.dyoa.bean.user.UserLoginBean;
 import com.datayes.dyoa.common.config.Config;
 import com.datayes.dyoa.module.user.CurrentUser;
@@ -161,14 +162,19 @@ public enum NetAccessTockenManager {
         DYLog.d(Tag, "清空缓存");
     }
 
+    //TODO 为了避免死循环，在这里添加时间限制
+    private static long mTimestamp = 0;
+
     /**
      * 刷新refreshTocken
      */
     protected void refreshAccessTocken() {
 
-        if (CurrentUser.getInstance().isLogin()) {
+        if (CurrentUser.getInstance().isLogin() && (System.currentTimeMillis() - mTimestamp) > TimeUtil.ONE_MILLION_SECOND * 60) {
 
             DYLog.d(Tag, "开始刷新token");
+
+            mTimestamp = System.currentTimeMillis();
 
             Callback callback = new Callback<String>() {
                 @Override
@@ -186,7 +192,8 @@ public enum NetAccessTockenManager {
 
                             if ((bean.getCode() == -120)) {
 
-                                enqueueCaches();
+                                CurrentUser.getInstance().clearUserInfo();
+                                clearCaches();
                                 DYLog.d(Tag, "刷新token失败，APP登出");
 
                             } else if (bean.getCode() > 0) {
