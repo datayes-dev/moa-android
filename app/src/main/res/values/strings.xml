@@ -10,7 +10,7 @@
     <string name="swipe_card_success">刷卡成功</string>
     <string name="trade_history">查看交易记录</string>
 
-    <string name="pay_title">用餐刷卡</string>
+    <string name="pay_title">商家扫描</string>
     <string name="trade_history_title">交易记录</string>
 
     <!-- 登录 -->

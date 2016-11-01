@@ -31,7 +31,7 @@
         android:textColor="@color/color_W1"
         android:visibility="gone" />
 
-    <com.datayes.dyoa.common.view.CMarqueeText
+    <com.datayes.dinnerbusiness.common.view.CMarqueeText
         android:id="@+id/titleTxt"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

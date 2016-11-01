@@ -7,7 +7,7 @@
     android:fitsSystemWindows="true"
     android:orientation="vertical">
 
-    <com.datayes.dyoa.common.view.CTitle
+    <com.datayes.dinnerbusiness.common.view.CTitle
         android:id="@+id/ct_title"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
