@@ -9,22 +9,24 @@ import android.view.View;
 import android.widget.Toast;
 
 import com.datayes.baseapp.tools.DYToast;
-import com.datayes.dinnerbusiness.App;
 import com.datayes.dinnerbusiness.R;
 import com.datayes.dinnerbusiness.common.base.BaseActivity;
 import com.datayes.dinnerbusiness.common.network.BaseService;
 import com.datayes.dinnerbusiness.common.networkstatus.NetworkState;
 import com.datayes.dinnerbusiness.common.view.CTitle;
-import com.datayes.dinnerbusiness.module.swipecard.activity.SwipeCardActivity;
+import com.datayes.dinnerbusiness.module.login.activity.LoginActivity;
 import com.datayes.dinnerbusiness.module.swipecard.activity.SwipeSuccessActivity;
 import com.datayes.dinnerbusiness.module.swipecard.activity.TradeHistoryActivity;
 import com.datayes.dinnerbusiness.module.swipecard.manager.SwipeManager;
 import com.datayes.dinnerbusiness.module.swipecard.service.SwipeService;
-import com.datayes.dinnerbusiness.module.user.RestaurantManager;
+import com.datayes.dinnerbusiness.module.user.CurrentUser;
+import com.datayes.dinnerbusiness.module.user.activity.MineActivity;
 import com.datayes.dinnerbusiness.utils.PermissionConstant;
 import com.datayes.dinnerbusiness.utils.PermissionManager;
 import com.uuzuche.lib_zxing.activity.CaptureFragment;
 import com.uuzuche.lib_zxing.activity.CodeUtils;
+
+import org.json.JSONObject;
 
 import java.util.List;
 
@@ -101,25 +103,30 @@ public class ScanCodeActivity extends BaseActivity implements CodeUtils.AnalyzeC
     public void onAnalyzeSuccess(Bitmap mBitmap, String result) {
 
         if (result != null) {
-            mSwipeManager.sendUserTradeMessage(this, this, result);
+            if (!CurrentUser.getInstance().isLogin()) {
+
+                Intent intent = new Intent(ScanCodeActivity.this, LoginActivity.class);
+                startActivity(intent);
+                finish();
+
+            } else {
+
+                mSwipeManager.sendUserTradeMessage(this, this, result);
+            }
+
         } else {
 
-            Intent intent = new Intent(this, SwipeCardActivity.class);
-            intent.putExtra(CodeUtils.RESULT_TYPE, CodeUtils.RESULT_FAILED);
-            startActivity(intent);
+            jumpNextPage(false, "扫描失败");
 
-            finish();
         }
 
     }
 
     @Override
     public void onAnalyzeFailed() {
-        Intent intent = new Intent(this, SwipeCardActivity.class);
-        intent.putExtra(CodeUtils.RESULT_TYPE, CodeUtils.RESULT_FAILED);
-        startActivity(intent);
 
-        finish();
+        jumpNextPage(false, "扫描失败");
+
     }
 
     @Override
@@ -193,17 +200,33 @@ public class ScanCodeActivity extends BaseActivity implements CodeUtils.AnalyzeC
         hideLoading();
         if (operationType.equals("/transaction")) {//执行交易
 
-            if (code >= 0) {
+            if (mSwipeService != null) {
 
-                jumpNextPage(true,null);
+                if (mSwipeService.getTranResultBean() != null) {
 
-            } else if (tag.equals("Quota error")) {
+                    if (("Quota error").equals(mSwipeService.getTranResultBean().getInfo())) {
 
-                jumpNextPage(false,tag);
+                        jumpNextPage(false, tag);
 
-            } else if (tag.equals("Qrcode error")) {
+                    } else if (("Qrcode error").equals(mSwipeService.getTranResultBean().getInfo())) {
 
-                jumpNextPage(false,tag);
+                        jumpNextPage(false, tag);
+                    } else {
+                        JSONObject object = mSwipeService.getTranResultBean().jsonObj;
+                        try {
+                            String resultStr = object.getString("result");
+                            if ("success".equals(resultStr)) {
+                                jumpNextPage(true, null);
+                            }
+                        } catch (Exception ex) {
+                            jumpNextPage(false, "交易失败");
+                        }
+                    }
+
+
+                }
+
+
             }
 
 
@@ -212,8 +235,8 @@ public class ScanCodeActivity extends BaseActivity implements CodeUtils.AnalyzeC
 
     @Override
     public BaseService initService() {
-        if (mSwipeService == null)
-            mSwipeService = new SwipeService();
+
+        mSwipeService = new SwipeService();
         return mSwipeService;
     }
 
@@ -226,7 +249,7 @@ public class ScanCodeActivity extends BaseActivity implements CodeUtils.AnalyzeC
 
         if (success == false) {
 
-            String error ="";
+            String error = "";
 
             if (tag.equals("Quota error")) {
 

@@ -170,4 +170,17 @@ public interface AppService {
             @Body RequestBody body
     );
 
+
+    /**
+     * 获取个人当天交易(新)
+     *
+     * @author hongfei.tao
+     * @time create at 2016/9/13 14:04
+     */
+    @POST("{subServer}/transaction-restaurant-app")
+    Call<String> getTradeHistory(
+            @Path(value = "subServer", encoded = true) String subServer,
+            @Body RequestBody body
+    );
+
 }

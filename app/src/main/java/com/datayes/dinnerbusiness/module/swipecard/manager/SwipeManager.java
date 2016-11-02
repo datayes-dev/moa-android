@@ -4,6 +4,8 @@ import com.datayes.dinnerbusiness.bean.user.AccountBean;
 import com.datayes.dinnerbusiness.common.config.Config;
 import com.datayes.dinnerbusiness.common.network.NetCallBack;
 import com.datayes.dinnerbusiness.common.network.bean.RestaurantListBean;
+import com.datayes.dinnerbusiness.common.network.bean.TradeHistoryListBean;
+import com.datayes.dinnerbusiness.common.network.bean.TranResultBean;
 import com.datayes.dinnerbusiness.common.network.bean.TransactionListBean;
 import com.datayes.dinnerbusiness.common.network.manager.base.JsonRequestManager;
 import com.datayes.dinnerbusiness.module.login.manager.UserManager;
@@ -47,7 +49,7 @@ public class SwipeManager extends JsonRequestManager {
 
         JsonObject jsonObject = new JsonObject();
         jsonObject.addProperty("qrstring", qrstring);
-        jsonObject.addProperty("restaurant", "e91feed4-9f38-11e6-9bc5-0242ac110003RES_");
+        jsonObject.addProperty("restaurant", "866f0bd8-a002-11e6-8f4c-0242c0a80003RES_");
         jsonObject.addProperty("memo", "");
 
         RequestBody body = RequestBody.create(MediaType.parse("application/json; charset=UTF-8"), jsonObject.toString());
@@ -56,12 +58,12 @@ public class SwipeManager extends JsonRequestManager {
                 baseService,
                 getInstance().handleTransaction(Config.ConfigUrlType.ORDER.getUrl(), body),
                 Config.ConfigUrlType.ORDER,
-                RestaurantListBean.class);
+                TranResultBean.class);
     }
 
 
     /**
-     * 获取交易记录
+     * 获取交易记录(old)
      *
      * @author datayes
      * @time create at 16/9/13
@@ -92,8 +94,41 @@ public class SwipeManager extends JsonRequestManager {
                         TransactionListBean.class);
             }
         }
-
-
     }
+
+    /**
+     * 获取交易记录(新)
+     *
+     * @author datayes
+     * @time create at 16/9/13
+     */
+    public void getTradeHistoryList(NetCallBack netCallBack,
+                                          NetCallBack.InitService baseService,
+                                          String begin,
+                                          String end) {
+
+        if (CurrentUser.getInstance().getAccountInfo() != null) {
+
+            AccountBean bean = CurrentUser.getInstance().getAccountInfo();
+
+            if (bean.getActivieAccount() != null) {
+
+                JsonObject jsonObject = new JsonObject();
+                jsonObject.addProperty("begin", begin);
+                jsonObject.addProperty("end", end);
+
+//                jsonObject.addProperty("admin", bean.getActivieAccount().getPrincipalName());
+
+                RequestBody body = RequestBody.create(MediaType.parse("application/json; charset=UTF-8"), jsonObject.toString());
+
+                start(netCallBack,
+                        baseService,
+                        getInstance().getTradeHistory(Config.ConfigUrlType.ORDER.getUrl(), body),
+                        Config.ConfigUrlType.ORDER,
+                        TradeHistoryListBean.class);
+            }
+        }
+    }
+
 
 }

@@ -117,17 +117,37 @@ public class MineActivity extends BaseActivity {
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.miv_scan_code://扫描二维码
-                startActivity(new Intent(this, ScanCodeActivity.class));
+
+                if (!CurrentUser.getInstance().isLogin()) {
+
+                    Intent intent = new Intent(MineActivity.this, LoginActivity.class);
+                    startActivity(intent);
+
+                } else {
+                    startActivity(new Intent(this, ScanCodeActivity.class));
+                }
+
                 break;
             case R.id.miv_history://交易记录
-                Intent intent = new Intent(MineActivity.this, TradeHistoryActivity.class);
-                startActivity(intent);
+                if (!CurrentUser.getInstance().isLogin()) {
+
+                    Intent intent = new Intent(MineActivity.this, LoginActivity.class);
+                    startActivity(intent);
+
+                } else {
+
+                    Intent intent = new Intent(MineActivity.this, TradeHistoryActivity.class);
+                    startActivity(intent);
+                }
+
                 break;
 
             case R.id.miv_logout://退出登录
+
                 CurrentUser.sharedInstance().clearUserInfo();
                 startActivity(new Intent(this, LoginActivity.class));
                 finish();
+
                 break;
         }
     }

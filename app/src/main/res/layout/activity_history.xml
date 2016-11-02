@@ -12,16 +12,6 @@
         android:layout_height="wrap_content"
         irr:titleValue="@string/trade_history_title" />
 
-    <TextView
-        android:id="@+id/tv_picker"
-        android:layout_width="match_parent"
-        android:layout_height="30dp"
-        android:layout_margin="10dp"
-        android:text="当前日期:---"
-        android:textColor="@color/color_W1"
-        android:textSize="18dp"
-        android:gravity="center"
-        android:background="@color/color_B1"/>
 
     <ListView
         android:id="@+id/lv_history"
