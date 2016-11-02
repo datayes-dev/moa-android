@@ -26,6 +26,8 @@
 package com.datayes.dinnerbusiness.common.network.manager.token;
 
 import com.datayes.baseapp.tools.DYLog;
+import com.datayes.baseapp.utils.TimeUtil;
+import com.datayes.dinnerbusiness.App;
 import com.datayes.dinnerbusiness.bean.user.UserLoginBean;
 import com.datayes.dinnerbusiness.common.config.Config;
 import com.datayes.dinnerbusiness.module.user.CurrentUser;
@@ -161,12 +163,16 @@ public enum NetAccessTockenManager {
         DYLog.d(Tag, "清空缓存");
     }
 
+    private long mRefreshTockenTime = 0;
+
     /**
      * 刷新refreshTocken
      */
     protected void refreshAccessTocken() {
 
-        if (CurrentUser.getInstance().isLogin()) {
+        if (CurrentUser.getInstance().isLogin() && (System.currentTimeMillis() - mRefreshTockenTime) > TimeUtil.ONE_MILLION_SECOND * 60) {
+
+            mRefreshTockenTime = System.currentTimeMillis();
 
             DYLog.d(Tag, "开始刷新token");
 
@@ -186,8 +192,13 @@ public enum NetAccessTockenManager {
 
                             if ((bean.getCode() == -120)) {
 
-                                enqueueCaches();
+//                                enqueueCaches();
+                                clearCaches();
+                                CurrentUser.getInstance().clearUserInfo();
+                                App.getInstance().gotoLoginActivity();
                                 DYLog.d(Tag, "刷新token失败，APP登出");
+
+//                                App.getInstance().getcu
 
                             } else if (bean.getCode() > 0) {
 
