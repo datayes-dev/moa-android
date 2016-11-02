@@ -1,6 +1,7 @@
 package com.datayes.dinnercustom;
 
 import android.app.Activity;
+import android.content.Intent;
 
 import com.datayes.baseapp.base.BaseApp;
 import com.uuzuche.lib_zxing.activity.ZXingLibrary;
@@ -23,6 +24,19 @@ public class App extends BaseApp {
         super.onCreate();
 
         ZXingLibrary.initDisplayOpinion(this);
+    }
+
+    /**
+     * 打开登陆界面
+     */
+    public void gotoLoginActivity() {
+
+        Activity activity = this.getLastActivity();
+
+        if (activity != null) {
+
+            activity.startActivity(new Intent(activity, LoginActivity.class));
+        }
     }
 
     @Override

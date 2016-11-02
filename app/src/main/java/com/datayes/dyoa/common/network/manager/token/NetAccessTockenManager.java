@@ -27,6 +27,7 @@ package com.datayes.dyoa.common.network.manager.token;
 
 import com.datayes.baseapp.tools.DYLog;
 import com.datayes.baseapp.utils.TimeUtil;
+import com.datayes.dinnercustom.App;
 import com.datayes.dyoa.bean.user.UserLoginBean;
 import com.datayes.dyoa.common.config.Config;
 import com.datayes.dyoa.module.user.CurrentUser;
@@ -194,6 +195,7 @@ public enum NetAccessTockenManager {
 
                                 CurrentUser.getInstance().clearUserInfo();
                                 clearCaches();
+                                App.getInstance().gotoLoginActivity();
                                 DYLog.d(Tag, "刷新token失败，APP登出");
 
                             } else if (bean.getCode() > 0) {
