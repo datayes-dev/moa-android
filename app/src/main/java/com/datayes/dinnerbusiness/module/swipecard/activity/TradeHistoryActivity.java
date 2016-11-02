@@ -6,6 +6,7 @@ import android.view.View;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
+
 import com.datayes.baseapp.tools.DYToast;
 import com.datayes.dinnerbusiness.App;
 import com.datayes.dinnerbusiness.R;
@@ -14,17 +15,16 @@ import com.datayes.dinnerbusiness.common.network.BaseService;
 import com.datayes.dinnerbusiness.common.network.bean.TransactionListBean;
 import com.datayes.dinnerbusiness.common.networkstatus.NetworkState;
 import com.datayes.dinnerbusiness.common.view.CTitle;
-import com.datayes.dinnerbusiness.module.code.activity.ScanCodeActivity;
 import com.datayes.dinnerbusiness.module.login.activity.LoginActivity;
 import com.datayes.dinnerbusiness.module.swipecard.adapter.TradeHistoryAdapter;
 import com.datayes.dinnerbusiness.module.swipecard.manager.SwipeManager;
 import com.datayes.dinnerbusiness.module.swipecard.service.SwipeService;
 import com.datayes.dinnerbusiness.module.user.CurrentUser;
 import com.datayes.dinnerbusiness.utils.AppUtil;
+
 import java.util.ArrayList;
 
 import butterknife.BindView;
-import butterknife.OnClick;
 
 
 /**
@@ -42,6 +42,8 @@ public class TradeHistoryActivity extends BaseActivity {
 
     @BindView(R.id.tv_nodata)
     TextView mTvNodata;
+    @BindView(R.id.tv_count)
+    TextView mTvCount;
 
 
     private TradeHistoryAdapter mHistoryAdapter;
@@ -71,13 +73,22 @@ public class TradeHistoryActivity extends BaseActivity {
     public void networkFinished(String operationType, BaseService service, int code, String tag) {
         hideLoading();
         if (mSwipeService.getTradeHistoryListBean() != null) {
+
             mHistoryAdapter.setList(mSwipeService.getTradeHistoryListBean().getHistoryBeanList());
 
             if (mHistoryAdapter.getCount() == 0) {
 
                 mTvNodata.setVisibility(View.VISIBLE);
+                mTvCount.setVisibility(View.GONE);
             } else {
+                mTvCount.setVisibility(View.VISIBLE);
                 mTvNodata.setVisibility(View.GONE);
+                if (mSwipeService.getTradeHistoryListBean().getCount() !=null){
+                    mTvCount.setText("今天一共有"+ mSwipeService.getTradeHistoryListBean().getCount() + "笔交易,以下为最新10条");
+                }else {
+                    mTvCount.setText("");
+                }
+
             }
         } else {
 

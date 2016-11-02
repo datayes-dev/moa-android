@@ -12,6 +12,20 @@
         android:layout_height="wrap_content"
         irr:titleValue="@string/trade_history_title" />
 
+    <TextView
+        android:id="@+id/tv_count"
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+        android:textSize="17dp"
+        android:gravity="left|center_vertical"
+        android:layout_marginTop="4dp"
+        android:paddingLeft="4dp"
+        android:textColor="@color/color_H9"/>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/color_H3"/>
 
     <ListView
         android:id="@+id/lv_history"

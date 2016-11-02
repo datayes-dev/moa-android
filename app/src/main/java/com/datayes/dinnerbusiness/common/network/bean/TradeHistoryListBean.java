@@ -14,6 +14,16 @@ import java.util.List;
  */
 
 public class TradeHistoryListBean extends BaseBean {
+
+    public String getCount() {
+        return count;
+    }
+
+    public void setCount(String count) {
+        this.count = count;
+    }
+
+    private String count;
     public List<TransactionListBean.TransactionBean> getHistoryBeanList() {
         return mHistoryBeanList;
     }
@@ -28,6 +38,9 @@ public class TradeHistoryListBean extends BaseBean {
     protected void parseJson(JSONObject json) {
         if (json == null)return;
         try {
+
+            String count = json.getString("count");
+            setCount(count);
 
             JSONArray jsonArray = json.getJSONArray("data");
 
