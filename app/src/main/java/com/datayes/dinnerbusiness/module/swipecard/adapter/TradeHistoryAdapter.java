@@ -25,7 +25,7 @@ public class TradeHistoryAdapter extends ArrayListAdapter<TransactionListBean.Tr
     @Override
     protected void getView(int position, View convertView, ViewHolder viewHolder, ViewGroup parent) {
         TransactionListBean.TransactionBean bean =  getList().get(position);
-        String shopName = bean.getUser();
+        String shopName = bean.getId();
         String dateValue = bean.getTime_stamp();
         viewHolder.mTvShopName.setText(shopName);
         viewHolder.mTvMoney.setText("");
