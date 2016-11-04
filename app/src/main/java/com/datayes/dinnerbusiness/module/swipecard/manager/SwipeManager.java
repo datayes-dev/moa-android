@@ -49,7 +49,7 @@ public class SwipeManager extends JsonRequestManager {
 
         JsonObject jsonObject = new JsonObject();
         jsonObject.addProperty("qrstring", qrstring);
-        jsonObject.addProperty("restaurant", "866f0bd8-a002-11e6-8f4c-0242c0a80003RES_");
+        jsonObject.addProperty("restaurant", "888cf414-a270-11e6-b99a-02730bb67404RES_");
         jsonObject.addProperty("memo", "");
 
         RequestBody body = RequestBody.create(MediaType.parse("application/json; charset=UTF-8"), jsonObject.toString());
