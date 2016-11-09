@@ -54,7 +54,8 @@ public class SwipeManager extends JsonRequestManager {
 
         RequestBody body = RequestBody.create(MediaType.parse("application/json; charset=UTF-8"), jsonObject.toString());
 
-        start(netCallBack,
+        start(qrstring,
+                netCallBack,
                 baseService,
                 getInstance().handleTransaction(Config.ConfigUrlType.ORDER.getUrl(), body),
                 Config.ConfigUrlType.ORDER,

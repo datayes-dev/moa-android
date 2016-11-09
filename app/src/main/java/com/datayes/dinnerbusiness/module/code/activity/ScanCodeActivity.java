@@ -1,9 +1,12 @@
 package com.datayes.dinnerbusiness.module.code.activity;
-
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.media.Ringtone;
+import android.media.RingtoneManager;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.view.View;
 import android.widget.Toast;
@@ -15,15 +18,13 @@ import com.datayes.dinnerbusiness.common.network.BaseService;
 import com.datayes.dinnerbusiness.common.networkstatus.NetworkState;
 import com.datayes.dinnerbusiness.common.view.CTitle;
 import com.datayes.dinnerbusiness.module.login.activity.LoginActivity;
-import com.datayes.dinnerbusiness.module.swipecard.activity.SwipeSuccessActivity;
+import com.datayes.dinnerbusiness.module.moacapture.MoaCaptureFragment;
 import com.datayes.dinnerbusiness.module.swipecard.activity.TradeHistoryActivity;
 import com.datayes.dinnerbusiness.module.swipecard.manager.SwipeManager;
 import com.datayes.dinnerbusiness.module.swipecard.service.SwipeService;
 import com.datayes.dinnerbusiness.module.user.CurrentUser;
-import com.datayes.dinnerbusiness.module.user.activity.MineActivity;
 import com.datayes.dinnerbusiness.utils.PermissionConstant;
 import com.datayes.dinnerbusiness.utils.PermissionManager;
-import com.uuzuche.lib_zxing.activity.CaptureFragment;
 import com.uuzuche.lib_zxing.activity.CodeUtils;
 
 import org.json.JSONObject;
@@ -42,10 +43,14 @@ public class ScanCodeActivity extends BaseActivity implements CodeUtils.AnalyzeC
     CTitle mTitle;
 
 
-    private CaptureFragment mCaptureFragment;
+    private MoaCaptureFragment mCaptureFragment;
 
     private SwipeManager mSwipeManager;
     private SwipeService mSwipeService;
+    private static String lastScanCode = "";
+    private Handler mHandler;
+    private Runnable mRunnable;
+    private boolean isNetWorking;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -76,6 +81,13 @@ public class ScanCodeActivity extends BaseActivity implements CodeUtils.AnalyzeC
             initCode();
         }
 
+        mHandler = new Handler();
+        mRunnable = new Runnable() {
+            @Override
+            public void run() {
+                inintCodeManager();
+            }
+        };
 
     }
 
@@ -87,10 +99,28 @@ public class ScanCodeActivity extends BaseActivity implements CodeUtils.AnalyzeC
     protected void onResume() {
         super.onResume();
 
-        mCaptureFragment = new CaptureFragment();
-        CodeUtils.setFragmentArgs(mCaptureFragment, R.layout.layout_camera);
-        mCaptureFragment.setAnalyzeCallback(this);
+        inintCodeManager();
+
+    }
+
+    @Override
+    protected void onDestroy() {
+
+        mHandler.removeCallbacks(mRunnable);
+
+        super.onDestroy();
+
+    }
+
+    private void inintCodeManager() {
+
+        mCaptureFragment = new MoaCaptureFragment();
+        Bundle bundle = new Bundle();
+        bundle.putInt("layout_id", R.layout.layout_camera);
+        mCaptureFragment.setArguments(bundle);
+        mCaptureFragment.setAnalyzeCallback(ScanCodeActivity.this);
         getSupportFragmentManager().beginTransaction().replace(R.id.fl_code_container, mCaptureFragment).commit();
+
 
     }
 
@@ -111,7 +141,13 @@ public class ScanCodeActivity extends BaseActivity implements CodeUtils.AnalyzeC
 
             } else {
 
-                mSwipeManager.sendUserTradeMessage(this, this, result);
+                if (lastScanCode != null && !lastScanCode.equals(result) && !isNetWorking) {
+                    isNetWorking = true;
+                    mSwipeManager.sendUserTradeMessage(this, this, result);
+                } else {
+                    jumpNextPage(false, "不能重复扫码");
+
+                }
             }
 
         } else {
@@ -187,49 +223,44 @@ public class ScanCodeActivity extends BaseActivity implements CodeUtils.AnalyzeC
 
     @Override
     public void onErrorResponse(String operationType, Throwable throwable, String tag) {
+
         hideLoading();
-        if (operationType.equals("/transaction")) {//执行交易
 
-            jumpNextPage(false, throwable.toString());
-
-        }
+        isNetWorking = false;
+        jumpNextPage(false, "交易失败");
     }
 
     @Override
     public void networkFinished(String operationType, BaseService service, int code, String tag) {
+
         hideLoading();
-        if (operationType.equals("/transaction")) {//执行交易
 
-            if (mSwipeService != null) {
+        isNetWorking = false;
+        lastScanCode = operationType;
 
-                if (mSwipeService.getTranResultBean() != null) {
+        if (mSwipeService != null) {
 
-                    if (("Quota error").equals(mSwipeService.getTranResultBean().getInfo())) {
+            if (mSwipeService.getTranResultBean() != null) {
 
-                        jumpNextPage(false, tag);
+                if (("Quota error").equals(mSwipeService.getTranResultBean().getInfo())) {
 
-                    } else if (("Qrcode error").equals(mSwipeService.getTranResultBean().getInfo())) {
+                    jumpNextPage(false, " 配额用完了");
 
-                        jumpNextPage(false, tag);
-                    } else {
-                        JSONObject object = mSwipeService.getTranResultBean().jsonObj;
-                        try {
-                            String resultStr = object.getString("result");
-                            if ("success".equals(resultStr)) {
-                                jumpNextPage(true, null);
-                            }
-                        } catch (Exception ex) {
-                            jumpNextPage(false, "交易失败");
+                } else if (("Qrcode error").equals(mSwipeService.getTranResultBean().getInfo())) {
+
+                    jumpNextPage(false, "二维码不正确");
+                } else {
+                    JSONObject object = mSwipeService.getTranResultBean().jsonObj;
+                    try {
+                        String resultStr = object.getString("result");
+                        if ("success".equals(resultStr)) {
+                            jumpNextPage(true, null);
                         }
+                    } catch (Exception ex) {
+                        jumpNextPage(false, "交易失败");
                     }
-
-
                 }
-
-
             }
-
-
         }
     }
 
@@ -242,30 +273,19 @@ public class ScanCodeActivity extends BaseActivity implements CodeUtils.AnalyzeC
 
     private void jumpNextPage(boolean success, String tag) {
 
+        if (success) {
 
-        Intent intent = new Intent(this, SwipeSuccessActivity.class);
+            Uri notification = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
+            Ringtone r = RingtoneManager.getRingtone(getApplicationContext(), notification);
+            r.play();
 
-        intent.putExtra(SwipeSuccessActivity.INFO_KEY, success);
-
-        if (success == false) {
-
-            String error = "";
-
-            if (tag.equals("Quota error")) {
-
-                error = "配额用完了";
-
-            } else if (tag.equals("Qrcode error")) {
-
-                error = "二维码不正确";
-            } else {
-                error = tag;
-            }
-            intent.putExtra(SwipeSuccessActivity.ERROR_MESSAG, error);
+        } else {
+            if (tag != null)
+                DYToast.makeText(this, tag, Toast.LENGTH_SHORT).show();
         }
-        startActivity(intent);
+
+        mHandler.postDelayed(mRunnable, 500);
 
     }
-
 
 }

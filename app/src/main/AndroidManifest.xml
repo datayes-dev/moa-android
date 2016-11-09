@@ -15,7 +15,6 @@
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.GET_TASKS" />
-
     <!-- Application -->
     <application
         android:name=".App"
@@ -66,7 +65,7 @@
         <!-- qa; stg, prd -->
         <meta-data
             android:name="ENVIRONMENT"
-            android:value="prd" />
+            android:value="stg" />
     </application>
 
 </manifest>

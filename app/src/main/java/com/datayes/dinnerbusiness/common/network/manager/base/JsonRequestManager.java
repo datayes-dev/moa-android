@@ -235,4 +235,101 @@ public class JsonRequestManager extends BaseRequestManager {
         }
     }
 
+
+
+    protected void start(final String operateType, final NetCallBack callBack, final NetCallBack.InitService service, Call<String> call, final Config.ConfigUrlType type, final Class<? extends BaseBean> beanClass) {
+
+        Callback<String> callback = new Callback<String>() {
+            @Override
+            public void onResponse(Call<String> call, Response<String> response) {
+
+                String resultJson = response.body();
+
+                Throwable errorThrowable = checkResponseCode(response);
+
+                if (errorThrowable == null) {//网络正常
+
+                    if (!TextUtils.isEmpty(resultJson)) {
+
+                        BaseBean bean;
+
+                        try {
+
+                            if (beanClass == null) {
+
+                                bean = BaseBean.class.newInstance();
+
+                            } else {
+
+                                bean = beanClass.newInstance();
+                            }
+
+                            if (resultJson.startsWith("{")) {
+                                JSONObject json = new JSONObject(resultJson);
+                                bean.parseJsonObject(json);
+                            }else if (resultJson.startsWith("["))  {
+                                JSONArray jsonArray = new JSONArray(resultJson);
+                                bean.parseJsonArray(jsonArray);
+                            }
+
+
+                            //检查运维模式
+                            if (bean.getCode() == -9990) {
+
+                                if (callBack != null) {
+                                    callBack.onErrorResponse(
+                                            operateType,
+                                            new SafeGrardException(),
+                                            ""
+                                    );
+                                }
+
+                            } else {
+
+                                if (checkTockenNeedLogin(call, this, bean.getCode())) {
+
+                                    saveCookie(response.headers());
+
+                                    if (callBack != null) {
+
+                                        BaseService initService = service.initService();
+
+                                        //数据注入
+                                        infuse(initService, bean);
+
+                                        callBack.networkFinished(operateType, initService, bean.getCode(), bean.getInfo());
+                                    }
+                                }
+                            }
+
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
+                    }
+
+                } else {
+
+                    this.onFailure(call, errorThrowable);
+                }
+            }
+
+            @Override
+            public void onFailure(Call<String> call, Throwable t) {
+                if (callBack != null && t != null) {
+
+
+                    callBack.onErrorResponse(
+                            operateType,
+                            t,
+                            ""
+                    );
+                }
+            }
+        };
+
+        NetAccessTockenManager.INSTANCE.enqueue(call, callback);
+    }
+
+
+
 }
