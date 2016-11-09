@@ -71,7 +71,7 @@
         <!-- qa; stg, prd -->
         <meta-data
             android:name="ENVIRONMENT"
-            android:value="stg" />
+            android:value="prd" />
     </application>
 
 </manifest>

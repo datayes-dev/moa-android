@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Intent;
 
 import com.datayes.baseapp.base.BaseApp;
+import com.datayes.dyoa.module.login.activity.LoginActivity;
 import com.uuzuche.lib_zxing.activity.ZXingLibrary;
 
 /**
