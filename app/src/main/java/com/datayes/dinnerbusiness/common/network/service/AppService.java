@@ -36,6 +36,7 @@ import retrofit2.http.GET;
 import retrofit2.http.Headers;
 import retrofit2.http.POST;
 import retrofit2.http.Path;
+import retrofit2.http.Query;
 
 /**
  * Created by Yang on 2016/5/1.
@@ -183,4 +184,24 @@ public interface AppService {
             @Body RequestBody body
     );
 
+
+    /**
+     * 获取AccessToken
+     * Create by zhizhong.zhou at 16/11/15.
+     */
+    @GET("https://qyapi.weixin.qq.com/cgi-bin/gettoken")
+    Call<String> getPersonalAccessToken(
+            @Query("corpid") String corpid,
+            @Query("corpsecret") String corpsecret);
+
+
+    /**
+     * 核销code
+     *
+     */
+    @POST("https://qyapi.weixin.qq.com/cgi-bin/card/code/consume")
+    Call<String> consumeCode(
+            @Query("access_token") String access_token,
+            @Body RequestBody body
+    );
 }

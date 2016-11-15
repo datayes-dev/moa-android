@@ -1,4 +1,5 @@
 package com.datayes.dinnerbusiness.module.code.activity;
+
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.media.Ringtone;
@@ -15,8 +16,10 @@ import com.datayes.baseapp.tools.DYToast;
 import com.datayes.dinnerbusiness.R;
 import com.datayes.dinnerbusiness.common.base.BaseActivity;
 import com.datayes.dinnerbusiness.common.network.BaseService;
+import com.datayes.dinnerbusiness.common.network.bean.WeiXinConsumeBean;
 import com.datayes.dinnerbusiness.common.networkstatus.NetworkState;
 import com.datayes.dinnerbusiness.common.view.CTitle;
+import com.datayes.dinnerbusiness.module.code.activity.manager.WeiXinManager;
 import com.datayes.dinnerbusiness.module.login.activity.LoginActivity;
 import com.datayes.dinnerbusiness.module.moacapture.MoaCaptureFragment;
 import com.datayes.dinnerbusiness.module.swipecard.activity.TradeHistoryActivity;
@@ -47,7 +50,6 @@ public class ScanCodeActivity extends BaseActivity implements CodeUtils.AnalyzeC
 
     private SwipeManager mSwipeManager;
     private SwipeService mSwipeService;
-    private static String lastScanCode = "";
     private Handler mHandler;
     private Runnable mRunnable;
     private boolean isNetWorking;
@@ -58,20 +60,20 @@ public class ScanCodeActivity extends BaseActivity implements CodeUtils.AnalyzeC
 
         mSwipeManager = new SwipeManager();
 
-        mTitle.setRightBtnText(getString(R.string.trade_history_title));
-        mTitle.setLeftBtnClick(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                finish();
-            }
-        });
-        mTitle.setrightFenGeClick(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(ScanCodeActivity.this, TradeHistoryActivity.class);
-                startActivity(intent);
-            }
-        });
+//        mTitle.setRightBtnText(getString(R.string.trade_history_title));
+//        mTitle.setLeftBtnClick(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                finish();
+//            }
+//        });
+//        mTitle.setrightFenGeClick(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                Intent intent = new Intent(ScanCodeActivity.this, TradeHistoryActivity.class);
+//                startActivity(intent);
+//            }
+//        });
 
 
         // 检查运行时权限，如果是Android M以下直接调用
@@ -141,9 +143,11 @@ public class ScanCodeActivity extends BaseActivity implements CodeUtils.AnalyzeC
 
             } else {
 
-                if (lastScanCode != null && !lastScanCode.equals(result) && !isNetWorking) {
+                if (!isNetWorking) {
+
                     isNetWorking = true;
-                    mSwipeManager.sendUserTradeMessage(this, this, result);
+                    mSwipeManager.consumeCode(this, this, result);
+
                 } else {
                     jumpNextPage(false, "不能重复扫码");
 
@@ -227,7 +231,7 @@ public class ScanCodeActivity extends BaseActivity implements CodeUtils.AnalyzeC
         hideLoading();
 
         isNetWorking = false;
-        jumpNextPage(false, "交易失败");
+        jumpNextPage(false, tag);
     }
 
     @Override
@@ -236,31 +240,50 @@ public class ScanCodeActivity extends BaseActivity implements CodeUtils.AnalyzeC
         hideLoading();
 
         isNetWorking = false;
-        lastScanCode = operationType;
 
         if (mSwipeService != null) {
 
-            if (mSwipeService.getTranResultBean() != null) {
+            WeiXinConsumeBean bean = mSwipeService.getWeiXinConsumeBean();
 
-                if (("Quota error").equals(mSwipeService.getTranResultBean().getInfo())) {
+            if (bean != null) {
 
-                    jumpNextPage(false, " 配额用完了");
+                if (bean.getErrCode() == 0) {//成功
 
-                } else if (("Qrcode error").equals(mSwipeService.getTranResultBean().getInfo())) {
+                    jumpNextPage(true, "");
 
-                    jumpNextPage(false, "二维码不正确");
                 } else {
-                    JSONObject object = mSwipeService.getTranResultBean().jsonObj;
-                    try {
-                        String resultStr = object.getString("result");
-                        if ("success".equals(resultStr)) {
-                            jumpNextPage(true, null);
-                        }
-                    } catch (Exception ex) {
-                        jumpNextPage(false, "交易失败");
-                    }
+
+                    jumpNextPage(false, bean.getErrMsg());
+
                 }
+            } else {
+
+                jumpNextPage(false, "交易失败");
+
             }
+
+
+//            if (mSwipeService.getTranResultBean() != null) {
+//
+//                if (("Quota error").equals(mSwipeService.getTranResultBean().getInfo())) {
+//
+//                    jumpNextPage(false, " 配额用完了");
+//
+//                } else if (("Qrcode error").equals(mSwipeService.getTranResultBean().getInfo())) {
+//
+//                    jumpNextPage(false, "二维码不正确");
+//                } else {
+//                    JSONObject object = mSwipeService.getTranResultBean().jsonObj;
+//                    try {
+//                        String resultStr = object.getString("result");
+//                        if ("success".equals(resultStr)) {
+//                            jumpNextPage(true, null);
+//                        }
+//                    } catch (Exception ex) {
+//                        jumpNextPage(false, "交易失败");
+//                    }
+//                }
+//            }
         }
     }
 
@@ -284,7 +307,10 @@ public class ScanCodeActivity extends BaseActivity implements CodeUtils.AnalyzeC
                 DYToast.makeText(this, tag, Toast.LENGTH_SHORT).show();
         }
 
+        WeiXinManager.INSTANCE.freshWeixinToken();
+
         mHandler.postDelayed(mRunnable, 500);
+
 
     }
 

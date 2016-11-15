@@ -17,6 +17,7 @@ import com.datayes.dinnerbusiness.common.view.CTitle;
 import com.datayes.dinnerbusiness.common.view.CircleImageView;
 import com.datayes.dinnerbusiness.common.view.MineItemView;
 import com.datayes.dinnerbusiness.module.code.activity.ScanCodeActivity;
+import com.datayes.dinnerbusiness.module.code.activity.manager.WeiXinManager;
 import com.datayes.dinnerbusiness.module.login.activity.LoginActivity;
 import com.datayes.dinnerbusiness.module.swipecard.activity.TradeHistoryActivity;
 import com.datayes.dinnerbusiness.module.user.CurrentUser;
@@ -96,6 +97,9 @@ public class MineActivity extends BaseActivity {
             startActivity(new Intent(MineActivity.this, LoginActivity.class));
             finish();
         }
+
+
+        WeiXinManager.INSTANCE.freshWeixinToken();
     }
 
     @Override

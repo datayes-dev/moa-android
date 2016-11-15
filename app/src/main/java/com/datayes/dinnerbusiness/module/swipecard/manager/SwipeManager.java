@@ -7,7 +7,10 @@ import com.datayes.dinnerbusiness.common.network.bean.RestaurantListBean;
 import com.datayes.dinnerbusiness.common.network.bean.TradeHistoryListBean;
 import com.datayes.dinnerbusiness.common.network.bean.TranResultBean;
 import com.datayes.dinnerbusiness.common.network.bean.TransactionListBean;
+import com.datayes.dinnerbusiness.common.network.bean.WeiXinConsumeBean;
+import com.datayes.dinnerbusiness.common.network.bean.WeiXinTokenBean;
 import com.datayes.dinnerbusiness.common.network.manager.base.JsonRequestManager;
+import com.datayes.dinnerbusiness.module.code.activity.manager.WeiXinManager;
 import com.datayes.dinnerbusiness.module.login.manager.UserManager;
 import com.datayes.dinnerbusiness.module.user.CurrentUser;
 import com.google.gson.JsonObject;
@@ -99,14 +102,11 @@ public class SwipeManager extends JsonRequestManager {
 
     /**
      * 获取交易记录(新)
-     *
-     * @author datayes
-     * @time create at 16/9/13
      */
     public void getTradeHistoryList(NetCallBack netCallBack,
-                                          NetCallBack.InitService baseService,
-                                          String begin,
-                                          String end) {
+                                    NetCallBack.InitService baseService,
+                                    String begin,
+                                    String end) {
 
         if (CurrentUser.getInstance().getAccountInfo() != null) {
 
@@ -127,6 +127,52 @@ public class SwipeManager extends JsonRequestManager {
                         getInstance().getTradeHistory(Config.ConfigUrlType.ORDER.getUrl(), body),
                         Config.ConfigUrlType.ORDER,
                         TradeHistoryListBean.class);
+            }
+        }
+    }
+
+
+    /**
+     * 获取AccessToken
+     * Create by zhizhong.zhou at 16/11/15.
+     */
+    public void getAccessTokenMessage(NetCallBack netCallBack,
+                                      NetCallBack.InitService baseService) {
+
+        start(netCallBack,
+                baseService,
+                getInstance().getPersonalAccessToken("wx035063b1d4ac336b", "oIQ5f1tLiG7xkZ6VSAT8b-h9ysK3avDqwWjGYxs5xEiGHWhKP0SZ3QzZ8TuFh_dm"),
+                Config.ConfigUrlType.WEI_XIN,
+                WeiXinTokenBean.class);
+
+    }
+
+
+    /**
+     *核销code
+     */
+    public void consumeCode(NetCallBack netCallBack,
+                            NetCallBack.InitService baseService,
+                            String code) {
+
+        if (CurrentUser.getInstance().getAccountInfo() != null) {
+
+            AccountBean bean = CurrentUser.getInstance().getAccountInfo();
+
+            if (bean.getActivieAccount() != null) {
+
+                JsonObject jsonObject = new JsonObject();
+                jsonObject.addProperty("code", code);
+
+                RequestBody body = RequestBody.create(MediaType.parse("application/json; charset=UTF-8"), jsonObject.toString());
+
+                String token = WeiXinManager.INSTANCE.getAccessToken();
+
+                start(netCallBack,
+                        baseService,
+                        getInstance().consumeCode(token, body),
+                        Config.ConfigUrlType.WEI_XIN,
+                        WeiXinConsumeBean.class);
             }
         }
     }

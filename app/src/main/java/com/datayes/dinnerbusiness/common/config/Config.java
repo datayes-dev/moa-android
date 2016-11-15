@@ -75,7 +75,7 @@ public class Config {
     ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     //基本配置变量
 
-    private String type = "2"; // 1:QA; 2:STG, 3:PROD
+    private String type = "4"; // 1:QA; 2:STG, 3:PROD 4:weixin
 
     public String getUrl(int dd) {
         return qaBaseUrl;
@@ -98,6 +98,7 @@ public class Config {
         WEB_VIEW_PAGE_ANNOUNCEMENT("information/announcement/"),
         WEB_VIEW_PAGE_EVENT(""),
         ORDER("/meal_ticket"),
+        WEI_XIN("/cgi-bin"),
         WEB_MIAL("/webmail");
 
         private String url_;
